@@ -22,6 +22,7 @@
   },
   "gitHead": "859a33f0897ce1523a85bbd92a77a9b9a8b82eb9",
   "dependencies": {
+    "@studyathome-internationally/vuepress-plugin-hub": "^0.0.1-alpha.1",
     "@vuepress/theme-default": "^1.0.3"
   }
 }
