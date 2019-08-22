@@ -1,0 +1,53 @@
+{
+  "name": "@studyathome-internationally/vuepress-plugin-hub",
+  "version": "0.0.0",
+  "description": "Vuepress plugin for StudyATHome eLearning Sharing & Virtual Project Teams Hub",
+  "author": "Alija Sabic <sabic@technikum-wien.at>",
+  "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
+  "license": "GPL-3.0",
+  "main": "lib/node/index.js",
+  "directories": {},
+  "files": [
+    "lib",
+    "types"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studyathome-internationally/hub.js.git",
+    "path": "packages/@studyathome-internationally/vuepress-plugin-hub"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm:dev:client\" \"npm:dev:node\" \"npm:build:components\"",
+    "build": "concurrently \"npm:build:client\" \"npm:build:node\" \"npm:build:components\"",
+    "dev:client": "tsc -p tsconfig.client.json --watch",
+    "dev:node": "tsc -p tsconfig.node.json --watch",
+    "build:client": "tsc -p tsconfig.client.json",
+    "build:node": "tsc -p tsconfig.node.json",
+    "build:components": "mkdir -p lib/client/components && cp -r src/client/components lib/client"
+  },
+  "bugs": {
+    "url": "https://github.com/studyathome-internationally/hub.js/issues"
+  },
+  "dependencies": {
+    "concurrently": "^4.1.2"
+  },
+  "devDependencies": {
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3",
+    "vuepress": "^1.0.3",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "extends": [
+      "plugin:prettier/recommended",
+      "xo-typescript"
+    ],
+    "extensions": [
+      "ts"
+    ]
+  }
+}
