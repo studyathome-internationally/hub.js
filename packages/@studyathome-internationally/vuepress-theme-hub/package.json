@@ -19,5 +19,9 @@
   },
   "bugs": {
     "url": "https://github.com/studyathome-internationally/hub.js/issues"
+  },
+  "gitHead": "859a33f0897ce1523a85bbd92a77a9b9a8b82eb9",
+  "dependencies": {
+    "@vuepress/theme-default": "^1.0.3"
   }
 }
