@@ -33,6 +33,7 @@
     "url": "https://github.com/studyathome-internationally/hub.js/issues"
   },
   "dependencies": {
+    "@vuepress/shared-utils": "^1.0.3",
     "concurrently": "^4.1.2"
   },
   "devDependencies": {
@@ -43,11 +44,13 @@
   },
   "xo": {
     "extends": [
+      "rem",
       "plugin:prettier/recommended",
       "xo-typescript"
     ],
     "extensions": [
       "ts"
-    ]
+    ],
+    "rules": {}
   }
 }
