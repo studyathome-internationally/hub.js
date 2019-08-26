@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <table>
-      <tr>
-        <td>Title</td>
-        <td>{{frontmatter.title}}</td>
-      </tr>
-      <tr>
-        <td>University</td>
-        <td>{{frontmatter.university}}</td>
-      </tr>
-    </table>
-  </div>
+  <b-card
+    :title="frontmatter.title"
+    img-src="https://picsum.photos/600/300/?image=25"
+    img-alt="Alternative Text"
+  >
+    <b-card-text>{{ frontmatter.lecturer }}</b-card-text>
+  </b-card>
 </template>
 
 <script>

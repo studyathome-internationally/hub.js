@@ -1,32 +1,21 @@
 <template>
-  <div class="content-wrapper">
-    <!-- <ListCourseEntry v-for="entry of entries" :key="entry.path" :course-data="entry" /> -->
-    <b-card
-      title="Card Title"
-      img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image"
-      img-top
-      tag="article"
-      style="max-width: 20rem;"
-      class="mb-2"
-    >
-      <b-card-text>Some quick example text to build on the card title and make up the bulk of the card's content.</b-card-text>
-
-      <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
+  <div>
+    <div class="deck-wrapper" v-for="[idx, entryMap] of entriesMap.entries()" :key="idx">
+      <ListCourseDeck :courses="entryMap" />
+    </div>
   </div>
 </template>
 
 <script>
-import ListCourseEntry from "@theme/components/ListCourseEntry.vue";
+import ListCourseDeck from "@theme/components/ListCourseDeck.vue";
 
 export default {
   components: {
-    ListCourseEntry
+    ListCourseDeck
   },
   data() {
     return {
-      paths: "test"
+      row: 3
     };
   },
   computed: {
@@ -35,9 +24,18 @@ export default {
         const r = new RegExp("^" + this.$route.path);
         return path !== this.$route.path && r.exec(path);
       });
+    },
+    entriesMap: function() {
+      let array = [];
+      while (this.entries.length) array.push(this.entries.splice(0, this.row));
+      return array;
     }
   }
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.deck-wrapper {
+  padding: 15px 0;
+}
+</style>
