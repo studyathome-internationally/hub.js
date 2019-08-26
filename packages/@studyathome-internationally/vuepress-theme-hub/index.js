@@ -3,10 +3,14 @@ module.exports = (themeConfig, ctx) => {
     directories: [
       {
         id: "courses",
-        dirname: "_courses",
-        path: "/courses/",
+        dirname: "courses",
+        // path: "/courses/" (generated from id),
         layout: "IndexCourse",
-        itemLayout: "Course"
+        itemLayout: "Course",
+        nav: {
+          title: "Courses",
+          order: 2
+        }
       }
     ]
   };
@@ -18,7 +22,7 @@ module.exports = (themeConfig, ctx) => {
       ? modifyHubPluginOptions(defaultHubPluginOptions)
       : defaultHubPluginOptions;
 
-  const plugins = ["@studyathome-internationally/hub", hubPluginOptions];
+  const plugins = [["@studyathome-internationally/hub", hubPluginOptions]];
 
   const config = {
     extend: "@vuepress/theme-default",
