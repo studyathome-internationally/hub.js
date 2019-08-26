@@ -1,5 +1,6 @@
 import { join } from "path";
 import { existsSync } from "fs";
+import { PageEnhancer } from "./interface/PageEnhancer";
 import { logger, chalk } from "@vuepress/shared-utils";
 import { HubPluginOptions } from "./interface/Options";
 
@@ -29,5 +30,9 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
     return false;
   });
 
-  return {};
+  const pageEnhancers: PageEnhancer[] = [];
+
+  return {
+    pageEnhancers
+  };
 }
