@@ -1,41 +1,20 @@
 <template>
   <div>
-    <div class="deck-wrapper" v-for="[idx, entryMap] of entriesMap.entries()" :key="idx">
-      <ListCourseDeck :courses="entryMap" />
-    </div>
+    <ListCourseDecks :row="3" />
   </div>
 </template>
 
 <script>
-import ListCourseDeck from "@theme/components/ListCourseDeck.vue";
+import ListCourseDecks from "@theme/components/ListCourseDecks.vue";
 
 export default {
   components: {
-    ListCourseDeck
+    ListCourseDecks
   },
   data() {
-    return {
-      row: 3
-    };
-  },
-  computed: {
-    entries: function() {
-      return this.$site.pages.filter(({ path }) => {
-        const r = new RegExp("^" + this.$route.path);
-        return path !== this.$route.path && r.exec(path);
-      });
-    },
-    entriesMap: function() {
-      let array = [];
-      while (this.entries.length) array.push(this.entries.splice(0, this.row));
-      return array;
-    }
+    return {};
   }
 };
 </script>
 
-<style lang="stylus" scoped>
-.deck-wrapper {
-  padding: 15px 0;
-}
-</style>
+<style lang="stylus" scoped></style>
