@@ -1,6 +1,6 @@
 {
   "name": "@studyathome-internationally/vuepress-plugin-hub",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.1",
   "description": "Vuepress plugin for StudyATHome eLearning Sharing & Virtual Project Teams Hub",
   "author": "Alija Sabic <sabic@technikum-wien.at>",
   "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
@@ -52,5 +52,6 @@
       "ts"
     ],
     "rules": {}
-  }
+  },
+  "gitHead": "370dc5386bcbe37ab10013a6cb8b0e33de5f7656"
 }
