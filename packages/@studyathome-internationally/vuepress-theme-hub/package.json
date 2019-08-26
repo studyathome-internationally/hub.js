@@ -1,6 +1,6 @@
 {
   "name": "@studyathome-internationally/vuepress-theme-hub",
-  "version": "0.0.1-beta.6+c5e68a1",
+  "version": "0.0.1-beta.7+6dd1680",
   "description": "VuePress Theme for StudyATHome Internationally Hub",
   "author": "Alija Sabic <sabic@technikum-wien.at>",
   "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
@@ -22,7 +22,7 @@
   },
   "gitHead": "f1abeb807052496689fbd3580378de0b2eda809f",
   "dependencies": {
-    "@studyathome-internationally/vuepress-plugin-hub": "^0.0.1-beta.1",
+    "@studyathome-internationally/vuepress-plugin-hub": "canary",
     "@vuepress/theme-default": "^1.0.3",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.28"
