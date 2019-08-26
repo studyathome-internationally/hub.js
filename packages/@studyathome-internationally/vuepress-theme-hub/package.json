@@ -23,6 +23,8 @@
   "gitHead": "370dc5386bcbe37ab10013a6cb8b0e33de5f7656",
   "dependencies": {
     "@studyathome-internationally/vuepress-plugin-hub": "^0.0.1-canary.2",
-    "@vuepress/theme-default": "^1.0.3"
+    "@vuepress/theme-default": "^1.0.3",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.28"
   }
 }
