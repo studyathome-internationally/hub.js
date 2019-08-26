@@ -19,9 +19,26 @@ export interface DirectoryClassifier {
    */
   layout?: string;
   /**
+   * Frontmatter for entry page.
+   */
+  frontmatter?: Record<string, any>;
+  /**
    * Layout for matched page.
    */
   itemLayout?: string;
+  /**
+   * Display in navbar.
+   */
+  nav?: {
+    /**
+     * Navbar title.
+     */
+    title: string;
+    /**
+     * Navbar order.
+     */
+    order: number;
+  };
 }
 
 /**
