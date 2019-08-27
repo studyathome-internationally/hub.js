@@ -1,7 +1,7 @@
 {
   "name": "@studyathome-internationally/vuepress-theme-hub",
-  "version": "0.0.1",
-  "description": "VuePress Theme for StudyATHome Internationally Hub",
+  "version": "0.0.1-beta.13",
+  "description": "Vuepress theme for StudyATHome Internationally eLearning Sharing & Virtual Project Teams Hub",
   "author": "Alija Sabic <sabic@technikum-wien.at>",
   "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
   "license": "GPL-3.0",
