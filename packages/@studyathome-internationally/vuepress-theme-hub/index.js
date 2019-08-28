@@ -22,7 +22,20 @@ module.exports = (themeConfig, ctx) => {
       ? modifyHubPluginOptions(defaultHubPluginOptions)
       : defaultHubPluginOptions;
 
-  const plugins = [["@studyathome-internationally/hub", hubPluginOptions]];
+  const plugins = [
+    // ["@studyathome-internationally/hub", hubPluginOptions],
+    // [
+    //   "register-components",
+    //   {
+    //     components: [
+    //       {
+    //         name: "ListCourseColumns",
+    //         path: "components/ListCourseColumns.vue"
+    //       }
+    //     ]
+    //   }
+    // ]
+  ];
 
   const config = {
     extend: "@vuepress/theme-default",
