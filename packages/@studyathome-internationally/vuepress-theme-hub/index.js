@@ -23,7 +23,7 @@ module.exports = (themeConfig, ctx) => {
       : defaultHubPluginOptions;
 
   const plugins = [
-    // ["@studyathome-internationally/hub", hubPluginOptions],
+    ["@studyathome-internationally/hub", hubPluginOptions]
     // [
     //   "register-components",
     //   {
