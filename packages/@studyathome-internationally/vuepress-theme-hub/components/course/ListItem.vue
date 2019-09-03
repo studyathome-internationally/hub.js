@@ -1,5 +1,12 @@
 <template>
-  <b-card :img-src="frontmatter.image" :img-alt="frontmatter.imageAlt">
+  <b-card>
+    <b-card-img-lazy
+      slot="header"
+      class="mb-0"
+      :src="frontmatter.image"
+      :image-alt="frontmatter.imageAlt"
+    ></b-card-img-lazy>
+
     <b-card-title style="padding: 0; margin: 0;">
       <b-link :to="path">{{frontmatter.title}}</b-link>
     </b-card-title>
@@ -26,7 +33,12 @@ a {
   text-decoration: none;
 }
 div.card-body {
-  margin: 0;
+  margin: 10px;
   padding: 0;
+}
+
+div.card-header {
+  padding: 0;
+  border: none;
 }
 </style>
