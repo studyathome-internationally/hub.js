@@ -1,15 +1,14 @@
 <template>
-  <b-card-group columns>
-    <ListCourseEntry v-for="course of courses" :key="course.path" :course-data="course" />
-  </b-card-group>
+  <div class="container">
+    <ListItem v-for="course of courses" :key="course.path" :course-data="course" />
+  </div>
 </template>
 
 <script>
-import ListCourseEntry from "@theme/components/ListCourseEntry.vue";
-
+import ListItem from "@theme/components/course/ListItem.vue";
 export default {
   components: {
-    ListCourseEntry
+    ListItem
   },
   props: {
     path: {
@@ -33,4 +32,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.container > * {
+  width: 30%;
+  margin: 1vw;
+}
 </style>

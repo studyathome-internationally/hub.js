@@ -1,9 +1,6 @@
 <template>
-  <b-card
-    :img-src="frontmatter.image || 'https://picsum.photos/600/300/?image=25'"
-    img-alt="Alternative Text"
-  >
-    <b-card-title>
+  <b-card :img-src="frontmatter.image" :img-alt="frontmatter.imageAlt">
+    <b-card-title style="padding: 0; margin: 0;">
       <b-link :to="path">{{frontmatter.title}}</b-link>
     </b-card-title>
     <b-card-text>{{ frontmatter.lecturer }}</b-card-text>
@@ -27,5 +24,9 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
+}
+div.card-body {
+  margin: 0;
+  padding: 0;
 }
 </style>
