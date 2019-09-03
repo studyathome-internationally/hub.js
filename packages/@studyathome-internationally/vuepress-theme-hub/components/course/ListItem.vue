@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 a {
-  text-decoration: none;
+  text-decoration-style: none;
 }
 div.card-body {
   margin: 10px;
