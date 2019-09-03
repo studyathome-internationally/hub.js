@@ -40,5 +40,6 @@ export default {
 .container > * {
   width: 30%;
   margin: 1vw;
+  box-shadow: #ccc 1px 2px 5px 0px;
 }
 </style>
