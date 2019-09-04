@@ -3,6 +3,7 @@ import { existsSync } from "fs";
 import { logger, chalk } from "@vuepress/shared-utils";
 import { HubPluginOptions } from "./interface/Options";
 import { ExtraPage } from "./interface/ExtraPages";
+import { PageEnhancer } from "./interface/PageEnhancer";
 
 function capitalize(w) {
   if (typeof w !== "string") return "";
@@ -36,6 +37,7 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
   });
 
   const extraPages: ExtraPage[] = [];
+  const pageEnhancers: PageEnhancer[] = [];
 
   /**
    * 1. Directory-based classification
@@ -47,7 +49,7 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
       path: indexPath = `/${directory.id}/`,
       layout: indexLayout = "IndexCourse",
       frontmatter,
-      // itemLayout = "Course",
+      itemLayout = "Course",
       nav
     } = directory;
 
@@ -87,9 +89,24 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
         });
       }
     }
+
+    /**
+     * 1.4 Set layout for pages that match current directory classifier.
+     */
+    pageEnhancers.push({
+      when: ({regularPath}) => Boolean(regularPath) && regularPath !== indexPath && regularPath.startsWith(`/${dirname}/`),
+      frontmatter: {
+        layout: ctx.getLayout(itemLayout, 'Course'),
+      },
+      data: {
+        id,
+        pid: id
+      }
+    })
   }
 
   return {
+    pageEnhancers,
     extraPages
   };
 }

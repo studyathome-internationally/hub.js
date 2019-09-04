@@ -20,7 +20,7 @@ function injectExtraAPI(ctx: any) {
 module.exports = (options: HubPluginOptions, ctx: any) => {
   injectExtraAPI(ctx);
 
-  const { extraPages } = handleOptions(options, ctx);
+  const { pageEnhancers, extraPages } = handleOptions(options, ctx);
 
   return {
     name: "vuepress-plugin-hub",
@@ -28,7 +28,22 @@ module.exports = (options: HubPluginOptions, ctx: any) => {
     /**
      * 1. Execute `pageEnhancers` generated in handleOptions
      */
-    extendPageData() {
+    extendPageData(pageCtx: any) {
+      const { frontmatter: rawFrontMatter } = pageCtx;
+
+      pageEnhancers.forEach(({when, data = {}, frontmatter = {}}) => {
+        if (when(pageCtx)) {
+          Object.keys(frontmatter).forEach(key=> {
+            /**
+             * Respect the original frontmatter in markdown
+             */
+            if (!rawFrontMatter[key]) {
+              rawFrontMatter[key] = frontmatter[key];
+            }
+            Object.assign(pageCtx, data);
+          })
+        }
+      })
       // logPageContext(pageCtx);
     },
     async ready() {
