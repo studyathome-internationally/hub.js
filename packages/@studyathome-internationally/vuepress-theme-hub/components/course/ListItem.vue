@@ -1,21 +1,18 @@
 <template>
   <b-card>
-    <b-card-img-lazy
-      slot="header"
-      class="mb-0"
-      :src="frontmatter.image"
-      :image-alt="frontmatter.imageAlt"
-    ></b-card-img-lazy>
-
-    <b-card-title style="padding: 0; margin: 0;">
-      <b-link :to="path">{{frontmatter.title}}</b-link>
-    </b-card-title>
-    <b-card-text>{{ frontmatter.lecturer }}</b-card-text>
+    <b-link :to="path" slot="header">
+      <b-card-img-lazy class="mb-0" :src="frontmatter.image" :image-alt="frontmatter.imageAlt"></b-card-img-lazy>
+    </b-link>
+    <CourseData :title="frontmatter.title" :lecturer="frontmatter.lecturer" :link="path" />
   </b-card>
 </template>
 
 <script>
+import CourseData from "@theme/components/course/CourseData.vue";
 export default {
+  components: {
+    CourseData
+  },
   props: {
     courseData: Object
   },
@@ -24,6 +21,11 @@ export default {
       frontmatter: this.courseData.frontmatter,
       path: this.courseData.path
     };
+  },
+  methods: {
+    routeToCourse() {
+      this.$router.push(this.path);
+    }
   }
 };
 </script>
