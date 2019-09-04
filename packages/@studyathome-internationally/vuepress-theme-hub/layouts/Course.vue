@@ -1,10 +1,14 @@
 <template>
-  <div></div>
+  <ParentLayout></ParentLayout>
 </template>
 
 <script>
-export default {};
+import ParentLayout from "@parent-theme/layouts/Layout.vue";
+export default {
+  components: {
+    ParentLayout
+  }
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="stylus"></style>

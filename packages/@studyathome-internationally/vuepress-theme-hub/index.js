@@ -39,7 +39,8 @@ module.exports = (themeConfig, ctx) => {
 
   const config = {
     extend: "@vuepress/theme-default",
-    plugins
+    plugins,
+    globalUIComponents: ["Enroll"]
   };
 
   return config;

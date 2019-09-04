@@ -1,7 +1,7 @@
 <template>
   <ParentLayout>
     <div slot="page-top">
-      <div class="content-wrapper">
+      <div class="theme-default-content">
         <CourseList />
       </div>
     </div>
@@ -17,10 +17,4 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-.content-wrapper {
-  padding: 80px 2vw;
-  max-width: 70vw;
-  margin: 0 auto;
-}
-</style>
+<style lang="stylus"></style>

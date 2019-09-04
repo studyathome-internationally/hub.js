@@ -21,11 +21,19 @@ export default {
   },
   computed: {
     courses: function() {
-      return this.$site.pages.filter(({ path }) => {
-        const basePath = this.path || this.$route.path;
-        const r = new RegExp("^" + basePath);
-        return path !== basePath && r.exec(path);
-      });
+      return this.$site.pages.filter(
+        ({ regularPath }) => {
+          const path = this.path || this.$route.path;
+          return (
+            Boolean(path) &&
+            regularPath !== path &&
+            regularPath.startsWith(`${path}`)
+          );
+        }
+        // const path = this.path || this.$route.path;
+        // const r = new RegExp("^" + basePath);
+        // return path !== basePath && r.exec(path);
+      );
     }
   }
 };
@@ -35,20 +43,21 @@ export default {
 .container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: center;
 }
 
 .container > * {
   width: 31%;
-  margin: 1vh 0;
+  margin: 1vh auto;
   box-shadow: #ccc 1px 2px 5px 0px;
   transition: 0.5s width ease;
   min-width: 200px;
 }
 
-.container > *:last-child {
-  margin: 1vh auto;
-}
+// .container > *:last-child {
+//   margin: 1vh auto;
+// }
 
 @media (max-width: 768px) {
   .container > * {
