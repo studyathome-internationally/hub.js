@@ -39,6 +39,19 @@ export interface DirectoryClassifier {
      */
     order: number;
   };
+  /**
+   * Enrollment config.
+   */
+  enroll?: {
+    /**
+     * Path to enrollment template
+     */
+    template: string;
+    /**
+     * Path of generated enrollment
+     */
+    path: string;
+  };
 }
 
 /**

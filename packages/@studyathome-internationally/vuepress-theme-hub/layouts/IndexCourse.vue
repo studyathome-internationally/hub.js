@@ -2,7 +2,7 @@
   <ParentLayout>
     <div slot="page-top">
       <div class="theme-default-content">
-        <CourseList />
+        <CourseCards />
       </div>
     </div>
   </ParentLayout>

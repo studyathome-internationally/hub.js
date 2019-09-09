@@ -9,7 +9,11 @@ module.exports = (themeConfig, ctx) => {
         itemLayout: "Course",
         nav: {
           title: "Courses",
-          order: 2
+          order: 2 // TODO: add option "append"
+        },
+        enroll: {
+          template: "general/enroll",
+          path: "enroll"
         }
       }
     ]
@@ -22,25 +26,12 @@ module.exports = (themeConfig, ctx) => {
       ? modifyHubPluginOptions(defaultHubPluginOptions)
       : defaultHubPluginOptions;
 
-  const plugins = [
-    ["@studyathome-internationally/hub", hubPluginOptions]
-    // [
-    //   "register-components",
-    //   {
-    //     components: [
-    //       {
-    //         name: "ListCourseColumns",
-    //         path: "components/ListCourseColumns.vue"
-    //       }
-    //     ]
-    //   }
-    // ]
-  ];
+  const plugins = [["@studyathome-internationally/hub", hubPluginOptions]];
 
   const config = {
     extend: "@vuepress/theme-default",
-    plugins,
-    globalUIComponents: ["Enroll"]
+    plugins
+    // globalUIComponents: ["Enroll"]
   };
 
   return config;

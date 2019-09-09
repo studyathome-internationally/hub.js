@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <ListItem v-for="course of courses" :key="course.path" :course-data="course" />
+    <CourseCard v-for="course of courses" :key="course.path" :data="course" />
   </div>
 </template>
 
 <script>
-import ListItem from "@theme/components/course/ListItem.vue";
+import CourseCard from "@theme/components/course/CourseCard.vue";
 export default {
   components: {
-    ListItem
+    CourseCard
   },
   props: {
     path: {
@@ -21,19 +21,15 @@ export default {
   },
   computed: {
     courses: function() {
-      return this.$site.pages.filter(
-        ({ regularPath }) => {
-          const path = this.path || this.$route.path;
-          return (
-            Boolean(path) &&
-            regularPath !== path &&
-            regularPath.startsWith(`${path}`)
-          );
-        }
-        // const path = this.path || this.$route.path;
-        // const r = new RegExp("^" + basePath);
-        // return path !== basePath && r.exec(path);
-      );
+      return this.$site.pages.filter(({ regularPath }) => {
+        const path = this.path || this.$route.path;
+        return (
+          Boolean(path) &&
+          regularPath !== path &&
+          regularPath.startsWith(`${path}`) &&
+          (regularPath.endsWith("index.html") || regularPath.endsWith("/"))
+        );
+      });
     }
   }
 };

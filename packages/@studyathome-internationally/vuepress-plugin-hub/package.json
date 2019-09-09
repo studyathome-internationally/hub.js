@@ -1,6 +1,6 @@
 {
   "name": "@studyathome-internationally/vuepress-plugin-hub",
-  "version": "0.0.1-beta.16",
+  "version": "0.0.1-beta.26",
   "description": "Vuepress plugin for StudyATHome Internationally eLearning Sharing & Virtual Project Teams Hub",
   "author": "Alija Sabic <sabic@technikum-wien.at>",
   "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
@@ -32,14 +32,11 @@
   "bugs": {
     "url": "https://github.com/studyathome-internationally/hub.js/issues"
   },
-  "dependencies": {
-    "@vuepress/shared-utils": "^1.0.3",
-    "concurrently": "^4.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3",
-    "vuepress": "^1.0.3",
     "xo": "^0.24.0"
   },
   "xo": {

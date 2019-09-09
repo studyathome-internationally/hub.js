@@ -1,26 +1,17 @@
-<!--
 <template>
-  <div id="container" class="theme-default-content">
-    <b-button class="item" variant="primary">Enroll</b-button>
-  </div>
+  <router-link to="enroll" style="display: flex;">
+    <b-button style="flex: 1; font-size: 1.4rem;" variant="primary">Enroll</b-button>
+  </router-link>
 </template>
 
 <script>
 export default {
   data() {
     return {};
-  }
+  },
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
-div#container.theme-default-content {
-  display: flex;
-  margin-top: -160px;
-}
-.item {
-  flex: 1;
-  font-size: 1.5rem;
-}
 </style>
--->

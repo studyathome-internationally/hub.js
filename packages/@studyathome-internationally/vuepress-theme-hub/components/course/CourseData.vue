@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-card-title class="title">
-      <b-link :to="link">{{title}}</b-link>
+      <div>{{title}}</div>
     </b-card-title>
     <b-card-sub-title>{{subtitle}}</b-card-sub-title>
     <b-card-text>
@@ -42,11 +42,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.outline {
+  outline: 1px red dashed;
+}
+
 .title {
   margin-top: 0.05vh;
 }
 .first-level {
   background-color: #ccc;
+}
+
+#main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+#main > * {
+  cursor: default;
+  pointer-events: none;
 }
 
 #info,
@@ -64,15 +80,13 @@ export default {
   padding: 5px;
   display: flex;
   flex-flow: row nowrap;
-  // justify-content: space-between;
+  justify-content: space-between;
 }
 
 #info > div > div {
-  flex: 1 0 auto;
-  padding: 0 5px;
+  flex: 1;
 }
 #info > div > div:last-child {
-  flex: 3 0 auto;
-  text-align: end;
+  flex: 2;
 }
 </style>

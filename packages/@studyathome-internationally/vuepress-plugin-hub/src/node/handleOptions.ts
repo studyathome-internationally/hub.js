@@ -5,11 +5,6 @@ import { HubPluginOptions } from "./interface/Options";
 import { ExtraPage } from "./interface/ExtraPages";
 import { PageEnhancer } from "./interface/PageEnhancer";
 
-function capitalize(w) {
-  if (typeof w !== "string") return "";
-  return w.charAt(0).toUpperCase() + w.slice(1);
-}
-
 /**
  * Handle options from users.
  * @param options
@@ -64,6 +59,7 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
      * 1.2 Inject index page.
      */
     extraPages.push({
+      title: capitalize(id),
       permalink: indexPath,
       frontmatter: {
         layout: ctx.getLayout(indexLayout),
@@ -72,7 +68,7 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
         ...frontmatter
       },
       meta: {
-        pid: id,
+        cid: id,
         id
       }
     });
@@ -94,19 +90,111 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
      * 1.4 Set layout for pages that match current directory classifier.
      */
     pageEnhancers.push({
-      when: ({regularPath}) => Boolean(regularPath) && regularPath !== indexPath && regularPath.startsWith(`/${dirname}/`),
+      when: ({ regularPath }) => filterIndexedPages(regularPath, indexPath, dirname),
       frontmatter: {
-        layout: ctx.getLayout(itemLayout, 'Course'),
+        layout: ctx.getLayout(itemLayout, "Course")
       },
       data: {
         id,
-        pid: id
+        cid: id
       }
-    })
+    });
   }
 
   return {
     pageEnhancers,
     extraPages
   };
+}
+
+/**
+ * Capitalize first letter of every word.
+ * @param text
+ * @return {*}
+ */
+function capitalize(text: string) {
+  return text.replace(/(?:^|\s)\S/g, l => l.toUpperCase());
+}
+
+/**
+ * Filter pages in `dirname`, i.e. only top-level files or index files in sub directories.
+ * @param regularPath
+ * @param indexPath
+ * @param dirname
+ * @return {*}
+ */
+export function filterIndexedPages(regularPath: string, indexPath: string, dirname: string) {
+  return (
+    Boolean(regularPath) &&
+    regularPath !== indexPath &&
+    regularPath.startsWith(`/${dirname}/`) &&
+    (regularPath.endsWith("index.html") || regularPath.endsWith("/"))
+    // || isFirstLevelEntry(regularPath, indexPath)
+  );
+}
+
+// /**
+//  * Tests if entry is first level entry of given index page.
+//  * @param itemPath
+//  * @param indexPath
+//  * return {*}
+//  */
+// function isFirstLevelEntry(itemPath: string, indexPath: string) {
+//   const p = relative(indexPath, itemPath);
+//   return p.split("/").length == 1;
+// }
+
+/**
+ * Create default enrollment pages where missing.
+ * @param options
+ * @param ctx
+ * @return {*}
+ */
+export function handleEnrollmentPages(options: HubPluginOptions, ctx: any) {
+  let enrollmentPages: any[] = [];
+  const { directories } = options;
+  const { pages } = ctx;
+  for (const directory of directories) {
+    const { path: indexPath = `/${directory.id}/`, enroll } = directory;
+    if (enroll) {
+      const indexPages = pages.filter(({ regularPath }) => regularPath.startsWith(indexPath));
+      enrollmentPages.push(...generateMissingEnrollment(enroll, ctx, indexPages));
+    }
+  }
+  return enrollmentPages;
+}
+
+function generateMissingEnrollment(
+  enroll: { template: string; path: string },
+  ctx: any,
+  indexPages: any
+) {
+  const { pages } = ctx;
+  const { template: enrollmentTemplatePath, path: enrollmentSubpath } = enroll;
+  const coursePages = indexPages.filter(
+    ({ regularPath }) => !regularPath.endsWith(enrollmentSubpath + ".html")
+  );
+  let enrollmentPages: any[] = [];
+
+  for (const coursePage of coursePages) {
+    const enrollmentPagePath = coursePage.regularPath + enrollmentSubpath + ".html";
+    const hasEnrollmentPage =
+      indexPages.filter(({ regularPath }) => regularPath === enrollmentPagePath).length > 0;
+
+    if (!hasEnrollmentPage) {
+      const defaultEnrollmentPage = pages.find(
+        ({ relativePath }) => relativePath === enrollmentTemplatePath + ".md"
+      );
+      // const enrollmentPage = Object.assign({}, defaultEnrollmentPage);
+      // Object.assign(enrollmentPage, {
+      const enrollmentPage = {
+        title: defaultEnrollmentPage.title,
+        path: enrollmentPagePath,
+        content: defaultEnrollmentPage._content
+        // });
+      };
+      enrollmentPages.push(enrollmentPage);
+    }
+  }
+  return enrollmentPages;
 }

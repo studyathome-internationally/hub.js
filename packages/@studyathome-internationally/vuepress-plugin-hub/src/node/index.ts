@@ -1,5 +1,5 @@
-import { handleOptions } from "./handleOptions";
 import { HubPluginOptions } from "./interface/Options";
+import { handleOptions, handleEnrollmentPages } from "./handleOptions";
 
 function injectExtraAPI(ctx: any) {
   const { layoutComponentMap } = ctx.themeAPI;
@@ -31,34 +31,36 @@ module.exports = (options: HubPluginOptions, ctx: any) => {
     extendPageData(pageCtx: any) {
       const { frontmatter: rawFrontMatter } = pageCtx;
 
-      pageEnhancers.forEach(({when, data = {}, frontmatter = {}}) => {
+      pageEnhancers.forEach(({ when, data = {}, frontmatter = {} }) => {
         if (when(pageCtx)) {
-          Object.keys(frontmatter).forEach(key=> {
+          Object.keys(frontmatter).forEach(key => {
             /**
              * Respect the original frontmatter in markdown
              */
             if (!rawFrontMatter[key]) {
               rawFrontMatter[key] = frontmatter[key];
             }
-            Object.assign(pageCtx, data);
-          })
+          });
+          Object.assign(pageCtx, data);
         }
-      })
-      // logPageContext(pageCtx);
+      });
     },
+    /**
+     * 2. Create pages according to user's config.
+     */
     async ready() {
-      // const { pages } = ctx;
-      // console.log("Pages: "); //, pages);
-      // logKeys(pages[0], "Page Keys: ");
-      // logKeys(ctx, "Context Keys: ");
-      // logPages(pages);
-      // console.log("ready()");
-      // await ctx.addPage({ title: "My New Page", path: "/new_page/" });
-      // await ctx.addPage({ title: "My 2nd New Page", path: "/new_page_2/" });
-      // logPages(pages);
-      // await Promise.all(extraPages.map(async page => ctx.addPage(page)));
-    },
-    additionalPages: extraPages
+      const enrollmentPages = handleEnrollmentPages(options, ctx);
+
+      /**
+       * 2.2 Combine all pages.
+       *
+       *   - Index page for courses.
+       *   - Enrollment pages.
+       */
+      const allExtraPages = [...extraPages, ...enrollmentPages];
+
+      await Promise.all(allExtraPages.map(async page => ctx.addPage(page)));
+    }
   };
 };
 
