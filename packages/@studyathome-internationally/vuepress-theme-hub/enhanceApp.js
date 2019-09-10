@@ -1,5 +1,6 @@
 import "./styles/main.scss";
 import "./plugins/bootstrap";
+import "./plugins/icons";
 
 // import Enroll from "./components/course/Enroll.vue";
 

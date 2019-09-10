@@ -44,13 +44,17 @@ export interface DirectoryClassifier {
    */
   enroll?: {
     /**
-     * Path to enrollment template
+     * Path to enrollment template.
      */
     template: string;
     /**
-     * Path of generated enrollment
+     * Path of generated enrollment.
      */
     path: string;
+    /**
+     * Layout for enrollment page.
+     */
+    enrollLayout: string;
   };
 }
 

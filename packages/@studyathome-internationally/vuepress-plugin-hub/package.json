@@ -32,7 +32,9 @@
   "bugs": {
     "url": "https://github.com/studyathome-internationally/hub.js/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^2.4.2"
+  },
   "devDependencies": {
     "concurrently": "^4.1.2",
     "ts-node": "^8.3.0",

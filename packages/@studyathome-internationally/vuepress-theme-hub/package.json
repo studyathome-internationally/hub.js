@@ -22,6 +22,11 @@
   },
   "gitHead": "f1abeb807052496689fbd3580378de0b2eda809f",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-brands-svg-icons": "^5.10.2",
+    "@fortawesome/free-regular-svg-icons": "^5.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/vue-fontawesome": "^0.1.7",
     "@studyathome-internationally/vuepress-plugin-hub": "canary",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.28",

@@ -2,15 +2,15 @@
   <div class="theme-default-content">
     <Content />
     <!-- TODO: test if enrollment is possible / link pushable -->
-    <Enroll />
+    <EnrollButton />
   </div>
 </template>
 
 <script>
-import Enroll from "@theme/components/course/Enroll.vue";
+import EnrollButton from "@theme/components/enroll/EnrollButton.vue";
 export default {
   components: {
-    Enroll
+    EnrollButton
   }
 };
 </script>

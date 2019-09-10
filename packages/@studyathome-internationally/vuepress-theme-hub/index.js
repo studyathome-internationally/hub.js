@@ -13,7 +13,8 @@ module.exports = (themeConfig, ctx) => {
         },
         enroll: {
           template: "general/enroll",
-          path: "enroll"
+          path: "enroll",
+          enrollLayout: "Enrollment"
         }
       }
     ]

@@ -1,7 +1,10 @@
 import { join } from "path";
 import { existsSync } from "fs";
-import { logger, chalk } from "@vuepress/shared-utils";
-import { HubPluginOptions } from "./interface/Options";
+
+import chalk from "chalk";
+import logger from "../util/logger";
+
+import { HubPluginOptions, DirectoryClassifier } from "./interface/Options";
 import { ExtraPage } from "./interface/ExtraPages";
 import { PageEnhancer } from "./interface/PageEnhancer";
 
@@ -154,23 +157,37 @@ export function handleEnrollmentPages(options: HubPluginOptions, ctx: any) {
   let enrollmentPages: any[] = [];
   const { directories } = options;
   const { pages } = ctx;
+
   for (const directory of directories) {
     const { path: indexPath = `/${directory.id}/`, enroll } = directory;
     if (enroll) {
       const indexPages = pages.filter(({ regularPath }) => regularPath.startsWith(indexPath));
+      setDefaultEnrollmentLayout(indexPages, directory);
       enrollmentPages.push(...generateMissingEnrollment(enroll, ctx, indexPages));
     }
   }
   return enrollmentPages;
 }
 
+function setDefaultEnrollmentLayout(pages: any, directory: DirectoryClassifier) {
+  const { enroll } = directory;
+  const enrollmentPages = pages.filter(({ regularPath }) =>
+    regularPath.endsWith(enroll ? enroll.path + ".html" : "enroll.html")
+  );
+  for (const page of enrollmentPages) {
+    if (!page.frontmatter.layout) {
+      page.frontmatter.layout = enroll ? enroll.enrollLayout : "Layout";
+    }
+  }
+}
+
 function generateMissingEnrollment(
-  enroll: { template: string; path: string },
+  enroll: { template: string; path: string; enrollLayout: string },
   ctx: any,
   indexPages: any
 ) {
   const { pages } = ctx;
-  const { template: enrollmentTemplatePath, path: enrollmentSubpath } = enroll;
+  const { template: enrollmentTemplatePath, path: enrollmentSubpath, enrollLayout } = enroll;
   const coursePages = indexPages.filter(
     ({ regularPath }) => !regularPath.endsWith(enrollmentSubpath + ".html")
   );
@@ -188,6 +205,9 @@ function generateMissingEnrollment(
       // const enrollmentPage = Object.assign({}, defaultEnrollmentPage);
       // Object.assign(enrollmentPage, {
       const enrollmentPage = {
+        frontmatter: {
+          layout: enrollLayout || "Layout"
+        },
         title: defaultEnrollmentPage.title,
         path: enrollmentPagePath,
         content: defaultEnrollmentPage._content
