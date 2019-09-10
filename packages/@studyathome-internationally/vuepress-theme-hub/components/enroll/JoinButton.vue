@@ -1,8 +1,8 @@
 <template>
-  <b-link :href="mailto()" style="display: flex;" class="link">
-    <b-button style="flex: 1; font-size: 1.4rem; cursor: pointer;" variant="info">
-      <span>Compose a Mail!</span>
-      <font-awesome-icon icon="envelope-open-text" />
+  <b-link :href="mailto()" class="link">
+    <b-button class="join-button" variant="info">
+      <span>Join the Course!</span>
+      <font-awesome-icon icon="mail-bulk" />
     </b-button>
   </b-link>
 </template>
@@ -52,5 +52,13 @@ export default {
 <style lang="scss" scoped>
 .link:hover {
   text-decoration: none !important;
+}
+.container {
+  display: flex;
+}
+.join-button {
+  flex: 1;
+  font-size: 1.4rem;
+  cursor: pointer;
 }
 </style>
