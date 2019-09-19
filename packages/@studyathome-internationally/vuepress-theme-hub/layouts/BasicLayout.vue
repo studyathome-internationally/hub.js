@@ -14,16 +14,18 @@
     </Sidebar>
 
     <slot name="content"></slot>
+    <PageEdit />
   </div>
 </template>
 
 <script>
 import Navbar from "@parent-theme/components/Navbar.vue";
 import Sidebar from "@parent-theme/components/Sidebar.vue";
+import PageEdit from "@parent-theme/components/PageEdit.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
-  components: { Navbar, Sidebar },
+  components: { Navbar, Sidebar, PageEdit },
 
   data() {
     return {
