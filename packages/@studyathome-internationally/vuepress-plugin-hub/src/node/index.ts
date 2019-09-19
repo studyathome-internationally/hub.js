@@ -1,5 +1,5 @@
 import { HubPluginOptions } from "./interface/Options";
-import { handleOptions, handleEnrollmentPages } from "./handleOptions";
+import { handleOptions, handleEnrollmentPages, isIndexed } from "./handleOptions";
 
 function injectExtraAPI(ctx: any) {
   const { layoutComponentMap } = ctx.themeAPI;
@@ -20,7 +20,7 @@ function injectExtraAPI(ctx: any) {
 module.exports = (options: HubPluginOptions, ctx: any) => {
   injectExtraAPI(ctx);
 
-  const { pageEnhancers, extraPages } = handleOptions(options, ctx);
+  const { pageEnhancers, indexPages } = handleOptions(options, ctx);
 
   return {
     name: "vuepress-plugin-hub",
@@ -35,7 +35,7 @@ module.exports = (options: HubPluginOptions, ctx: any) => {
         if (when(pageCtx)) {
           Object.keys(frontmatter).forEach(key => {
             /**
-             * Respect the original frontmatter in markdown
+             * Respect the original frontmatter in markdown.
              */
             if (!rawFrontMatter[key]) {
               rawFrontMatter[key] = frontmatter[key];
@@ -49,7 +49,18 @@ module.exports = (options: HubPluginOptions, ctx: any) => {
      * 2. Create pages according to user's config.
      */
     async ready() {
+      const { pages } = ctx;
       const enrollmentPages = handleEnrollmentPages(options, ctx);
+
+      /**
+       * 2.1 Add paths of indexed pages to index pages.
+       */
+      for (let { permalink, frontmatter } of indexPages) {
+        frontmatter.indexed = pages
+          .filter(({ regularPath }) => isIndexed(regularPath, permalink, frontmatter.subdirlevel))
+          .map(({ regularPath }) => regularPath)
+          .sort();
+      }
 
       /**
        * 2.2 Combine all pages.
@@ -57,40 +68,9 @@ module.exports = (options: HubPluginOptions, ctx: any) => {
        *   - Index page for courses.
        *   - Enrollment pages.
        */
-      const allExtraPages = [...extraPages, ...enrollmentPages];
+      const allExtraPages = [...indexPages, ...enrollmentPages];
 
       await Promise.all(allExtraPages.map(async page => ctx.addPage(page)));
     }
   };
 };
-
-// function logKeys(obj, label) {
-//   // console.log(label, Object.keys(obj));
-//   console.log(label, Object.getOwnPropertyNames(obj));
-// }
-
-// function logPages(pages) {
-//   for (const [idx, page] of pages.entries()) {
-//     console.log(`Page ${idx}: ${page["title"]}`);
-//   }
-// }
-
-// function logPageContext(ctx) {
-//   console.log(`Page Context:`);
-//   for (const key of Object.keys(ctx)) {
-//     if (key === "frontmatter") {
-//       console.log(`  frontmatter:`);
-//       for (const frontmatterKey of Object.keys(ctx[key])) {
-//         console.log(`    [${frontmatterKey}]: ${ctx[key][frontmatterKey]}`);
-//       }
-//     } else if (key === "_computed") {
-//       console.log(`  [_computed]: ~`);
-//     } else if (key === "_content") {
-//       console.log(`  [_content]: ~`);
-//     } else if (key === "_strippedContent") {
-//       console.log(`  [_strippedContent]: ~`);
-//     } else {
-//       console.log(`  [${key}]: ${ctx[key]}`);
-//     }
-//   }
-// }

@@ -1,7 +1,7 @@
 <template>
   <div class="theme-default-content">
     <Content />
-    <JoinButton />
+    <JoinButton :enrollment="$frontmatter.enrollment" />
   </div>
 </template>
 

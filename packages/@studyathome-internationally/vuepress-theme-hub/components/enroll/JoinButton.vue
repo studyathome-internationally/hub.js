@@ -1,7 +1,7 @@
 <template>
-  <b-link :href="mailto()" class="link">
+  <b-link :href="mailto()" class="link" style="display: flex;">
     <b-button class="join-button" variant="info">
-      <span>Join the Course!</span>
+      Join
       <font-awesome-icon icon="mail-bulk" />
     </b-button>
   </b-link>
@@ -9,14 +9,14 @@
 
 <script>
 export default {
+  props: {
+    enrollment: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
-    return {
-      to: ["funny@uni.at", "funny@uni.de"],
-      subject: "Subject line",
-      cc: ["funny@fh.at", "funny@fh.de"],
-      bcc: ["funny@project.at", "funny@project.de"],
-      body: "This is the body."
-    };
+    return this.enrollment;
   },
   methods: {
     mailto: function() {
@@ -43,7 +43,15 @@ export default {
       return this.construct("bcc", this.bcc);
     },
     getBody: function() {
-      return this.construct("body", this.body);
+      // FIXME
+      // https://stackoverflow.com/questions/22765834/insert-a-line-break-in-mailto-body
+      const body = encodeURI
+        ? encodeURI(this.body.replace(/\\n/g, "%0D%0A"))
+        : this.body;
+      return this.construct("body", body);
+    },
+    bodyN: function() {
+      return encodeURI(this.body);
     }
   }
 };

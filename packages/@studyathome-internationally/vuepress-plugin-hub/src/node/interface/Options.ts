@@ -27,18 +27,9 @@ export interface DirectoryClassifier {
    */
   itemLayout?: string;
   /**
-   * Display in navbar.
+   * Sub directory level of indexed pages.
    */
-  nav?: {
-    /**
-     * Navbar title.
-     */
-    title: string;
-    /**
-     * Navbar order.
-     */
-    order: number;
-  };
+  level?: number;
   /**
    * Enrollment config.
    */

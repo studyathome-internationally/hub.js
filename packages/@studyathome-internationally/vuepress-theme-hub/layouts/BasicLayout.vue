@@ -20,11 +20,10 @@
 <script>
 import Navbar from "@parent-theme/components/Navbar.vue";
 import Sidebar from "@parent-theme/components/Sidebar.vue";
-import CoursePage from "@theme/components/course/CoursePage.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
-  components: { CoursePage, Navbar, Sidebar },
+  components: { Navbar, Sidebar },
 
   data() {
     return {

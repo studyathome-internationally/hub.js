@@ -1,18 +1,14 @@
 <template>
-  <!-- <router-link :to="path"> -->
   <b-card id="card" @mousedown="onMouseDown" @mouseup="onMouseUp" tabindex="0">
-    <!-- <b-card id="card" tabindex="0"> -->
     <div slot="header">
-      <!-- <router-link :to="path"> -->
       <b-card-img-lazy
-        :src="frontmatter.image || 'https://via.placeholder.com/800x600'"
+        class="card-image"
+        :src="frontmatter.media.image || 'https://via.placeholder.com/800x600'"
         :image-alt="frontmatter.imageAlt"
       ></b-card-img-lazy>
-      <!-- </router-link> -->
     </div>
-    <CourseData :title="frontmatter.title" :lecturer="frontmatter.lecturer" :link="path" />
+    <CourseData :data="frontmatter" :link="path" />
   </b-card>
-  <!-- </router-link> -->
 </template>
 
 <script>
@@ -56,11 +52,6 @@ export default {
   cursor: pointer;
 }
 
-// #card:hover,
-// #card:focus {
-//   outline: 2px #0e0 solid;
-// }
-
 a,
 a:hover {
   text-decoration-style: none;
@@ -76,5 +67,10 @@ div.card-body {
 div.card-header {
   padding: 0;
   border: none;
+}
+
+.card-image {
+  height: 150px;
+  object-fit: cover;
 }
 </style>

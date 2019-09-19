@@ -1,15 +1,23 @@
 <template>
-  <div>
+  <div class="card-container">
     <b-card-title class="title">
-      <div>{{title}}</div>
+      <div class="hide-overflow">{{data.title}}</div>
     </b-card-title>
-    <b-card-sub-title>{{subtitle}}</b-card-sub-title>
+    <b-card-sub-title style="height: 2rem;">
+      <div
+        class="hide-overflow"
+        v-for="lecturer of data.lecturers"
+        :key="lecturer.name"
+      >{{ lecturer.name }}</div>
+    </b-card-sub-title>
     <b-card-text>
-      <div id="info">
-        <div v-for="i of 3" :key="i">
-          <div>Label</div>
-          <div>Information</div>
-        </div>
+      <div class="flex-container">
+        <div>ECTS</div>
+        <div>{{data.ects}}</div>
+        <div>Semester</div>
+        <div>{{data.semester}}</div>
+        <div>Start</div>
+        <div>{{data.schedule.start}}</div>
       </div>
     </b-card-text>
   </div>
@@ -18,17 +26,9 @@
 <script>
 export default {
   props: {
-    lecturer: {
-      type: String,
-      default: "Lecturer Data missing!"
-    },
-    title: {
-      type: String,
-      default: "Title Data missing!"
-    },
-    subtitle: {
-      type: String,
-      default: "Subtitle Data missing!"
+    data: {
+      type: Object,
+      required: true
     },
     link: {
       type: String,
@@ -41,7 +41,42 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
+.hide-overflow {
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+div.flex-container {
+  list-style: none;
+  padding-left: none !important;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  height: 3.6rem;
+
+  & > div {
+    // outline: 0.1px solid;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.1rem;
+    height: 1.2rem;
+    text-align: center;
+    &:nth-child(2n-1) {
+      text-align: left;
+      width: 40%;
+      font-weight: 500;
+    }
+    &:nth-child(2n) {
+      text-align: right;
+      width: 60%;
+    }
+  }
+}
+
 .outline {
   outline: 1px red dashed;
 }
@@ -60,33 +95,33 @@ export default {
   height: 100%;
 }
 
-#main > * {
-  cursor: default;
-  pointer-events: none;
-}
+// #main > * {
+//   cursor: default;
+//   pointer-events: none;
+// }
 
-#info,
-#info div {
-  outline: 1px #333 dotted;
-}
+// #info,
+// #info div {
+//   outline: 1px #333 dotted;
+// }
 
-#info {
-  display: flex;
-  flex-flow: column nowrap;
-}
+// #info {
+//   display: flex;
+//   flex-flow: column nowrap;
+// }
 
-#info > div {
-  background-color: #eee;
-  padding: 5px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-}
+// #info > div {
+//   background-color: #eee;
+//   padding: 5px;
+//   display: flex;
+//   flex-flow: row nowrap;
+//   justify-content: space-between;
+// }
 
-#info > div > div {
-  flex: 1;
-}
-#info > div > div:last-child {
-  flex: 2;
-}
+// #info > div > div {
+//   flex: 1;
+// }
+// #info > div > div:last-child {
+//   flex: 2;
+// }
 </style>

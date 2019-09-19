@@ -1,7 +1,6 @@
 <template>
   <div class="theme-default-content">
     <Content />
-    <!-- TODO: test if enrollment is possible / link pushable -->
     <EnrollButton />
   </div>
 </template>

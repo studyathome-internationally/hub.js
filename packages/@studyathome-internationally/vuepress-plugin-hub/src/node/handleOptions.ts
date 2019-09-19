@@ -5,7 +5,7 @@ import chalk from "chalk";
 import logger from "../util/logger";
 
 import { HubPluginOptions, DirectoryClassifier } from "./interface/Options";
-import { ExtraPage } from "./interface/ExtraPages";
+import { IndexPage } from "./interface/ExtraPages";
 import { PageEnhancer } from "./interface/PageEnhancer";
 
 /**
@@ -34,7 +34,7 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
     return false;
   });
 
-  const extraPages: ExtraPage[] = [];
+  const indexPages: IndexPage[] = [];
   const pageEnhancers: PageEnhancer[] = [];
 
   /**
@@ -45,10 +45,10 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
       id,
       dirname,
       path: indexPath = `/${directory.id}/`,
-      layout: indexLayout = "IndexCourse",
+      layout: indexLayout = "IndexPage",
       frontmatter,
-      itemLayout = "Course",
-      nav
+      itemLayout = "Page",
+      level = 1
     } = directory;
 
     /**
@@ -61,52 +61,37 @@ export function handleOptions(options: HubPluginOptions, ctx: any) {
     /**
      * 1.2 Inject index page.
      */
-    extraPages.push({
-      title: capitalize(id),
+    indexPages.push({
       permalink: indexPath,
       frontmatter: {
         layout: ctx.getLayout(indexLayout),
         title: capitalize(id),
+        subdirlevel: level,
         itemPath: dirname,
         ...frontmatter
       },
       meta: {
-        cid: id,
         id
       }
     });
 
     /**
-     * 1.3 Inject entry in navigation.
-     */
-    if (nav) {
-      const { nav: navBar } = ctx.themeConfig;
-      if (nav.order > 0 && nav.order < navBar.length) {
-        navBar.splice(nav.order - 1, 0, {
-          text: nav.title,
-          link: indexPath
-        });
-      }
-    }
-
-    /**
-     * 1.4 Set layout for pages that match current directory classifier.
+     * 1.3 Set layout for pages that match current directory classifier.
      */
     pageEnhancers.push({
-      when: ({ regularPath }) => filterIndexedPages(regularPath, indexPath, dirname),
+      when: ({ regularPath }) => isIndexed(regularPath, indexPath, level),
       frontmatter: {
-        layout: ctx.getLayout(itemLayout, "Course")
+        layout: itemLayout || "Page"
       },
       data: {
-        id,
-        cid: id
+        id
       }
     });
   }
 
   return {
     pageEnhancers,
-    extraPages
+    indexPages
   };
 }
 
@@ -123,29 +108,54 @@ function capitalize(text: string) {
  * Filter pages in `dirname`, i.e. only top-level files or index files in sub directories.
  * @param regularPath
  * @param indexPath
- * @param dirname
+ * @param level
  * @return {*}
  */
-export function filterIndexedPages(regularPath: string, indexPath: string, dirname: string) {
+export function isIndexed(indexedPath: string, indexPath: string, level: number) {
   return (
-    Boolean(regularPath) &&
-    regularPath !== indexPath &&
-    regularPath.startsWith(`/${dirname}/`) &&
-    (regularPath.endsWith("index.html") || regularPath.endsWith("/"))
-    // || isFirstLevelEntry(regularPath, indexPath)
+    Boolean(indexedPath) &&
+    indexedPath !== indexPath &&
+    indexedPath.startsWith(indexPath) &&
+    (indexedPath.endsWith("index.html") ||
+      indexedPath.endsWith("/") ||
+      isWithinSubDir(indexPath, indexedPath, level))
   );
 }
 
-// /**
-//  * Tests if entry is first level entry of given index page.
-//  * @param itemPath
-//  * @param indexPath
-//  * return {*}
-//  */
-// function isFirstLevelEntry(itemPath: string, indexPath: string) {
-//   const p = relative(indexPath, itemPath);
-//   return p.split("/").length == 1;
-// }
+/**
+ * Subtract `sub` from `text`.
+ * @param text
+ * @param sub
+ * @return {*}
+ */
+function diff(text, sub) {
+  return text.split(sub).join("");
+}
+
+/**
+ * Test weather subtraction makes sense.
+ * @param text
+ * @param sub
+ * @return {*}
+ */
+function diffValidate(text, sub) {
+  return text !== diff(text, sub);
+}
+
+/**
+ * Test if path is within the next`level` sub directories.
+ * @param index
+ * @param path
+ * @param level
+ * @return {*}
+ */
+function isWithinSubDir(index, path, level = 1) {
+  if (level > 0 && diffValidate(path, index)) {
+    const dirLevel = diff(path, index).split("/").length;
+    return dirLevel > 0 && dirLevel <= level + 1;
+  }
+  return false;
+}
 
 /**
  * Create default enrollment pages where missing.

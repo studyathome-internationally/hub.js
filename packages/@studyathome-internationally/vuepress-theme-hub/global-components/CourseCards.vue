@@ -20,16 +20,17 @@ export default {
     return {};
   },
   computed: {
+    index: function() {
+      const path = this.path || this.$route.path;
+      const indexPage = this.$site.pages.find(
+        ({ regularPath }) => regularPath === path
+      );
+      return indexPage.frontmatter.indexed;
+    },
     courses: function() {
-      return this.$site.pages.filter(({ regularPath }) => {
-        const path = this.path || this.$route.path;
-        return (
-          Boolean(path) &&
-          regularPath !== path &&
-          regularPath.startsWith(`${path}`) &&
-          (regularPath.endsWith("index.html") || regularPath.endsWith("/"))
-        );
-      });
+      return this.$site.pages.filter(({ regularPath }) =>
+        this.index.includes(regularPath)
+      );
     }
   }
 };
