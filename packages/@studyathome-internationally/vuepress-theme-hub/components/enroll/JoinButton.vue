@@ -58,13 +58,15 @@ export default {
     },
     getBody: function() {
       const body = this.body.replace(/(\\n\s|\\n)/g, "\n");
+      let result = body;
       // Alternative: test if not Firefox
-      const isChrome =
+      if (
+        typeof navigator !== "undefined" &&
         /Chrome/.test(navigator.userAgent) &&
-        /Google Inc/.test(navigator.vendor);
-      const result = isChrome
-        ? [this.bodyHeader, body, "</p></body></html>"].join("")
-        : body;
+        /Google Inc/.test(navigator.vendor)
+      ) {
+        result = [this.bodyHeader, body, "</p></body></html>"].join("");
+      }
       return this.construct("body", result);
     }
   }
