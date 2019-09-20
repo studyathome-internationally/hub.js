@@ -48,7 +48,12 @@ module.exports = (themeConfig, ctx) => {
   const plugins = [
     ["@studyathome-internationally/hub", hubPluginOptions],
     ["@vuepress/back-to-top", true],
-    ["@vuepress/medium-zoom"],
+    [
+      "@vuepress/medium-zoom",
+      {
+        selector: ".theme-default-content :not(a) > img:not(.card-image):not(.card-img)"
+      }
+    ],
     [
       "container",
       {

@@ -1,6 +1,6 @@
 {
   "name": "@studyathome-internationally/vuepress-theme-hub",
-  "version": "0.0.1-beta.34",
+  "version": "0.0.1-beta.35",
   "description": "Vuepress theme for StudyATHome Internationally eLearning Sharing & Virtual Project Teams Hub",
   "author": "Alija Sabic <sabic@technikum-wien.at>",
   "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
@@ -27,7 +27,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.10.2",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
-    "@studyathome-internationally/vuepress-plugin-hub": "0.0.1-beta.35",
+    "@studyathome-internationally/vuepress-plugin-hub": "0.0.1-beta.36",
     "@vuepress/plugin-back-to-top": "^1.1.0",
     "@vuepress/plugin-medium-zoom": "^1.1.0",
     "bootstrap": "^4.3.1",
