@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  // DISCUSS: https://en.wikipedia.org/wiki/Mailto
   data() {
     return {};
   },

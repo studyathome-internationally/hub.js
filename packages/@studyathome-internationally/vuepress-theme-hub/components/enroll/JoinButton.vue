@@ -62,6 +62,8 @@ export default {
       // Alternative: test if not Firefox
       if (
         typeof navigator !== "undefined" &&
+        !/Mobile/.test(navigator.userAgent) &&
+        !/Android/.test(navigator.userAgent) &&
         /Chrome/.test(navigator.userAgent) &&
         /Google Inc/.test(navigator.vendor)
       ) {

@@ -1,15 +1,22 @@
 <template>
   <div class="card-container">
     <b-card-title class="title">
-      <div class="hide-overflow">{{data.title}}</div>
+      <div class="hide-overflow">{{data.short_title ? data.short_title : data.title}}</div>
     </b-card-title>
     <b-card-sub-title style="height: 2rem;">
-      <div
+      <!-- <div
         class="hide-overflow"
         v-for="lecturer of data.lecturers"
         :key="lecturer.name"
-      >{{ lecturer.name }}</div>
+      >{{ lecturer.name }}</div>-->
+      <div class="flex-subtitle-container">
+        <p v-for="lecturer of data.lecturers" :key="lecturer.name">{{lecturer.name}}</p>
+      </div>
     </b-card-sub-title>
+    <hr style="margin: 0; margin-top: 5px; border-top: 1px solid #ddd;" />
+    <div class="flex-tags-container">
+      <b-badge variant="info" v-for="tag of data.tags" :key="tag">{{tag}}</b-badge>
+    </div>
     <b-card-text>
       <div class="flex-container">
         <div>ECTS</div>
@@ -49,6 +56,37 @@ export default {
   text-overflow: ellipsis !important;
 }
 
+div.flex-subtitle-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  // height: 3.6rem;
+
+  & > p {
+    line-height: 1rem;
+    width: 50%;
+    text-align: left;
+    margin: 0;
+  }
+
+  & > p:nth-child(2n) {
+    text-align: right;
+  }
+}
+
+div.flex-tags-container {
+  height: 40px;
+  margin-top: 4px;
+  display: flex;
+  flex-flow: row wrap;
+  // overflow: hidden;
+  justify-content: flex-start;
+
+  & > span {
+    margin: 0 3px auto 0;
+  }
+}
+
 div.flex-container {
   list-style: none;
   padding-left: none !important;
@@ -75,10 +113,6 @@ div.flex-container {
       width: 60%;
     }
   }
-}
-
-.outline {
-  outline: 1px red dashed;
 }
 
 .title {

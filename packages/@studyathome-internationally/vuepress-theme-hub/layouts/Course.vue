@@ -18,6 +18,17 @@ export default {
     };
   },
   computed: {},
-  methods: {}
+  methods: {},
+  created() {
+    if (!this.$page.headers.find(({ slug }) => slug === "enrollment")) {
+      this.$page.headers.push({
+        level: 2,
+        slug: "enrollment",
+        title: "Enrollment"
+      });
+    }
+  }
 };
 </script>
+
+<style lang="stylus"></style>

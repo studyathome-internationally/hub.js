@@ -13,8 +13,10 @@
       <slot name="sidebar-bottom" slot="bottom" />
     </Sidebar>
 
-    <slot name="content"></slot>
-    <PageEdit />
+    <div class="page">
+      <slot name="content"></slot>
+      <PageEdit />
+    </div>
   </div>
 </template>
 

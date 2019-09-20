@@ -47,7 +47,24 @@ module.exports = (themeConfig, ctx) => {
 
   const plugins = [
     ["@studyathome-internationally/hub", hubPluginOptions],
-    ["@vuepress/back-to-top", true]
+    ["@vuepress/back-to-top", true],
+    ["@vuepress/medium-zoom"],
+    [
+      "container",
+      {
+        type: "full-width-image",
+        before: "<div class='full-width-image'>",
+        after: "</div>"
+      }
+    ],
+    [
+      "container",
+      {
+        type: "post-it",
+        before: title => `<pre class="post-it">`,
+        after: "</pre>"
+      }
+    ]
   ];
 
   const config = {

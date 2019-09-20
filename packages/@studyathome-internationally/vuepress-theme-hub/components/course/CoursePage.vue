@@ -1,15 +1,15 @@
 <template>
   <div class="theme-default-content">
     <Content />
-    <EnrollButton />
+    <EnrollSection />
   </div>
 </template>
 
 <script>
-import EnrollButton from "@theme/components/enroll/EnrollButton.vue";
+import EnrollSection from "@theme/components/enroll/EnrollSection.vue";
 export default {
   components: {
-    EnrollButton
+    EnrollSection
   }
 };
 </script>

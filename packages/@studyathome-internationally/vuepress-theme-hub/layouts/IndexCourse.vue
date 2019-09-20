@@ -16,9 +16,3 @@ export default {
   }
 };
 </script>
-
-<style lang="stylus" scoped>
-// .theme-default-content {
-//   max-width: 75vw !important;
-// }
-</style>
