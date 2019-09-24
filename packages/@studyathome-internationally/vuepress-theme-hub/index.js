@@ -42,22 +42,22 @@ module.exports = (themeConfig, ctx) => {
   const plugins = [
     // ["@studyathome-internationally/hub", hubPluginOptions],
     ["@vuepress/back-to-top", true],
-    // [
-    //   "vuepress-plugin-directory-classifier",
-    //   {
-    //     directories: [
-    //       {
-    //         dirname: "courses",
-    //         layout: "IndexCourses",
-    //         itemLayout: "Course",
-    //         subdirlevel: 1,
-    //         frontmatter: {
-    //           title: "Courses"
-    //         }
-    //       }
-    //     ]
-    //   }
-    // ],
+    [
+      "vuepress-plugin-directory-classifier",
+      {
+        directories: [
+          {
+            dirname: "courses",
+            layout: "IndexCourses",
+            itemLayout: "Course",
+            subdirlevel: 1,
+            frontmatter: {
+              title: "Courses"
+            }
+          }
+        ]
+      }
+    ],
     [
       "@vuepress/medium-zoom",
       {
