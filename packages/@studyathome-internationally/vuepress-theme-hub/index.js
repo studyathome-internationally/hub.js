@@ -4,10 +4,13 @@ module.exports = (themeConfig, ctx) => {
   const defaultHubPluginOptions = {
     directories: [
       {
-        id: "courses",
         dirname: "courses",
-        layout: "IndexCourse",
-        itemLayout: "Course"
+        layout: "IndexCourses",
+        itemLayout: "Course",
+        subdirlevel: 1,
+        frontmatter: {
+          title: "Courses"
+        }
       }
     ]
   };
@@ -39,25 +42,11 @@ module.exports = (themeConfig, ctx) => {
       ? modifyHubPluginOptions(defaultHubPluginOptions)
       : defaultHubPluginOptions;
 
+  const hubDirectoryClassifierPluginOptions = { directories: hubPluginOptions.directories };
+
   const plugins = [
-    // ["@studyathome-internationally/hub", hubPluginOptions],
+    ["vuepress-plugin-directory-classifier", hubDirectoryClassifierPluginOptions],
     ["@vuepress/back-to-top", true],
-    [
-      "vuepress-plugin-directory-classifier",
-      {
-        directories: [
-          {
-            dirname: "courses",
-            layout: "IndexCourses",
-            itemLayout: "Course",
-            subdirlevel: 1,
-            frontmatter: {
-              title: "Courses"
-            }
-          }
-        ]
-      }
-    ],
     [
       "@vuepress/medium-zoom",
       {
