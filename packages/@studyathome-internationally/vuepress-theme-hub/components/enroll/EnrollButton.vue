@@ -1,15 +1,20 @@
 <template>
-  <router-link to="enroll" class="container">
+  <router-link :to="`/general/enroll.html?course=${course}`" class="container">
     <b-button class="enroll" variant="primary">Enroll</b-button>
   </router-link>
 </template>
 
 <script>
 export default {
+  props: {
+    course: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {};
-  },
-  methods: {}
+  }
 };
 </script>
 

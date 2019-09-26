@@ -4,7 +4,7 @@
       <a id="#enrollment" aria-hidden="true" class="header-anchor">#</a>
       Enrollment
     </h2>
-    <EnrollButton />
+    <EnrollButton :course="course" />
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
   name: "EnrollSection",
   components: {
     EnrollButton
+  },
+  props: {
+    course: {
+      type: String,
+      required: true
+    }
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="theme-default-content">
     <Content />
-    <EnrollSection />
+    <EnrollSection :course="$page.regularPath" />
   </div>
 </template>
 

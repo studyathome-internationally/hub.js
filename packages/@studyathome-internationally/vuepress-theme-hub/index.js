@@ -45,7 +45,7 @@ module.exports = (themeConfig, ctx) => {
   const hubDirectoryClassifierPluginOptions = { directories: hubPluginOptions.directories };
 
   const plugins = [
-    ["vuepress-plugin-directory-classifier", hubDirectoryClassifierPluginOptions],
+    ["directory-classifier", hubDirectoryClassifierPluginOptions],
     ["@vuepress/back-to-top", true],
     [
       "@vuepress/medium-zoom",

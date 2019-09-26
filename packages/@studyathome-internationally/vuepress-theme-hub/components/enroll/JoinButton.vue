@@ -13,6 +13,10 @@ export default {
     enrollment: {
       type: Object,
       required: true
+    },
+    course: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -38,6 +42,7 @@ export default {
       return url;
     },
     construct: function(label, elems) {
+      if (typeof elems === "undefined") return "";
       let entry = elems;
       if (typeof elems === "Array") entry = elems.join(",");
       return `&${encodeURIComponent(label)}=${encodeURIComponent(entry)}`;
@@ -51,25 +56,35 @@ export default {
       return this.construct("subject", this.subject);
     },
     getCC: function() {
-      return this.construct("cc", this.cc);
+      return this.construct("cc", [
+        ...this.cc,
+        ...this.coursePage.frontmatter.lecturers.map(({ email }) => email)
+      ]);
     },
     getBCC: function() {
       return this.construct("bcc", this.bcc);
     },
     getBody: function() {
-      const body = this.body.replace(/(\\n\s|\\n)/g, "\n");
-      let result = body;
-      // Alternative: test if not Firefox
-      if (
-        typeof navigator !== "undefined" &&
-        !/Mobile/.test(navigator.userAgent) &&
-        !/Android/.test(navigator.userAgent) &&
-        /Chrome/.test(navigator.userAgent) &&
-        /Google Inc/.test(navigator.vendor)
-      ) {
-        result = [this.bodyHeader, body, "</p></body></html>"].join("");
-      }
-      return this.construct("body", result);
+      let body = this.body.replace(/(\\n\s|\\n)/g, "\n");
+      [
+        ["title", this.coursePage.frontmatter.title],
+        ["link", this.coursePage.frontmatter.link]
+      ].forEach(([name, value]) => {
+        body = body.replace(new RegExp(`{{\\s?${name}\\s?}}`, "g"), value);
+      });
+      return this.construct("body", body);
+    },
+    coursePage() {
+      return this.$site.pages.find(
+        ({ regularPath }) => regularPath === this.course
+      );
+    },
+    universityPage() {
+      const university = this.coursePage.frontmatter.university.name;
+      const universityPath = `/studyathome/partner/${university}/`;
+      return this.$site.pages.find(
+        ({ regularPath }) => regularPath === universityPath
+      );
     }
   }
 };
