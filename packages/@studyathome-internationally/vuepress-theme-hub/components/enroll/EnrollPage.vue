@@ -14,8 +14,7 @@ export default {
       type: String,
       require: true
     }
-  },
-  computed: {}
+  }
 };
 </script>
 

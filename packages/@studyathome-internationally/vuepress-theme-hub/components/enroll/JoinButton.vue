@@ -1,10 +1,23 @@
 <template>
-  <b-link :href="mailto()" class="link" style="display: flex;">
-    <b-button class="join-button" variant="info">
-      Open E-Mail Template
-      <font-awesome-icon icon="mail-bulk" />
-    </b-button>
-  </b-link>
+  <div>
+    <b-form>
+      <b-form-group label="Select Course:" label-for="input-course">
+        <b-form-select
+          id="input-course"
+          v-model="selection"
+          :options="courses"
+          @change="onChange"
+          required
+        ></b-form-select>
+      </b-form-group>
+    </b-form>
+    <b-link :href="mail()" class="link" style="display: flex;">
+      <b-button class="join-button" variant="info" :disabled="disabled">
+        Open E-Mail Template
+        <font-awesome-icon icon="mail-bulk" />
+      </b-button>
+    </b-link>
+  </div>
 </template>
 
 <script>
@@ -16,71 +29,106 @@ export default {
     },
     course: {
       type: String,
-      required: true
+      default: null
     }
   },
   data() {
     return {
-      ...this.enrollment
+      disabled: true,
+      selection: "",
+      mailto: ""
     };
   },
   methods: {
-    mailto: function() {
-      // https://tools.ietf.org/html/rfc6068
-      const url = `mailto:?${this.getTo +
-        this.getSubject +
-        this.getCC +
-        this.getBCC +
-        this.getBody}`;
-      return url;
+    mail: function() {
+      return this.disabled ? "enroll.html" : `mailto:${this.mailto}`;
     },
-    construct: function(label, elems) {
-      if (typeof elems === "undefined") return "";
-      let entry = elems;
-      if (typeof elems === "Array") entry = elems.join(",");
-      return `&${encodeURIComponent(label)}=${encodeURIComponent(entry)}`;
+    onChange: function() {
+      if (this.selection !== "") {
+        this.disabled = false;
+        this.mailto = generateMail(this);
+      }
     }
   },
   computed: {
-    getTo: function() {
-      return this.construct("to", this.to);
-    },
-    getSubject: function() {
-      return this.construct("subject", this.subject);
-    },
-    getCC: function() {
-      return this.construct("cc", [
-        ...this.cc,
-        ...this.coursePage.frontmatter.lecturers.map(({ email }) => email)
-      ]);
-    },
-    getBCC: function() {
-      return this.construct("bcc", this.bcc);
-    },
-    getBody: function() {
-      let body = this.body.replace(/(\\n\s|\\n)/g, "\n");
-      [
-        ["title", this.coursePage.frontmatter.title],
-        ["link", this.coursePage.frontmatter.link]
-      ].forEach(([name, value]) => {
-        body = body.replace(new RegExp(`{{\\s?${name}\\s?}}`, "g"), value);
-      });
-      return this.construct("body", body);
-    },
-    coursePage() {
-      return this.$site.pages.find(
-        ({ regularPath }) => regularPath === this.course
-      );
-    },
-    universityPage() {
-      const university = this.coursePage.frontmatter.university.name;
-      const universityPath = `/studyathome/partner/${university}/`;
-      return this.$site.pages.find(
-        ({ regularPath }) => regularPath === universityPath
-      );
+    courses: function() {
+      const indexPage = getPage(this, "/courses/");
+      const index = indexPage.frontmatter.indexed;
+      return getPages(this, index)
+        .map(page => page.frontmatter)
+        .filter(({ state }) => state)
+        .map(frontmatter => frontmatter.title)
+        .sort();
+    }
+  },
+  mounted() {
+    const page = getPage(this, this.course);
+    if (page) {
+      this.selection = page.frontmatter.title;
+      this.disabled = false;
+      this.mailto = generateMail(this);
     }
   }
 };
+
+function getPage(pageCtx, path) {
+  return pageCtx.$site.pages.find(({ regularPath }) => regularPath === path);
+}
+function getPageByTitle(pageCtx, title) {
+  return pageCtx.$site.pages.find(page => {
+    return page.frontmatter.title === title;
+  });
+}
+function getPages(pageCtx, paths) {
+  return pageCtx.$site.pages.filter(({ regularPath }) =>
+    paths.includes(regularPath)
+  );
+}
+function construct(label, elems) {
+  if (typeof elems === "undefined") return "";
+  let entry = elems;
+  if (typeof elems === "Array") entry = elems.join(",");
+  return `&${encodeURIComponent(label)}=${encodeURIComponent(entry)}`;
+}
+function processBody(body, { course }) {
+  let result = body.replace(/(\\n\s|\\n)/g, "\n");
+  [
+    ["title", course.frontmatter.title],
+    ["link", course.frontmatter.link]
+  ].forEach(([name, value]) => {
+    result = result.replace(new RegExp(`{{\\s?${name}\\s?}}`, "g"), value);
+  });
+  return result;
+}
+function generateMail(pageCtx) {
+  /* Load required data */
+  const course = pageCtx.selection;
+  const coursePage = getPageByTitle(pageCtx, course);
+  const university = coursePage.frontmatter.university.name;
+  const universityPage = getPage(
+    pageCtx,
+    `/studyathome/partner/${university}/`
+  );
+  /* Combine mailto data */
+  const enrollment = {
+    ...pageCtx.enrollment,
+    to: universityPage.frontmatter["international-office"]
+  };
+
+  /* Prepare mailto fields */
+  const to = construct("to", enrollment.to);
+  const cc = construct("cc", [
+    ...enrollment.cc,
+    ...coursePage.frontmatter.lecturers.map(({ email }) => email)
+  ]);
+  const bcc = construct("bcc", enrollment.bcc);
+  const subject = construct("subject", enrollment.subject);
+  const body = construct(
+    "body",
+    processBody(enrollment.body, { course: coursePage })
+  );
+  return [to, cc, bcc, subject, body].join(",");
+}
 </script>
 
 <style lang="scss" scoped>
