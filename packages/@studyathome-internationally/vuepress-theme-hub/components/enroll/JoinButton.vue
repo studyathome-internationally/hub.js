@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     mail: function() {
-      return this.disabled ? "enroll.html" : `mailto:${this.mailto}`;
+      return this.disabled ? "enroll.html" : `mailto:?${this.mailto}`;
     },
     onChange: function() {
       if (this.selection !== "") {
@@ -88,7 +88,7 @@ function construct(label, elems) {
   if (typeof elems === "undefined") return "";
   let entry = elems;
   if (typeof elems === "Array") entry = elems.join(",");
-  return `&${encodeURIComponent(label)}=${encodeURIComponent(entry)}`;
+  return `${encodeURIComponent(label)}=${encodeURIComponent(entry)}`;
 }
 function processBody(body, { course }) {
   let result = body.replace(/(\\n\s|\\n)/g, "\n");
@@ -127,7 +127,7 @@ function generateMail(pageCtx) {
     "body",
     processBody(enrollment.body, { course: coursePage })
   );
-  return [to, cc, bcc, subject, body].join(",");
+  return [to, cc, bcc, subject, body].join("&");
 }
 </script>
 
