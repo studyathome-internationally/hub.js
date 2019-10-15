@@ -42,7 +42,9 @@ module.exports = (themeConfig, ctx) => {
       ? modifyHubPluginOptions(defaultHubPluginOptions)
       : defaultHubPluginOptions;
 
-  const hubDirectoryClassifierPluginOptions = { directories: hubPluginOptions.directories };
+  const hubDirectoryClassifierPluginOptions = {
+    directories: hubPluginOptions.directories
+  };
 
   const plugins = [
     ["directory-classifier", hubDirectoryClassifierPluginOptions],
@@ -67,6 +69,14 @@ module.exports = (themeConfig, ctx) => {
         type: "post-it",
         before: title => `<pre class="post-it">`,
         after: "</pre>"
+      }
+    ],
+    [
+      "container",
+      {
+        type: "centered-image",
+        before: "<div class='centered-image'>",
+        after: "</div>"
       }
     ]
   ];

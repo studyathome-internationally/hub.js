@@ -3,7 +3,7 @@
     <div slot="header">
       <b-card-img-lazy
         class="card-image"
-        :src="frontmatter.media.image || 'https://via.placeholder.com/800x600'"
+        :src="frontmatter.media.image || '/assets/img/800x600.png'"
         :image-alt="frontmatter.imageAlt"
       ></b-card-img-lazy>
     </div>
@@ -14,6 +14,7 @@
 <script>
 import CourseData from "@theme/components/course/CourseData.vue";
 export default {
+  name: "CourseCard",
   components: {
     CourseData
   },

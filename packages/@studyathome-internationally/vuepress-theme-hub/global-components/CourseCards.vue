@@ -11,6 +11,7 @@
 <script>
 import CourseCard from "@theme/components/course/CourseCard.vue";
 export default {
+  name: "CourseCards",
   components: {
     CourseCard
   },

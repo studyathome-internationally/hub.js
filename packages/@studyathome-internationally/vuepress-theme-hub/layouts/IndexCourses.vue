@@ -1,15 +1,15 @@
 <template>
   <ParentLayout>
-    <div slot="page-top">
+    <template slot="page-top">
       <div class="theme-default-content">
         <CourseCards />
       </div>
-    </div>
+    </template>
   </ParentLayout>
 </template>
 
 <script>
-import ParentLayout from "@parent-theme/layouts/Layout.vue";
+import ParentLayout from "@theme/layouts/Layout.vue";
 export default {
   components: {
     ParentLayout

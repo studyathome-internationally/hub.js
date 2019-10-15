@@ -9,8 +9,8 @@
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 
     <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
-      <slot name="sidebar-top" slot="top" />
-      <slot name="sidebar-bottom" slot="bottom" />
+      <slot name="sidebar-top" #top />
+      <slot name="sidebar-bottom" #bottom />
     </Sidebar>
 
     <div class="page">
