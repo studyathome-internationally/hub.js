@@ -27,6 +27,15 @@ export default {
       path: this.data.path
     };
   },
+  computed: {
+    cardImage() {
+      return this.frontmatter.media.image
+        ? this.frontmatter.media.image.startsWith("https://")
+          ? this.frontmatter.media.image
+          : this.$withBase(this.frontmatter.media.image)
+        : this.$withBase("/assets/img/800x600.png");
+    }
+  },
   methods: {
     routeToCourse() {
       this.$router.push({ path: this.path });
