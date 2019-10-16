@@ -123,9 +123,11 @@ function generateMail(pageCtx) {
   ]);
   const bcc = construct("bcc", enrollment.bcc);
   const subject = construct("subject", enrollment.subject);
+  const { before, form, after } = enrollment.body;
+  const bodyTemplate = [before, form, after].join("");
   const body = construct(
     "body",
-    processBody(enrollment.body, { course: coursePage })
+    processBody(bodyTemplate, { course: coursePage })
   );
   return [to, cc, bcc, subject, body].join("&");
 }

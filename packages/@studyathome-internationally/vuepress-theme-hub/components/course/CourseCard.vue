@@ -1,11 +1,7 @@
 <template>
   <b-card id="card" @mousedown="onMouseDown" @mouseup="onMouseUp" tabindex="0">
     <div slot="header">
-      <b-card-img-lazy
-        class="card-image"
-        :src="frontmatter.media.image || '/assets/img/800x600.png'"
-        :image-alt="frontmatter.imageAlt"
-      ></b-card-img-lazy>
+      <b-card-img-lazy class="card-image" :src="cardImage" :image-alt="frontmatter.imageAlt"></b-card-img-lazy>
     </div>
     <CourseData :data="frontmatter" :link="path" />
   </b-card>
