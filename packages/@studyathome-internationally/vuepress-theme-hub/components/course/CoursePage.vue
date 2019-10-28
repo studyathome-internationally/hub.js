@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import EnrollSection from "@theme/components/enroll/EnrollSection.vue";
+import EnrollSection from "@theme/components/enrollment/EnrollmentSection.vue";
 export default {
+  name: "CoursePage",
   components: {
     EnrollSection
   }

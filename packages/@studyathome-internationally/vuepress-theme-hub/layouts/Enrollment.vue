@@ -6,12 +6,11 @@
 
 <script>
 import BasicLayout from "@theme/layouts/BasicLayout.vue";
-import EnrollPage from "@theme/components/enroll/EnrollPage.vue";
-import EnrollDescription from "@theme/components/enroll/EnrollDescription.vue";
+import EnrollPage from "@theme/components/enrollment/EnrollmentPage.vue";
 
 export default {
   name: "Enrollment",
-  components: { BasicLayout, EnrollPage, EnrollDescription },
+  components: { BasicLayout, EnrollPage },
   data() {
     return {
       course: null

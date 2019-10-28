@@ -4,6 +4,8 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
+    @mousedown="onMouseDown"
+    @keydown="onKeyDown"
   >
     <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
@@ -31,14 +33,13 @@ import Sidebar from "@parent-theme/components/Sidebar.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
+  name: "Layout",
   components: { Home, Page, Sidebar, Navbar },
-
   data() {
     return {
       isSidebarOpen: false
     };
   },
-
   computed: {
     shouldShowNavbar() {
       const { themeConfig } = this.$site;
@@ -116,6 +117,14 @@ export default {
           this.toggleSidebar(false);
         }
       }
+    },
+
+    onMouseDown() {
+      document.body.classList.add("using-mouse");
+    },
+
+    onKeyDown() {
+      document.body.classList.remove("using-mouse");
     }
   }
 };

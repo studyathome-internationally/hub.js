@@ -11,6 +11,7 @@
 <script>
 import ParentLayout from "@theme/layouts/Layout.vue";
 export default {
+  name: "IndexCourses",
   components: {
     ParentLayout
   }

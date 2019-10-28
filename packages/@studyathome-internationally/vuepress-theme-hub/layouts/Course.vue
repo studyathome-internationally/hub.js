@@ -10,8 +10,8 @@ import CoursePage from "@theme/components/course/CoursePage.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
+  name: "Course",
   components: { BasicLayout, CoursePage },
-
   data() {
     return {
       isSidebarOpen: false

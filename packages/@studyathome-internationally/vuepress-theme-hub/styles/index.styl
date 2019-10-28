@@ -55,3 +55,13 @@ pre.post-it
     margin: -5px;
   // & > p + p
   //   margin-top: 2px;
+
+// https://stackoverflow.com/questions/31402576/enable-focus-only-on-keyboard-use-or-tab-press
+:focus
+  outline-color: #E8572E;
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+
+body.using-mouse :focus
+  outline: none;

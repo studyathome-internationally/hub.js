@@ -32,6 +32,7 @@
 
 <script>
 export default {
+  name: "CourseCardData",
   props: {
     data: {
       type: Object,

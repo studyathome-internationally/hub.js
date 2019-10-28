@@ -4,6 +4,8 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
+    @mousedown="onMouseDown"
+    @keydown="onKeyDown"
   >
     <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
@@ -27,8 +29,8 @@ import PageEdit from "@parent-theme/components/PageEdit.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
+  name: "BasicLayout",
   components: { Navbar, Sidebar, PageEdit },
-
   data() {
     return {
       isSidebarOpen: false
@@ -103,6 +105,12 @@ export default {
           this.toggleSidebar(false);
         }
       }
+    },
+    onMouseDown() {
+      document.body.classList.add("using-mouse");
+    },
+    onKeyDown() {
+      document.body.classList.remove("using-mouse");
     }
   }
 };

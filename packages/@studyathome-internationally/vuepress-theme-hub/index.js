@@ -78,6 +78,17 @@ module.exports = (themeConfig, ctx) => {
         before: "<div class='centered-image'>",
         after: "</div>"
       }
+    ],
+    [
+      "@vuepress/plugin-register-components",
+      {
+        components: [
+          {
+            name: "CourseCards",
+            path: "@theme/components/course/CourseCards.vue"
+          }
+        ]
+      }
     ]
   ];
 

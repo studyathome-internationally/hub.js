@@ -13,7 +13,7 @@
     </b-form>
     <b-link :href="mail()" class="link" style="display: flex;">
       <b-button class="join-button" variant="info" :disabled="disabled">
-        Open E-Mail Template
+        Compose E-Mail
         <font-awesome-icon icon="mail-bulk" />
       </b-button>
     </b-link>
@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  name: "JoinButton",
   props: {
     enrollment: {
       type: Object,

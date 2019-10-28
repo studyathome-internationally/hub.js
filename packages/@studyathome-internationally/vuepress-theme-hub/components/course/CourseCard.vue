@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import CourseData from "@theme/components/course/CourseData.vue";
+import CourseData from "@theme/components/course/card/CourseCardData.vue";
 export default {
   name: "CourseCard",
   components: {

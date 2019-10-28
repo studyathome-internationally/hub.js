@@ -14,7 +14,9 @@
     "url": "git+https://github.com/studyathome-internationally/hub.js.git",
     "path": "packages/@studyathome-internationally/vuepress-theme-hub"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "bugs": {
     "url": "https://github.com/studyathome-internationally/hub.js/issues"
   },
@@ -25,8 +27,10 @@
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
-    "@vuepress/plugin-back-to-top": "^1.1.0",
-    "@vuepress/plugin-medium-zoom": "^1.1.0",
+    "@vuepress/plugin-back-to-top": "1.2.0",
+    "@vuepress/plugin-medium-zoom": "1.2.0",
+    "@vuepress/plugin-register-components": "1.2.0",
+    "babel-core": "7.0.0-bridge.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.2",
     "markdown-it-abbr": "^1.0.4",
@@ -42,5 +46,16 @@
     "twemoji": "^12.1.3",
     "vuepress": "1.2.0",
     "vuepress-plugin-directory-classifier": "^0.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.9.0",
+    "vue-jest": "^3.0.5"
   }
 }
