@@ -1,5 +1,11 @@
 <template>
-  <b-card id="card" @mousedown="onMouseDown" @mouseup="onMouseUp" tabindex="0">
+  <b-card
+    id="card"
+    @mousedown="onMouseDown"
+    @mouseup="onMouseUp"
+    tabindex="0"
+    @keydown.enter="routeToCourse"
+  >
     <div slot="header">
       <b-card-img-lazy class="card-image" :src="cardImage" :image-alt="frontmatter.imageAlt"></b-card-img-lazy>
     </div>

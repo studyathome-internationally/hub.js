@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-link :href="mail()" class="link" style="display: flex;">
-      <b-button class="mailer-button" variant="info" :disabled="disabled">
+      <b-button class="mailer-button" :variant="variant" :disabled="disabled">
         <slot>Mail</slot>
         <slot name="icon">
           <font-awesome-icon icon="mail-bulk" />
@@ -46,6 +46,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    variant: {
+      type: String,
+      default: "info"
     }
   },
   data() {

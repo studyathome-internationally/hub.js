@@ -1,9 +1,7 @@
 import { getPageByTitle, getCourseUniversityPage } from "@theme/utils/page.js";
 
-export function prepareMail(mail, pageCtx, course) {
-  const coursePage = getPageByTitle(pageCtx, course);
-  if (typeof coursePage === "undefined") return null;
-  const universityPage = getCourseUniversityPage(pageCtx, coursePage);
+export function prepareMail(mail, pageCtx) {
+  const universityPage = getCourseUniversityPage(pageCtx, pageCtx.$page);
   if (typeof universityPage === "undefined") return null;
 
   const to = universityPage.frontmatter["international-office"];
@@ -13,7 +11,7 @@ export function prepareMail(mail, pageCtx, course) {
     subject,
     body: { before, form, after }
   } = mail;
-  const body = processBody([before, form, after].join(""), { course: coursePage });
+  const body = processBody([before, form, after].join(""), { course: pageCtx.$page });
 
   return {
     to,

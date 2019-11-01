@@ -1,33 +1,47 @@
 <template>
   <BasicLayout>
-    <CoursePage slot="content" />
+    <CourseTabsPage slot="content" :tabs="tabs" />
   </BasicLayout>
 </template>
 
 <script>
 import BasicLayout from "@theme/layouts/BasicLayout.vue";
-import CoursePage from "@theme/components/course/CoursePage.vue";
+import CourseTabsPage from "@theme/components/course/CourseTabsPage.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
   name: "Course",
-  components: { BasicLayout, CoursePage },
+  components: { BasicLayout, CourseTabsPage },
   data() {
     return {
-      isSidebarOpen: false
+      isSidebarOpen: false,
+      tabs: [
+        {
+          title: "Overview",
+          slot: "overview",
+          path: "overview.html",
+          icon: "anchor"
+        },
+        {
+          title: "Assessment",
+          slot: "assessment",
+          path: "assessment.html",
+          icon: "balance-scale"
+        },
+        {
+          title: "Requirements",
+          slot: "requirements",
+          path: "requirements.html",
+          icon: "certificate"
+        },
+        { title: "Lecturer", slot: "lecturers", icon: "chalkboard-teacher" },
+        { title: "University", slot: "university", icon: "university" },
+        { title: "Enrollment", slot: "enrollment", icon: "envelope" }
+      ]
     };
   },
   computed: {},
-  methods: {},
-  created() {
-    if (!this.$page.headers.find(({ slug }) => slug === "enrollment")) {
-      this.$page.headers.push({
-        level: 2,
-        slug: "enrollment",
-        title: "Enrollment"
-      });
-    }
-  }
+  methods: {}
 };
 </script>
 

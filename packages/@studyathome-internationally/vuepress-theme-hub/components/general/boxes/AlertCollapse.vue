@@ -76,11 +76,11 @@ div.toggle-collapse {
   justify-content: space-between;
   cursor: pointer;
   & .rotate-up {
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
     transform: rotate(180deg);
   }
   & .rotate-down {
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
     transform: rotate(360deg);
   }
 }

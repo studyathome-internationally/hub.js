@@ -80,6 +80,15 @@ module.exports = (themeConfig, ctx) => {
       }
     ],
     [
+      "container",
+      {
+        type: "gslot",
+        before: title => `<div class="gslot ${title}">`,
+        after: "</div>"
+      }
+    ],
+
+    [
       "@vuepress/plugin-register-components",
       {
         components: [

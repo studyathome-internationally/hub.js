@@ -2,12 +2,32 @@ import Vue from "vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faMailBulk,
-  faCircle,
-  faTimes,
+  faAnchor,
+  faBalanceScale,
+  faCertificate,
+  faChalkboardTeacher,
   faChevronUp,
-  faChevronDown
+  faChevronDown,
+  faCircle,
+  faSignInAlt,
+  faTimes,
+  faUniversity,
+  faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faMailBulk, faCircle, faTimes, faChevronUp, faChevronDown);
+library.add(
+  faMailBulk,
+  faAnchor,
+  faBalanceScale,
+  faCertificate,
+  faChalkboardTeacher,
+  faChevronUp,
+  faChevronDown,
+  faCircle,
+  faEnvelope,
+  faSignInAlt,
+  faTimes,
+  faUniversity
+);
 
 import {
   FontAwesomeIcon,
