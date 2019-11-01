@@ -6,7 +6,7 @@
       <h1>{{$page.title}}</h1>
       <div>
         <ul class="details">
-          <li>{{university.title}}</li>
+          <li>{{title}}</li>
           <li>{{$page.frontmatter.university.faculty}}</li>
           <li>
             Lectures
@@ -40,6 +40,11 @@ export default {
   computed: {
     university() {
       return this.pages.universityPage;
+    },
+    title() {
+      const exists =
+        this.university && typeof this.university.title !== "undefined";
+      return exists ? this.university.title : "Default Title";
     }
   }
 };

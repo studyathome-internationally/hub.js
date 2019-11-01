@@ -14,8 +14,9 @@ export function getCourseUniversityPage(
   page = "",
   path = universityPath
 ) {
-  const university = coursePage.frontmatter.university.name || "";
-  return getPage(pageCtx, `${path + university}/${page}`);
+  const { university } = coursePage.frontmatter;
+  const name = university && university.name ? university.name : "";
+  return getPage(pageCtx, `${path + name}/${page}`);
 }
 export function getLecturerPages(pageCtx, coursePage, path = lecturerPath) {
   let pages = [];
