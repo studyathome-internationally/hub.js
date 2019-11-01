@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import FixedHeader from "vue-fixed-header";
 import CoursePageDetails from "@theme/components/course/page/CoursePageDetails.vue";
 import CoursePageContent from "@theme/components/course/page/CoursePageContent.vue";
 import Tabs from "@theme/components/general/tabs/Tabs.vue";
@@ -20,7 +19,6 @@ import {
 export default {
   name: "CourseTabsPage",
   components: {
-    FixedHeader,
     CoursePageDetails,
     Tabs,
     CoursePageContent
