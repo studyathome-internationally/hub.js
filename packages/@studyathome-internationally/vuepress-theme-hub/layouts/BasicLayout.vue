@@ -17,7 +17,7 @@
 
     <div class="page">
       <slot name="content"></slot>
-      <PageEdit />
+      <PageEdit v-if="edit" />
     </div>
   </div>
 </template>
@@ -30,6 +30,12 @@ import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
   name: "BasicLayout",
+  props: {
+    edit: {
+      type: Boolean,
+      default: true
+    }
+  },
   components: { Navbar, Sidebar, PageEdit },
   data() {
     return {

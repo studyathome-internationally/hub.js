@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <CourseCard
-      v-for="course of courses.filter(({frontmatter}) => frontmatter.state === true)"
+      v-for="course of courses"
       :key="course.path"
-      :data="course"
+      :info="course.frontmatter"
+      :path="course.path"
     />
   </div>
 </template>
@@ -33,9 +34,9 @@ export default {
       return indexPage.frontmatter.indexed;
     },
     courses: function() {
-      return this.$site.pages.filter(({ regularPath }) =>
-        this.index.includes(regularPath)
-      );
+      return this.$site.pages
+        .filter(({ regularPath }) => this.index.includes(regularPath))
+        .filter(({ frontmatter }) => frontmatter.state === true);
     }
   }
 };

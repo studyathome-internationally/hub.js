@@ -2,8 +2,8 @@
   <div class="course-page">
     <CoursePageDetails :pages="pages" />
     <div>
-      <Tabs class="sticky" :tabs="tabs" :default="activeSlot" @tab-change="onTabChange" />
-      <CoursePageContent class="main-content" :active="activeSlot" :tabs="tabs" :pages="pages" />
+      <IconTabs class="sticky" :tabs="tabs" :tab.sync="activePage" />
+      <CoursePageContent class="main-content" :page="activePage" :tabs="tabs" :pages="pages" />
     </div>
   </div>
 </template>
@@ -11,16 +11,13 @@
 <script>
 import CoursePageDetails from "@theme/components/course/page/CoursePageDetails.vue";
 import CoursePageContent from "@theme/components/course/page/CoursePageContent.vue";
-import Tabs from "@theme/components/general/tabs/Tabs.vue";
-import {
-  getCourseUniversityPage,
-  getLecturerPages
-} from "@theme/utils/page.js";
+import IconTabs from "@theme/components/general/tabs/IconTabs.vue";
+import { getCoursePages } from "@theme/utils/page.js";
 export default {
   name: "CourseTabsPage",
   components: {
     CoursePageDetails,
-    Tabs,
+    IconTabs,
     CoursePageContent
   },
   props: {
@@ -31,40 +28,24 @@ export default {
   },
   data() {
     return {
-      activeSlot: "overview"
+      activePage: "overview",
+      pages: null
     };
   },
   methods: {
-    lecturerPageContent(page) {
-      return page.excerpt.replace(/h1/g, "h2");
-    },
-    onTabChange(slot) {
-      this.activeSlot = slot;
+    onTabChange(page) {
+      this.activePage = page;
     },
     updateTab() {
       const { hash } = this.$route;
-      this.activeSlot = hash.startsWith("#") ? hash.substring(1) : "overview";
+      this.activePage = hash.startsWith("#") ? hash.substring(1) : "overview";
     }
   },
-  computed: {
-    universityPage() {
-      return getCourseUniversityPage(this, this.$page);
-    },
-    lecturerPages() {
-      return getLecturerPages(this, this.$page);
-    },
-    universityPageContent() {
-      return this.universityPage.excerpt.replace(/h1/g, "h2");
-    },
-    pages() {
-      const { universityPage, lecturerPages } = this;
-      return { universityPage, lecturerPages, coursePage: this.$page };
-    }
+  computed: {},
+  created() {
+    this.pages = getCoursePages(this, this.tabs, this.$page);
   },
   mounted() {
-    this.updateTab();
-  },
-  updated() {
     this.updateTab();
   }
 };
@@ -75,10 +56,9 @@ export default {
   padding-top: $navbarHeight;
 }
 
-.main-content {
-  margin-top: -1 * $navbarHeight;
-}
-
+// .main-content {
+// margin-top: -1 * $navbarHeight;
+// }
 .sticky {
   position: sticky;
   background-color: white;

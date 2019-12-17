@@ -2,7 +2,7 @@
   <div class="theme-default-content">
     <Description />
     <MatriculationData variant="primary" />
-    <Disclaimer @confirmation-change="onConfirmationChange" variant="info" />
+    <Disclaimer :pages="pages" @confirmation-change="onConfirmationChange" variant="info" />
     <Mailer v-bind="mail" :disabled="disableMailer" variant="primary">{{ mailerLabel }}</Mailer>
   </div>
 </template>
@@ -34,10 +34,7 @@ export default {
     pages: {
       type: Object,
       default: () => {
-        return {
-          coursePage: { excerpt: "<h2>Course</h2>" },
-          universityPage: { excerpt: "<h2>University</h2>" }
-        };
+        return {};
       }
     }
   },
@@ -51,11 +48,11 @@ export default {
     disableMailer() {
       return !this.confirmation;
     },
-    enrollment() {
-      return getPage(this, "/general/enroll.html").frontmatter.enrollment;
-    },
     mail() {
-      return prepareMail(this.enrollment, this);
+      return prepareMail(
+        this.pages.enrollment.general.frontmatter.enrollment,
+        this
+      );
     }
   },
   methods: {
@@ -63,10 +60,13 @@ export default {
       this.confirmation = confirmed;
     }
   }
-  // created() {
-  //   this.$frontmatter.mailerLabel = this.mailerLabel;
-  // }
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.theme-default-content:not(.custom) {
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+}
+</style>

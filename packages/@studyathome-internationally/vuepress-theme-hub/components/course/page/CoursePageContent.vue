@@ -1,79 +1,51 @@
 <template>
   <div class="page">
-    <template v-if="active === 'university'">
-      <div class="theme-default-content" v-html="subHeading(university)"></div>
-    </template>
-    <template v-else-if="active === 'lecturers'">
-      <div
-        class="theme-default-content"
-        v-for="lecturer of lecturers"
-        :key="lecturer.regularPath"
-        v-html="subHeading(lecturer.excerpt)"
-      ></div>
-    </template>
-    <template v-else-if="active === 'enrollment'">
-      <CoursePageEnrollment :pages="pages" />
-    </template>
-    <template v-else>
-      <div class="theme-default-content">
-        <div v-html="loadContent(active)"></div>
-      </div>
-      <!-- <Content class="theme-default-content" :slot-key="active" /> -->
-    </template>
+    <CoursePageAssessment v-if="page === 'assessment'" :pages="pages" />
+    <CoursePageRequirements v-else-if="page === 'requirements'" :pages="pages" />
+    <CoursePageLecturers v-else-if="page === 'lecturers'" :pages="pages" />
+    <CoursePageUniversity v-else-if="page === 'university'" :pages="pages" />
+    <CoursePageEnrollment v-else-if="page === 'enrollment'" :pages="pages" />
+    <CoursePageOverview v-else :pages="pages" />
   </div>
 </template>
 
 <script>
+import CoursePageOverview from "@theme/components/course/page/CoursePageOverview.vue";
+import CoursePageAssessment from "@theme/components/course/page/CoursePageAssessment.vue";
+import CoursePageRequirements from "@theme/components/course/page/CoursePageRequirements.vue";
+import CoursePageLecturers from "@theme/components/course/page/CoursePageLecturers.vue";
+import CoursePageUniversity from "@theme/components/course/page/CoursePageUniversity.vue";
 import CoursePageEnrollment from "@theme/components/course/page/CoursePageEnrollment.vue";
+import CoursePageEditLink from "@theme/components/course/page/CoursePageEditLink.vue";
 
-import { getPage } from "@theme/utils/page.js";
+import { getPage, getCoursePages, subHeading } from "@theme/utils/page.js";
 
 export default {
   name: "CoursePageContent",
-  components: { CoursePageEnrollment },
+  components: {
+    CoursePageOverview,
+    CoursePageAssessment,
+    CoursePageRequirements,
+    CoursePageLecturers,
+    CoursePageUniversity,
+    CoursePageEnrollment,
+    CoursePageEditLink
+  },
   props: {
-    active: {
-      type: String,
-      default: "default"
-    },
     tabs: {
       type: Array,
       default: () => []
     },
+    page: {
+      type: String,
+      default: "overview"
+    },
     pages: {
       type: Object,
-      default: () => {
-        return {
-          universityPage: { excerpt: "<h2>University</h2>" },
-          lecturerPages: [{ excerpt: "<h2>Lecturer</h2>" }]
-        };
-      }
-    }
-  },
-  methods: {
-    subHeading(content) {
-      return content
-        .replace(/h3/g, "h4")
-        .replace(/h2/g, "h3")
-        .replace(/h1/g, "h2");
-    },
-    loadContent(content) {
-      const tab = this.tabs.find(({ slot }) => slot === content);
-      const path = `${this.$page.regularPath}${tab.path}`;
-      const page = getPage(this, path);
-      return page ? page.excerpt : "";
-    }
-  },
-  computed: {
-    university() {
-      return this.pages.universityPage.excerpt;
-    },
-    lecturers() {
-      return this.pages.lecturerPages;
+      default: () => {}
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="stylus" scoped></style>

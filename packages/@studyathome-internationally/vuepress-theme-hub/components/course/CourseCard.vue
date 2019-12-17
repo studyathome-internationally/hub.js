@@ -7,9 +7,9 @@
     @keydown.enter="routeToCourse"
   >
     <div slot="header">
-      <b-card-img-lazy class="card-image" :src="cardImage" :image-alt="frontmatter.imageAlt"></b-card-img-lazy>
+      <b-card-img-lazy class="card-image" :src="cardImage" :image-alt="info.media.image"></b-card-img-lazy>
     </div>
-    <CourseData :data="frontmatter" :link="path" />
+    <CourseData :info="info" />
   </b-card>
 </template>
 
@@ -21,21 +21,25 @@ export default {
     CourseData
   },
   props: {
-    data: Object
+    info: Object,
+    path: String
   },
   data() {
-    return {
-      frontmatter: this.data.frontmatter,
-      path: this.data.path
-    };
+    return {};
   },
   computed: {
     cardImage() {
-      return this.frontmatter.media.image
-        ? this.frontmatter.media.image.startsWith("https://")
-          ? this.frontmatter.media.image
-          : this.$withBase(this.frontmatter.media.image)
-        : this.$withBase("/assets/img/800x600.png");
+      const { image } = this.info.media;
+      let res = this.$withBase("/assets/img/800x600.png");
+      if (image && typeof image.src !== "undefined") {
+        const { src } = image;
+        if (src.startsWith("https://")) {
+          res = src;
+        } else {
+          res = this.$withBase(src);
+        }
+      }
+      return res;
     }
   },
   methods: {

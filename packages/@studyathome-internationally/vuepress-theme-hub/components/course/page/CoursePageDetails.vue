@@ -4,7 +4,7 @@
     <!-- <div class="title" :style="{'background-image': `url(${$page.frontmatter.media.image})`}"> -->
     <div class="title">
       <h1>{{$page.title}}</h1>
-      <div>
+      <!-- <div>
         <ul class="details">
           <li>{{title}}</li>
           <li>{{$page.frontmatter.university.faculty}}</li>
@@ -21,7 +21,7 @@
           <li>{{$page.frontmatter.link}}</li>
           <li>ECTS: {{$page.frontmatter.ects}}</li>
         </ul>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -55,12 +55,18 @@ export default {
   background-color: $accentColor;
   color: white;
   padding: 18px 30px;
+  // padding-top: 1px;
   margin: 0;
+
+  & h1 {
+    padding-bottom: 0px;
+  }
 }
 
 .details {
   margin: 0 0;
   list-style-type: none;
+  padding: 0;
 }
 
 .course-image {

@@ -1,30 +1,30 @@
 <template>
   <div class="card-container">
     <b-card-title class="title">
-      <div class="hide-overflow">{{data.short_title ? data.short_title : data.title}}</div>
+      <div class="hide-overflow">{{info.short_title ? info.short_title : info.title}}</div>
     </b-card-title>
     <b-card-sub-title style="height: 2rem;">
       <!-- <div
         class="hide-overflow"
-        v-for="lecturer of data.lecturers"
+        v-for="lecturer of info.lecturers"
         :key="lecturer.name"
       >{{ lecturer.name }}</div>-->
       <div class="flex-subtitle-container">
-        <p v-for="lecturer of data.lecturers" :key="lecturer.name">{{lecturer.name}}</p>
+        <p v-for="lecturer of info.lecturers" :key="lecturer.name">{{lecturer.name}}</p>
       </div>
     </b-card-sub-title>
     <hr style="margin: 0; margin-top: 5px; border-top: 1px solid #ddd;" />
     <div class="flex-tags-container">
-      <b-badge variant="info" v-for="tag of data.tags" :key="tag">{{tag}}</b-badge>
+      <b-badge variant="info" v-for="tag of info.tags" :key="tag">{{tag}}</b-badge>
     </div>
     <b-card-text>
       <div class="flex-container">
         <div>ECTS</div>
-        <div>{{data.ects}}</div>
+        <div>{{info.ects}}</div>
         <div>Semester</div>
-        <div>{{data.semester}}</div>
+        <div>{{info.semester}}</div>
         <div>Start</div>
-        <div>{{data.schedule.start}}</div>
+        <div>{{info.schedule.start}}</div>
       </div>
     </b-card-text>
   </div>
@@ -34,13 +34,9 @@
 export default {
   name: "CourseCardData",
   props: {
-    data: {
+    info: {
       type: Object,
       required: true
-    },
-    link: {
-      type: String,
-      default: "#"
     }
   },
   data() {

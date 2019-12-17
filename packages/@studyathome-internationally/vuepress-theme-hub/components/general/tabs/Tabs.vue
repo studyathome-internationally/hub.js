@@ -21,7 +21,7 @@ export default {
       type: Array,
       default: () => []
     },
-    default: {
+    tab: {
       type: String,
       default: "default"
     }
@@ -35,13 +35,14 @@ export default {
   methods: {
     onTabChange(id) {
       this.active = id;
+      this.$emit("update:tab", id);
     }
   },
   created() {
-    this.active = this.default;
+    this.active = this.tab;
   },
   updated() {
-    this.active = this.default;
+    this.active = this.tab;
   }
 };
 </script>

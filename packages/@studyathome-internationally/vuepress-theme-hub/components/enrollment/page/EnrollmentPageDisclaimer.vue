@@ -20,7 +20,6 @@
 
 <script>
 import AlertCollapse from "@theme/components/general/boxes/AlertCollapse.vue";
-import { getPage, getCourseUniversityPage } from "@theme/utils/page.js";
 import { extractSlot } from "@theme/utils/container.js";
 export default {
   name: "EnrollmentPageDisclaimer",
@@ -28,6 +27,10 @@ export default {
     variant: {
       type: String,
       default: "warning"
+    },
+    pages: {
+      type: Object,
+      default: () => {}
     }
   },
   components: {
@@ -46,21 +49,15 @@ export default {
     }
   },
   computed: {
-    enrollment() {
-      const general = getPage(this, "/general/enroll.html");
-      const university = getCourseUniversityPage(
-        this,
-        this.$page,
-        "enroll.html"
-      );
-      return { general, university };
-    },
     disclaimer() {
       return {
-        general: extractSlot("disclaimer", this.enrollment.general.excerpt),
+        general: extractSlot(
+          "disclaimer",
+          this.pages.enrollment.general.excerpt
+        ),
         university: extractSlot(
           "disclaimer",
-          this.enrollment.university.excerpt
+          this.pages.enrollment.university.excerpt
         )
       };
     }

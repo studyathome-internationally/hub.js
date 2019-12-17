@@ -1,5 +1,5 @@
 <template>
-  <BasicLayout>
+  <BasicLayout :edit="false">
     <CourseTabsPage slot="content" :tabs="tabs" />
   </BasicLayout>
 </template>
