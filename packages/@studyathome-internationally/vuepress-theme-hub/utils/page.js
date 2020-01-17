@@ -38,7 +38,9 @@ export function getEnrollmentPages(pageCtx, course) {
   return { general, university };
 }
 export function getPages(pageCtx, paths) {
-  return pageCtx.$site.pages.filter(({ regularPath }) => paths.includes(regularPath));
+  return pageCtx.$site.pages.filter(({ regularPath }) =>
+    paths.includes(regularPath)
+  );
 }
 export function getCourses(pageCtx, path = coursePath) {
   const indexPage = getPage(pageCtx, path);
@@ -74,4 +76,18 @@ export function subHeading(content) {
     .replace(/h3/g, "h4")
     .replace(/h2/g, "h3")
     .replace(/h1/g, "h2");
+}
+
+export function withBase(content, base) {
+  return content
+    .replace(/\$withBase\('\/(.*?)'\)/g, (m, url) => base + url)
+    .replace(/img :src/g, "img class='medium-zoom-image' src");
+}
+
+export function video(content) {
+  return content.replace(
+    /<Video.*id=["'](.*)["']\/>/g,
+    (m, id) =>
+      `<div id="youtube-container"><iframe id="youtube-player" type="text/html" src="https://www.youtube.com/embed/${id}?autoplay=0controle=0rel=0modestbranding=1origin=" frameborder="0"></iframe></div>`
+  );
 }

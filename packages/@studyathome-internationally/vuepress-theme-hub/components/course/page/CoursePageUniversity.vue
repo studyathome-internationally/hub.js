@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { subHeading } from "@theme/utils/page.js";
+import { subHeading, withBase, video } from "@theme/utils/page.js";
 export default {
   name: "CoursePageUniversity",
   props: {
@@ -16,7 +16,10 @@ export default {
   },
   computed: {
     university() {
-      return subHeading(this.pages.university.excerpt);
+      return withBase(
+        video(subHeading(this.pages.university.excerpt)),
+        this.$site.base
+      );
     }
   }
 };

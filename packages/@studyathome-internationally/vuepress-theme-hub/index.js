@@ -52,7 +52,8 @@ module.exports = (themeConfig, ctx) => {
     [
       "@vuepress/medium-zoom",
       {
-        selector: ".theme-default-content :not(a) > img:not(.card-image):not(.card-img)"
+        selector:
+          ".theme-default-content :not(a) > img:not(.card-image):not(.card-img)"
       }
     ],
     [
@@ -60,6 +61,14 @@ module.exports = (themeConfig, ctx) => {
       {
         type: "full-width-image",
         before: "<div class='full-width-image'>",
+        after: "</div>"
+      }
+    ],
+    [
+      "container",
+      {
+        type: "image-triplet",
+        before: "<div class='image-triplet'>",
         after: "</div>"
       }
     ],
