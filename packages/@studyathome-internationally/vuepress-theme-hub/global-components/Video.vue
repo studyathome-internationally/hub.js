@@ -12,16 +12,22 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    hl: {
+      type: String,
+      default: "en"
     }
   },
   data() {
     return {
-      src: "https://www.youtube.com/embed/",
+      src: "https://www.youtube-nocookie.com/embed/",
       params: {
         autoplay: false,
-        controle: false,
+        cc_load_policy: true,
+        controls: true,
         rel: false,
         modestbranding: true,
+        hl: "en",
         origin: ""
       }
     };
@@ -31,22 +37,27 @@ export default {
       const videoUrl = this.src + this.id;
       return append(videoUrl, this.params);
     }
+  },
+  created() {
+    this.params.hl = this.hl;
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-#container
-  margin 2rem 0
-  position relative
-  width 100%
-  height 0
-  padding-top 56.25%; // 9 / 16 * 100
+#container {
+  margin: 2rem 0;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%; // 9 / 16 * 100
+}
 
-#player
-  position absolute
-  top 0
-  left 0
-  width 100%
-  height 100%
+#player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>

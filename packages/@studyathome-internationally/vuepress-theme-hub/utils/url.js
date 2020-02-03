@@ -7,7 +7,9 @@ function append(url, params) {
     } else {
       q += `${prop}=${value}`;
     }
+    q += "&";
   }
+  q = q.substring(0, q.length - 1);
   return url + q;
 }
 
