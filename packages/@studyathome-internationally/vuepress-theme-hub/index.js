@@ -5,14 +5,14 @@ module.exports = (themeConfig, ctx) => {
     directories: [
       {
         dirname: "courses",
-        layout: "IndexCourses",
+        layout: "Courses",
         itemLayout: "Course",
         subdirlevel: 1,
         frontmatter: {
-          title: "Courses"
-        }
-      }
-    ]
+          title: "Courses",
+        },
+      },
+    ],
   };
 
   const { modifyHubPluginOptions } = themeConfig;
@@ -27,12 +27,13 @@ module.exports = (themeConfig, ctx) => {
     md.use(require("markdown-it-checkbox"));
     md.use(require("markdown-it-imsize"), { autofill: true });
     md.use(require("markdown-it-kbd"));
+    md.use(require("markdown-it-attrs"));
 
     md.renderer.rules.emoji = function(token, idx) {
       return twemoji.parse(token[idx].content, {
         base: "https://twemoji.maxcdn.com/2/",
         ext: ".svg",
-        folder: "svg"
+        folder: "svg",
       });
     };
   }
@@ -43,7 +44,7 @@ module.exports = (themeConfig, ctx) => {
       : defaultHubPluginOptions;
 
   const hubDirectoryClassifierPluginOptions = {
-    directories: hubPluginOptions.directories
+    directories: hubPluginOptions.directories,
   };
 
   const plugins = [
@@ -52,49 +53,48 @@ module.exports = (themeConfig, ctx) => {
     [
       "@vuepress/medium-zoom",
       {
-        selector:
-          ".theme-default-content :not(a) > img:not(.card-image):not(.card-img)"
-      }
+        selector: ".theme-default-content :not(a) > img",
+      },
     ],
     [
       "container",
       {
         type: "full-width-image",
         before: "<div class='full-width-image'>",
-        after: "</div>"
-      }
+        after: "</div>",
+      },
     ],
     [
       "container",
       {
         type: "image-triplet",
         before: "<div class='image-triplet'>",
-        after: "</div>"
-      }
+        after: "</div>",
+      },
     ],
     [
       "container",
       {
         type: "post-it",
-        before: title => `<pre class="post-it">`,
-        after: "</pre>"
-      }
+        before: (title) => `<pre class="post-it">`,
+        after: "</pre>",
+      },
     ],
     [
       "container",
       {
         type: "centered-image",
         before: "<div class='centered-image'>",
-        after: "</div>"
-      }
+        after: "</div>",
+      },
     ],
     [
       "container",
       {
         type: "gslot",
-        before: title => `<div class="gslot ${title}">`,
-        after: "</div>"
-      }
+        before: (title) => `<div class="gslot ${title}">`,
+        after: "</div>",
+      },
     ],
 
     [
@@ -103,17 +103,17 @@ module.exports = (themeConfig, ctx) => {
         components: [
           {
             name: "CourseCards",
-            path: "@theme/components/course/CourseCards.vue"
-          }
-        ]
-      }
-    ]
+            path: "@theme/components/course/CourseCards.vue",
+          },
+        ],
+      },
+    ],
   ];
 
   const config = {
     extend: "@vuepress/theme-default",
     extendMarkdown: markdownConfiguration,
-    plugins
+    plugins,
   };
 
   return config;
