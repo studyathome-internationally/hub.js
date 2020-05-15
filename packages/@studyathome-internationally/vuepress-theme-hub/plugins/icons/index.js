@@ -1,7 +1,28 @@
 import Vue from "vue";
+
+import "@fortawesome/fontawesome-free/css/all.css";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-library.add(faChevronUp, faChevronDown);
+import {
+  faAngleDown,
+  faAngleDoubleDown,
+  faCertificate,
+  faCalendarAlt,
+  faLanguage,
+  faPaperPlane,
+  faSnowflake,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(
+  faAngleDown,
+  faAngleDoubleDown,
+  faCertificate,
+  faCalendarAlt,
+  faLanguage,
+  faPaperPlane,
+  faSnowflake,
+  faSun
+);
 
 import {
   FontAwesomeIcon,

@@ -10,6 +10,7 @@ module.exports = (themeConfig, ctx) => {
         subdirlevel: 1,
         frontmatter: {
           title: "Courses",
+          pageClass: "courses-overview",
         },
       },
     ],
@@ -18,7 +19,7 @@ module.exports = (themeConfig, ctx) => {
   const { modifyHubPluginOptions } = themeConfig;
 
   function markdownConfiguration(md) {
-    md.set({ breaks: false, typographer: true, linkify: true });
+    md.set({ breaks: false, typographer: true, linkify: false, xhtml: true });
     md.use(require("markdown-it-sub"));
     md.use(require("markdown-it-sup"));
     md.use(require("markdown-it-footnote"));
@@ -28,6 +29,7 @@ module.exports = (themeConfig, ctx) => {
     md.use(require("markdown-it-imsize"), { autofill: true });
     md.use(require("markdown-it-kbd"));
     md.use(require("markdown-it-attrs"));
+    md.use(require("markdown-it-fontawesome"));
 
     md.renderer.rules.emoji = function(token, idx) {
       return twemoji.parse(token[idx].content, {
@@ -53,7 +55,7 @@ module.exports = (themeConfig, ctx) => {
     [
       "@vuepress/medium-zoom",
       {
-        selector: ".theme-default-content :not(a) > img",
+        selector: ".theme-default-content :not(a) :not(.no-zoom) > img",
       },
     ],
     [
@@ -102,8 +104,32 @@ module.exports = (themeConfig, ctx) => {
       {
         components: [
           {
-            name: "CourseCards",
-            path: "@theme/components/course/CourseCards.vue",
+            name: "Courses",
+            path: "@theme/components/course/Courses.vue",
+          },
+          {
+            name: "CourseSelection",
+            path: "@theme/components/enrollment/CourseSelection.vue",
+          },
+          {
+            name: "UniversitySelection",
+            path: "@theme/components/enrollment/UniversitySelection.vue",
+          },
+          {
+            name: "RequiredData",
+            path: "@theme/components/enrollment/RequiredData.vue",
+          },
+          {
+            name: "Disclaimer",
+            path: "@theme/components/enrollment/Disclaimer.vue",
+          },
+          {
+            name: "EMail",
+            path: "@theme/components/enrollment/EMail.vue",
+          },
+          {
+            name: "PostIt",
+            path: "@theme/components/general/PostIt.vue",
           },
         ],
       },
