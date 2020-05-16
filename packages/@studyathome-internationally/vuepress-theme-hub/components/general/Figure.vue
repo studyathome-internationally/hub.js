@@ -1,6 +1,6 @@
 <template>
   <div class="container" :class="{ 'no-zoom': !zoom }">
-    <img :src="source" :alt="alt" />
+    <img :src="source" :alt="alt" :title="title || alt" />
   </div>
 </template>
 
@@ -19,6 +19,10 @@ export default {
     alt: {
       type: String,
       default: "",
+    },
+    title: {
+      type: String,
+      default: null,
     },
   },
   computed: {

@@ -1,16 +1,27 @@
 <template>
-  <div class="lecturer">
-    <div>
-      <img
-        :style="{
-          float: left ? 'left' : 'right',
-          margin: `0 ${left ? '1em' : '0'} 0 ${left ? '0' : '1em'}`,
-        }"
-        :src="src"
-        :alt="alt"
-      />
-      <div class="preview" v-html="excerpt"></div>
-      <router-link :to="path">Read more.</router-link>
+  <div class="lecturer-sidebar">
+    <div
+      class="title"
+      :style="{
+        textAlign: left ? 'left' : 'right',
+      }"
+    >
+      {{ name }}
+    </div>
+    <Figure
+      class="portrait"
+      :src="src"
+      :alt="alt"
+      :zoom="false"
+      :title="alt"
+      :style="{
+        float: left ? 'left' : 'right',
+        margin: `0 ${left ? '1em' : '0'} 0 ${left ? '0' : '1em'}`,
+      }"
+    />
+    <div class="lecturer-preview">
+      <div class="excerpt" v-html="excerpt"></div>
+      <router-link style="display: inline;" :to="path">Read more.</router-link>
     </div>
   </div>
 </template>
@@ -18,8 +29,11 @@
 <script>
 import { get } from "@theme/utils/object.js";
 
+import Figure from "@theme/components/general/Figure.vue";
+
 export default {
   name: "Lecturer",
+  components: { Figure },
   props: {
     path: {
       type: String,
@@ -35,16 +49,16 @@ export default {
       return this.$site.pages.find(({ regularPath }) => regularPath === this.path);
     },
     src() {
-      return get(["page", "frontmatter", "image", "src"], this) || "";
+      return get(["page", "frontmatter", "portrait"], this) || "";
     },
     alt() {
-      return get(["page", "frontmatter", "image", "alt"], this) || "";
+      return `Portrait of ${this.name}`;
     },
     description() {
       return get(["page", "frontmatter", "description"], this) || "";
     },
     name() {
-      return get(["page", "frontmatter", "name"], this) || "";
+      return get(["page", "title"], this) || "";
     },
     excerpt() {
       return get(["page", "excerpt"], this) || "";
@@ -54,31 +68,51 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.lecturer
-  // background-color lighten($accentColor,95%)
+.lecturer-sidebar
   background-color transparent
-  padding 1rem
-  margin 1rem 0
+  padding 1rem 0
+  // margin 1rem 0
   overflow auto
-  // border 1px solid lighten($accentColor,80%)
-  border 1px solid alpha($accentColor,25%)
-  border-radius 5px
-  // box-shadow 1px 1px 4px 1px lighten($accentColor,85%)
-  box-shadow -1px 1px 4px 1px $borderColor
-  & > div
-    text-align justify
+  // border 1px solid alpha($accentColor,25%)
+  // border-radius 5px
+  // box-shadow -1px 1px 4px 1px $borderColor
+  .title
+    font-weight 600
+    margin-bottom 0.5rem
+  .portrait
+    padding-top 1rem
+    width 40%
+</style>
 
-img
-  width 40%
-
-p
-  text-align justify
-  margin-block-start 0.5rem
-  margin-block-end 0.5rem
-
-@media (max-width: ($courseContentWidth + $courseSidebarWidth))
-  p
-    text-align unset
+<style lang="stylus">
+.portrait
   img
-    width 20%
+    box-shadow 1px 1px 4px 1px $borderColor
+
+.lecturer-preview
+  .excerpt
+    text-align justify
+    display inline
+  h1
+    display none
+  p
+    margin-block-start 0.5rem
+    margin-block-end 0.5rem
+
+// @media (max-width: ($courseContentWidth + $courseSidebarWidth))
+.no-side
+  .lecturer-sidebar
+    .lecturer-preview
+      .excerpt
+        text-align unset
+    .portrait
+      width 30%
+      padding-top 0
+      img
+        width 100%
+
+@media (max-width: $MQMobileNarrow)
+  .no-side .lecturer-sidebar .portrait
+    width 50%
+    padding-top 1rem
 </style>

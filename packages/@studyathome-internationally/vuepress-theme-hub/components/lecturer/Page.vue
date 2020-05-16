@@ -1,5 +1,5 @@
 <template>
-  <main class="page">
+  <main class="page lecturer">
     <Contents />
     <PageEdit />
     <PageNav v-bind="{ sidebarItems }" />
@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Contents from "@theme/components/course/page/Contents.vue";
+import Contents from "@theme/components/lecturer/page/Contents.vue";
 import PageEdit from "@parent-theme/components/PageEdit.vue";
 import PageNav from "@parent-theme/components/PageNav.vue";
 
@@ -17,14 +17,8 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
-.page
-  background-color $accentColor
-</style>
-
 <style lang="stylus">
 @require '../../styles/wrapper.styl'
-
 .page
   margin-top $navbarHeight
   padding-bottom 2rem

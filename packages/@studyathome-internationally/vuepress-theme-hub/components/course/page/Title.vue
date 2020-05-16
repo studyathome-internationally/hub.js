@@ -1,7 +1,7 @@
 <template>
   <div class="course-title">
     <h1 id="title">{{ title }}</h1>
-    <div>{{ lecturer.name }}</div>
+    <div>{{ name }}</div>
   </div>
 </template>
 
@@ -12,16 +12,16 @@ export default {
   name: "Title",
   computed: {
     title() {
-      return this.$page.title;
+      return get(["$page", "title"], this) || "";
     },
     lecturer() {
       return get(["$frontmatter", "lecturers", 0], this) || "";
     },
     page() {
-      return this.$site.pages(({ regularPath }) => regularPath === this.lecturer);
+      return this.$site.pages.find(({ regularPath }) => regularPath === this.lecturer);
     },
     name() {
-      return "";
+      return get(["page", "title"], this) || "";
     },
   },
 };
@@ -29,7 +29,6 @@ export default {
 
 <style lang="stylus" scoped>
 .course-title
-  // background-color lighten(green,50%)
   h1
     margin-bottom 1rem
   div

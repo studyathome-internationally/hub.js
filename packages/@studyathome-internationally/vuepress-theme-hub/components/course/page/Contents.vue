@@ -16,7 +16,7 @@ import Main from "@theme/components/course/page/Main.vue";
 import sidebar from "@theme/mixins/course-sidebar.js";
 
 export default {
-  name: "CoursePage",
+  name: "Contents",
   components: { Title, Medium, Main },
   mixins: [sidebar],
 };
@@ -25,10 +25,13 @@ export default {
 <style lang="stylus" scoped>
 .course
   .title
+    color white
     padding 2rem 2.5rem
+    padding-left 4rem
   .content
     max-width ($courseContentWidth + $courseSidebarWidth)px
     margin auto
     div:first-child
+      background-color white
       margin-bottom 2rem
 </style>

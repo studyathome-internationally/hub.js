@@ -5,13 +5,17 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    confirmation: {
+    enrollment: {
       disclaimer: false,
+      home: "",
     },
   },
   mutations: {
-    updatePrivacyDisclaimerConfirmation(state, confirm) {
-      state.confirmation.disclaimer = confirm;
+    updateEnrollmentDisclaimer(state, confirmation) {
+      state.enrollment.disclaimer = confirmation;
+    },
+    updateHomeUniversity(state, home) {
+      state.enrollment.home = home;
     },
   },
 });

@@ -30,7 +30,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["confirmation"]),
+    ...mapState(["enrollment"]),
     to() {
       return this.mailInfo.to;
     },
@@ -53,9 +53,12 @@ export default {
           )
         : false;
     },
+    homeUniversity() {
+      return this.$site.pages.find(({ title }) => title === this.enrollment.home);
+    },
     mailInfo() {
       return this.valid
-        ? prepareMail(this.$frontmatter.enrollment, this.course, this.university)
+        ? prepareMail(this.$frontmatter.enrollment, this.course, this.homeUniversity)
         : false;
     },
     valid() {
@@ -64,7 +67,7 @@ export default {
         this.$route.query.course !== "" &&
         this.$route.query.home &&
         this.$route.query.home !== "" &&
-        this.confirmation.disclaimer
+        this.enrollment.disclaimer
       );
     },
   },
@@ -73,7 +76,7 @@ export default {
   },
   mounted() {
     this.mailto = generateMailto(this);
-    this.$store.commit("updatePrivacyDisclaimerConfirmation", false);
+    this.$store.commit("updateEnrollmentDisclaimer", false);
   },
 };
 </script>

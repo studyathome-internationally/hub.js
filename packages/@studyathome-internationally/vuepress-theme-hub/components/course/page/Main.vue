@@ -26,10 +26,10 @@ h1, h2, h3, h4, h5, h6
     + p, + pre, + .custom-block
       margin-top 2rem
 
-.lecturer img
-  margin-top (0.5rem - $navbarHeight)
-  padding-top ($navbarHeight + 1rem)
-  margin-bottom 0
+// .lecturer img
+//   margin-top (0.5rem - $navbarHeight)
+//   padding-top ($navbarHeight + 1rem)
+//   margin-bottom 0
 </style>
 <style lang="stylus" scoped>
 
@@ -38,6 +38,8 @@ h1, h2, h3, h4, h5, h6
   max-width ($contentWidth*2)px
   div
     padding 2rem 2.5rem
+  .content__default, .course-sidebar
+    background-color white
   .course:not(.no-side) &
     display flex
     flex-flow row nowrap
@@ -46,9 +48,12 @@ h1, h2, h3, h4, h5, h6
       width $courseContentWidth
     .course-sidebar
       width $courseSidebarWidth
+    .course-sidebar, .content__default
       border 1px solid $borderColor
       border-radius 5px
       box-shadow 1px 1px 4px 1px darken($borderColor,25%)
+    .content__default
+      margin-right 2.5rem
 
 .no-side
   .content__default

@@ -25,12 +25,12 @@
 <script>
 import Home from "@parent-theme/components/Home.vue";
 import Navbar from "@parent-theme/components/Navbar.vue";
-import Page from "@theme/components/course/Page.vue";
+import Page from "@theme/components/lecturer/Page.vue";
 import Sidebar from "@parent-theme/components/Sidebar.vue";
 import { resolveSidebarItems } from "@parent-theme/util";
 
 export default {
-  name: "Course",
+  name: "Lecturer",
 
   components: {
     Home,
@@ -67,29 +67,7 @@ export default {
     },
 
     sidebarItems() {
-      const entries = resolveSidebarItems(
-        this.$page,
-        this.$page.regularPath,
-        this.$site,
-        this.$localePath
-      );
-      if (!entries || entries.length === 0) return [];
-      const entry = entries[0];
-      const basePath = this.$page.regularPath;
-      [
-        ["Enrollment", "enrollment"],
-        ["University", "university"],
-        ["Lecturers", "lecturers"],
-      ].forEach(([title, slug]) => {
-        entry.children.push({
-          basePath,
-          path: `${basePath}#${slug}`,
-          title,
-          type: "auto",
-          children: [],
-        });
-      });
-      return [entry];
+      return resolveSidebarItems(this.$page, this.$page.regularPath, this.$site, this.$localePath);
     },
 
     pageClasses() {

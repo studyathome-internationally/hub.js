@@ -44,7 +44,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["confirmation"]),
+    ...mapState(["enrollment"]),
     hostDisclaimer() {
       return this.$site.pages.find(
         ({ regularPath }) => regularPath === this.host + "disclaimer.html"
@@ -52,10 +52,10 @@ export default {
     },
     confirm: {
       get() {
-        return this.confirmation.disclaimer;
+        return this.enrollment.disclaimer;
       },
       set(value) {
-        this.$store.commit("updatePrivacyDisclaimerConfirmation", value);
+        this.$store.commit("updateEnrollmentDisclaimer", value);
       },
     },
   },

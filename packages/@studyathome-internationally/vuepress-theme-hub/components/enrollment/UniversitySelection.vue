@@ -47,6 +47,7 @@ export default {
           query: { course, home: newValue },
         });
       }
+      this.$store.commit("updateHomeUniversity", newValue);
     },
     universities(newValue, oldValue) {
       if (!newValue.map(({ title }) => title).includes(this.selection)) {
