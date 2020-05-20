@@ -1,5 +1,5 @@
 <template>
-  <div class="media">
+  <div class="media" :class="{figure: !isYoutube(content)}">
     <Figure v-if="content && !isYoutube(content)" :src="content" :zoom="zoom" />
     <Video v-else-if="isYoutube(content)" :code="isYoutube(content)" />
     <div v-else class="media-default"></div>
@@ -19,13 +19,13 @@ export default {
   props: {
     content: {
       type: String,
-      default: null,
+      default: null
     },
     zoom: {
       type: Boolean,
-      default: true,
-    },
-  },
+      default: true
+    }
+  }
 };
 </script>
 

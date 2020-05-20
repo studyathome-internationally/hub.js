@@ -7,10 +7,10 @@
     <p>
       Participation is free of charge. Student of partner universities can send applications to
       participate in courses.
-      <router-link class="action" :to="{ path: '/courses/enroll/', query: { course } }">
-        <button>Enroll now!</button>
-      </router-link>
     </p>
+    <router-link class="action" :to="{ path: '/courses/enroll/', query: { course } }">
+      <button>Enroll now!</button>
+    </router-link>
   </section>
 </template>
 
