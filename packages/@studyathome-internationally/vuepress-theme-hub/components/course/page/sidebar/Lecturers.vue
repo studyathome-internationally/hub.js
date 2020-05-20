@@ -1,15 +1,17 @@
 <template>
-  <section>
+  <section class="lecturers">
     <h2 id="lecturers">
       <a href="#lecturers" class="header-anchor">#</a>
       Lecturers
     </h2>
+    <!-- <div class="container"> -->
     <Lecturer
       v-for="(lecturer, i) of lecturers"
       :key="lecturer"
       :path="lecturer"
       :left="Boolean((i + 1) % 2)"
     />
+    <!-- </div> -->
   </section>
 </template>
 
@@ -24,8 +26,8 @@ export default {
   computed: {
     lecturers() {
       return get(["$frontmatter", "lecturers"], this) || [];
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -4,6 +4,7 @@
       <Medium :path="path" />
       <div class="content">
         <Title :path="path" />
+        <University :path="path" />
         <Lecturers :path="path" />
         <Tags :path="path" />
         <Info :path="path" />
@@ -15,6 +16,7 @@
 <script>
 import Medium from "@theme/components/course/grid/Medium.vue";
 import Title from "@theme/components/course/grid/Title.vue";
+import University from "@theme/components/course/grid/University.vue";
 import Lecturers from "@theme/components/course/grid/Lecturers.vue";
 import Tags from "@theme/components/course/grid/Tags.vue";
 import Info from "@theme/components/course/grid/Info.vue";
@@ -23,7 +25,7 @@ import course from "@theme/mixins/course.js";
 
 export default {
   name: "Course",
-  components: { Medium, Title, Lecturers, Tags, Info },
+  components: { Medium, Title, University, Lecturers, Tags, Info },
   mixins: [course],
 };
 </script>

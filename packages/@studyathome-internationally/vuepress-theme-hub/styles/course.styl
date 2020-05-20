@@ -1,0 +1,160 @@
+$courseContentWidth = $courseContentWidth + $courseSidebarWidth
+
+
+h1, h2, h3, h4, h5, h6
+  .content__default > &, .course-sidebar > section > &, .course-sidebar > section > .preview > .excerpt > &
+    margin-top (0.5rem - $navbarHeight)
+    padding-top ($navbarHeight + 1rem)
+    margin-bottom 0
+
+    &:first-child
+      + p, + pre, + .custom-block
+        margin-top 2rem
+
+.page.course
+  // background-color alpha($accentColor,45%)
+  background-color alpha($accentColor,100%)
+  // max-width $courseContentWidth
+  // margin auto
+
+  .course-title
+    color white
+    padding 2rem 0
+    max-width $courseContentWidth
+    margin auto
+
+  .container
+    max-width $courseContentWidth
+    margin auto
+
+    .course-description, .content__default, .course-sidebar
+      border 1px solid $borderColor
+      border-radius 5px
+      box-shadow 1px 1px 4px 1px darken($borderColor,25%)
+      padding 2.5rem 2rem
+      background-color white
+
+    .course-description
+      display flex
+      margin-bottom 2rem
+      div
+        flex 1 1 50%
+
+      .information
+        padding 0 2.5rem
+
+        .hard-facts
+          line-height 2
+      
+      .icon
+        width 2rem
+
+    .contents
+      display flex
+      flex-flow row nowrap
+      .content__default
+        width $courseContentWidth
+        margin-right 2rem
+        h1
+          display none
+      .course-sidebar
+        width $courseSidebarWidth
+
+        section.enrollment p, .preview
+          text-align justify
+
+        section.university
+          .excerpt h1
+            font-size 1rem
+            text-overflow ellipsis
+            display block
+            overflow hidden
+            white-space nowrap
+            max-width "calc(%s - 8rem)" % $courseSidebarWidth
+            margin-bottom 0.5rem
+        section.lecturers
+          .lecturer
+            margin 1rem 0
+
+            .title
+              font-weight 600
+              margin-bottom 0.5rem
+
+            .portrait
+              width 40%
+              padding-top 1rem
+
+            .excerpt h1
+              display none
+
+        .excerpt
+          &, & > *
+            display inline
+
+    .action button
+      cursor pointer
+      display block
+      width 100%
+      border none 
+      border-radius 5px
+      padding 0.5rem 1rem
+      margin-top 0.9rem
+      font-size 1rem
+      box-shadow 1px 1px 3px 1px darken($accentColor,40%)
+      background-color $accentColor
+      color white
+
+  &.mobile
+    .course-title
+      padding 2rem 2rem
+
+    .container
+
+      .course-description, .content__default, .course-sidebar
+        border unset
+        border-radius unset
+        box-shadow unset
+        padding 2.5rem 2rem
+
+      
+      .course-description
+        flex-flow column nowrap
+        margin 2rem
+        .media
+          flex 1 1 70%
+      
+      .contents
+        flex-flow column nowrap
+
+        .content__default
+          margin-right unset
+
+        .content__default, .course-sidebar
+          width unset
+
+        .course-sidebar
+
+          section.enrollment p, .preview
+            text-align unset
+
+          section.university
+            .excerpt h1
+              max-width unset
+
+          section.lecturers
+            // .container
+            //   .lecturer:not(:first-child)
+            //     border-top 1px solid $borderColor
+            //     padding-top 1rem
+                // background-color red
+                // overflow auto
+            
+            .lecturer
+              overflow auto
+              .portrait
+                max-width 20%
+// @media (max-width: $courseContentWidth)
+//   .page.course.mobile
+//     .container
+//       .course-description
+//         flex-flow column nowrap

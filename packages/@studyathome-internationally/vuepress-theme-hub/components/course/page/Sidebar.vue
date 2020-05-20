@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="course-sidebar">
     <Enrollment />
     <University />
     <Lecturers />

@@ -2,12 +2,8 @@
   <div>
     <font-awesome-icon class="icon" icon="language"></font-awesome-icon>
     <span v-for="(language, i) of languages" :key="language">
-      <template v-if="i + 1 !== languages.length">
-        {{ language }},
-      </template>
-      <template v-else>
-        {{ language }}
-      </template>
+      <template v-if="i + 1 !== languages.length">{{ language }},&nbsp;</template>
+      <template v-else>{{ language }}</template>
     </span>
   </div>
 </template>
@@ -19,12 +15,9 @@ export default {
   computed: {
     languages() {
       return get(["$frontmatter", "language"], this) || [];
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="stylus" scoped>
-.icon
-  width 2rem
-</style>
+<style lang="stylus" scoped></style>

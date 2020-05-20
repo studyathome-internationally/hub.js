@@ -14,12 +14,9 @@ export default {
   computed: {
     ects() {
       return get(["$frontmatter", "ects"], this) || 0;
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="stylus" scoped>
-.icon
-  width 2rem
-</style>
+<style lang="stylus" scoped></style>

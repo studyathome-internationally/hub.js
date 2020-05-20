@@ -1,8 +1,10 @@
 <template>
   <section v-if="excerpt" class="university">
-    <h2 id="university"><a href="#university" class="header-anchor">#</a>University</h2>
-    <div class="university">
-      <div class="preview" v-html="processedExcerpt"></div>
+    <h2 id="university">
+      <a href="#university" class="header-anchor">#</a>University
+    </h2>
+    <div class="preview">
+      <div class="excerpt" v-html="processedExcerpt"></div>
       <router-link :to="path">Read more.</router-link>
     </div>
   </section>
@@ -32,21 +34,9 @@ export default {
     },
     path() {
       return get(["university", "regularPath"], this) || "";
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="stylus">
-.university > div
-  text-align justify
-
-.preview
-  img
-    width 100%
-</style>
-<style lang="stylus" scoped>
-@media (max-width: ($courseContentWidth + $courseSidebarWidth))
-  p
-    text-align unset
-</style>
+<style lang="stylus"></style>

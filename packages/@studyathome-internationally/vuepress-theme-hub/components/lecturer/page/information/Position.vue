@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="position">
-      <a :href="href" rel="noopener" target="_blank">{{ role }}<OutboundLink /></a>
+      <a :href="href" rel="noopener" target="_blank">
+        {{ role }}
+        <OutboundLink />
+      </a>
     </div>
-    <div>
-      {{ department }}
-    </div>
+    <div>{{ department }}</div>
   </div>
 </template>
 
@@ -23,13 +24,9 @@ export default {
     },
     href() {
       return get(["$frontmatter", "position", "href"], this) || "";
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="stylus" scoped>
-.position
-  font-size 1.2rem
-  margin-bottom 0.5rem
-</style>
+<style lang="stylus" scoped></style>

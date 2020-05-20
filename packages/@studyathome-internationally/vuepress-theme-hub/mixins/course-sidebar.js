@@ -6,7 +6,7 @@ export default {
   },
 
   computed: {
-    side() {
+    show() {
       // palette.styl ($courseContentWidth, $courseSidebarWidth)
       return this.width >= 940 + 400;
     },

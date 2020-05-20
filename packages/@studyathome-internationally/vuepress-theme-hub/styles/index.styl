@@ -1,4 +1,18 @@
+@require "./course.styl"
+@require "./lecturer.styl"
 @require "./post-it.styl"
+
+// temporary workaround for @vuepress/theme-default
+// introduced with v1.4.1 (https://github.com/vuejs/vuepress/commit/430b9177deaa518c4f6034589459ddff0e9db033)
+.dropdown-wrapper .dropdown-title
+  pointer-events auto !important
+
+:focus, a:focus
+  outline 3px solid $accentColor !important
+  outline-offset 0.1rem !important
+
+:not(.grid-item) > a
+  color lighten($accentColor,40%)
 
 .courses-overview
   .theme-default-content
@@ -40,11 +54,6 @@ details.hub
     justify-content space-between
     &::-webkit-details-marker
       display none
-
-.preview, .preview > p
-  display inline
-  h1
-    font-size 1rem
 
 .sw-update-popup
   border 2px solid #0f303e !important

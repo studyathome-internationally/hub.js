@@ -1,12 +1,12 @@
-export function prepareMail(mail, course, university) {
-  const to = university.frontmatter["international-office"];
+export function prepareMail(mail, course, hostUniversity, homeUniversity) {
+  const to = homeUniversity.frontmatter["international-office"];
   const {
     cc,
     bcc,
     subject,
     body: { before, form, after },
   } = mail;
-  const body = processBody([before, form, after].join(""), { course, university });
+  const body = processBody([before, form, after].join(""), { course, university: hostUniversity });
 
   return {
     to,

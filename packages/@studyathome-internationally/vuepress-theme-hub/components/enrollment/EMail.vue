@@ -46,7 +46,7 @@ export default {
     body() {
       return this.mailInfo.body;
     },
-    university() {
+    hostUniversity() {
       return this.course
         ? this.$site.pages.find(
             ({ regularPath }) => regularPath === this.course.frontmatter.university.page
@@ -54,11 +54,16 @@ export default {
         : false;
     },
     homeUniversity() {
-      return this.$site.pages.find(({ title }) => title === this.enrollment.home);
+      return this.$site.pages.find(({ title }) => title && title === this.enrollment.home);
     },
     mailInfo() {
       return this.valid
-        ? prepareMail(this.$frontmatter.enrollment, this.course, this.homeUniversity)
+        ? prepareMail(
+            this.$frontmatter.enrollment,
+            this.course,
+            this.hostUniversity,
+            this.homeUniversity
+          )
         : false;
     },
     valid() {

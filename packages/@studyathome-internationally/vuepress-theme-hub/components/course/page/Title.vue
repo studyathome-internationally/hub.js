@@ -27,16 +27,4 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
-.course-title
-  h1
-    margin-bottom 1rem
-  div
-    border-top 1px solid $borderColor
-    padding-top 1rem
-</style>
-
-<style lang="stylus">
-.course .content__default > h1:not(#title)
-  display none
-</style>
+<style lang="stylus" scoped></style>

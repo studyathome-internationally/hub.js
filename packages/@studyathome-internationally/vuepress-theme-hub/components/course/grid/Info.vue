@@ -20,12 +20,22 @@
     </div>
     <div>
       <label :for="path + 'start'">Start</label>
-      <span :id="path + 'start'">{{ start }}</span>
+      <time :id="path + 'start'" :datetime="start.year + '-' + start.month + '-' + start.day"
+        >{{ start.day }}.{{ start.month }}.{{ start.year }}
+      </time>
+    </div>
+    <div>
+      <label :for="path + 'end'">End</label>
+      <time :id="path + 'end'" :datetime="end.year + '-' + end.month + '-' + end.day"
+        >{{ end.day }}.{{ end.month }}.{{ end.year }}
+      </time>
     </div>
   </div>
 </template>
 
 <script>
+import { get } from "@theme/utils/object.js";
+import { convertDate } from "@theme/utils/date.js";
 import course from "@theme/mixins/course.js";
 
 export default {
@@ -33,13 +43,16 @@ export default {
   mixins: [course],
   computed: {
     ects() {
-      return this.page.frontmatter.ects;
+      return get(["page", "frontmatter", "ects"], this) || "";
     },
     semester() {
-      return this.page.frontmatter.semester;
+      return get(["page", "frontmatter", "semester"], this) || "";
     },
     start() {
-      return this.page.frontmatter.schedule.start;
+      return convertDate(get(["page", "frontmatter", "schedule", "start"], this));
+    },
+    end() {
+      return convertDate(get(["page", "frontmatter", "schedule", "end"], this));
     },
   },
 };

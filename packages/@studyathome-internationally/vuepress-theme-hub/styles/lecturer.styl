@@ -1,0 +1,67 @@
+.page.lecturer
+  .title
+    background-color $accentColor
+    border-radius 5px
+    color white
+    padding 0.25rem
+    padding-left 0.5rem
+    font-size 1rem
+    font-weight 500
+    margin-bottom 0.5rem
+
+  ul
+    list-style-type none
+    padding-left 0.25rem
+    margin-block-start 0
+    margin-block-end 0
+  
+  .overview
+    display flex
+    flex-flow row nowrap
+    border 1px solid $borderColor
+    border none
+    border-radius 5px
+    box-shadow 1px 1px 4px 1px darken($borderColor,40%)
+    .portrait
+      margin auto 1.5rem auto 1.5rem
+      width 60%
+      img
+        border-radius 5px
+        box-shadow 1px 1px 4px 2px darken($borderColor,30%)
+    .information
+      width 100%
+      background-color alpha($accentColor,20%)
+      padding 2rem 1rem
+      border-radius 0 5px 5px 0
+      & > div
+        margin-bottom 1rem
+        &:last-child
+          margin-bottom 0
+      .position
+        font-size 1.2rem
+        margin-bottom 0.5rem
+      li
+        text-overflow ellipsis
+        overflow hidden
+        white-space nowrap
+    
+  .content__default h1
+    display none
+
+@media (max-width: $MQMobile)
+  .page.lecturer .overview
+    flex-flow column nowrap
+    .portrait
+      margin auto
+      max-height 25rem
+      overflow hidden
+    .information
+      width unset
+      border-radius 0 0 5px 5px
+
+@media (max-width: $MQMobileNarrow)
+  .page.lecturer .overview .portrait
+    overflow hidden
+    width 100%
+    img
+      object-fit cover

@@ -17,14 +17,9 @@ export default {
   computed: {
     contacts() {
       return get(["$frontmatter", "contact"], this) || {};
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="stylus" scoped>
-li
-  text-overflow ellipsis
-  overflow hidden
-  white-space nowrap
-</style>
+<style lang="stylus" scoped></style>
