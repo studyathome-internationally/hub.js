@@ -6,7 +6,10 @@ export function prepareMail(mail, course, hostUniversity, homeUniversity) {
     subject,
     body: { before, form, after },
   } = mail;
-  const body = processBody([before, form, after].join(""), { course, university: hostUniversity });
+  const body = processBody([before, form, after].join(""), {
+    course,
+    university: hostUniversity,
+  });
 
   return {
     to,
@@ -17,7 +20,8 @@ export function prepareMail(mail, course, hostUniversity, homeUniversity) {
   };
 }
 function processBody(body, { course, university }) {
-  let result = body.replace(/(\\n\s|\\n)/g, "\n");
+  let result = body.replace(/(\\n\s|\\n)/g, "\r\n");
+
   [
     ["title", course.title],
     ["link", course.frontmatter.link],

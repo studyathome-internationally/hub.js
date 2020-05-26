@@ -5,7 +5,7 @@
         <span>
           {{ title }}
         </span>
-        <font-awesome-icon icon="angle-double-down"></font-awesome-icon>
+        <font-awesome-icon class="marker" icon="angle-double-down"></font-awesome-icon>
       </summary>
       <slot></slot>
     </details>

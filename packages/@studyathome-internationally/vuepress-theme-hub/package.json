@@ -48,5 +48,8 @@
     "vuepress-plugin-directory-classifier": "^0.1.0",
     "vuex": "^3.4.0",
     "youtube-player": "^5.5.2"
+  },
+  "devDependencies": {
+    "uri-js": "^4.2.2"
   }
 }

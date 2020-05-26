@@ -83,7 +83,7 @@ export default {
   & > div
     display inline-flex
     input
-      margin auto 0.5rem
+      margin 0.5rem
 hr
   border-top 1px solid $accentColor
 </style>

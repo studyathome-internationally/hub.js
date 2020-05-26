@@ -2,7 +2,7 @@ $courseContentWidth = $courseContentWidth + $courseSidebarWidth
 
 
 h1, h2, h3, h4, h5, h6
-  .content__default > &, .course-sidebar > section > &, .course-sidebar > section > .preview > .excerpt > &
+  .content__default > &, .course-sidebar > section > &, .course-sidebar > section > .preview > .excerpt > &, .course-description > .information > .content__information > &
     margin-top (0.5rem - $navbarHeight)
     padding-top ($navbarHeight + 1rem)
     margin-bottom 0
@@ -19,13 +19,14 @@ h1, h2, h3, h4, h5, h6
 
   .course-title
     color white
-    padding 2rem 0
+    padding 2rem 3rem
     max-width $courseContentWidth
     margin auto
 
   .container
     max-width $courseContentWidth
     margin auto
+    padding 2rem
 
     .course-description, .content__default, .course-sidebar
       border 1px solid $borderColor
@@ -37,6 +38,9 @@ h1, h2, h3, h4, h5, h6
     .course-description
       display flex
       margin-bottom 2rem
+      padding 1rem
+      p
+        text-align justify
       div
         flex 1 1 50%
       
@@ -47,7 +51,9 @@ h1, h2, h3, h4, h5, h6
           object-fit contain
 
       .information
-        padding 0 2.5rem
+        padding 0 0.5rem
+        // padding-right 0.5rem
+        padding-left 1rem
 
         .hard-facts
           line-height 2
@@ -115,13 +121,14 @@ h1, h2, h3, h4, h5, h6
       padding 2rem 2rem
 
     .container
+      padding unset
 
       .course-description, .content__default, .course-sidebar
         border unset
         border-radius unset
         box-shadow unset
         padding 2.5rem 2rem
-
+        
         .information
           padding unset
       

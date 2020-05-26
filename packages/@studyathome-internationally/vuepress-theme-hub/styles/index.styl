@@ -34,10 +34,10 @@
     background-color alpha($borderColor,40%)
     border-color darken($borderColor,40%)
     box-shadow 1px 1px 4px -1px alpha($borderColor,80%)
+    margin-right -2rem
   .icon
     width 1rem
     position absolute
-    margin-left -1.9rem
     margin-top 1.3rem
 
 details.hub
@@ -52,10 +52,17 @@ details.hub
     list-style none
     font-weight 600
     cursor pointer
-    display flex
-    justify-content space-between
+    flex-flow row nowrap
     &::-webkit-details-marker
       display none
+    span
+      display inline-block
+      margin-right -1rem
+      width 100%
+    .marker
+      position absolute
+      width 1rem
+
 
 .sw-update-popup
   border 2px solid #0f303e !important

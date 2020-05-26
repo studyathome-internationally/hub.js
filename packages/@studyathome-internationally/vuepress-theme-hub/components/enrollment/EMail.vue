@@ -10,6 +10,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { serialize } from "uri-js";
 
 import { generateMailto } from "@theme/utils/mail.js";
 import { prepareMail } from "@theme/utils/enrollment.js";
@@ -26,25 +27,38 @@ export default {
   },
   methods: {
     mail() {
-      return !this.valid ? "/#" : `mailto:?${this.mailto}`;
+      const cc = this.cc.join(";");
+      const bcc = this.bcc.join(";");
+      return !this.valid
+        ? "/#"
+        : serialize({
+            scheme: "mailto",
+            to: this.to,
+            subject: this.subject,
+            body: this.body,
+            headers: {
+              cc,
+              bcc,
+            },
+          });
     },
   },
   computed: {
     ...mapState(["enrollment"]),
     to() {
-      return this.mailInfo.to;
+      return this.mailInfo.to || [];
     },
     cc() {
-      return this.mailInfo.cc;
+      return this.mailInfo.cc || [];
     },
     bcc() {
-      return this.mailInfo.bcc;
+      return this.mailInfo.bcc || [];
     },
     subject() {
-      return this.mailInfo.subject;
+      return this.mailInfo.subject || "";
     },
     body() {
-      return this.mailInfo.body;
+      return this.mailInfo.body || "";
     },
     hostUniversity() {
       return this.course
@@ -54,7 +68,9 @@ export default {
         : false;
     },
     homeUniversity() {
-      return this.$site.pages.find(({ title }) => title && title === this.enrollment.home);
+      return this.$site.pages.find(
+        ({ title }) => title && title === this.enrollment.home
+      );
     },
     mailInfo() {
       return this.valid
@@ -87,27 +103,38 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-a, button
-  display block
-  width 100%
-a:hover
-  text-decoration none !important
-button
-  background-color $accentColor
-  color white
-  border none
-  border-radius 4px
-  box-shadow 1px 1px 3px 1px darken($borderColor,70%)
-  &:disabled
-    background-color alpha($accentColor,50%)
-    cursor auto
-.mailer
-  width 100%
-  margin-block-start 1rem
-  margin-block-end 1rem
-.mailer-button
-  flex 1
-  font-size 1.4rem
-  padding 0.5rem 1rem
-  cursor pointer
+a, button {
+  display: block;
+  width: 100%;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+button {
+  background-color: $accentColor;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px 1px darken($borderColor, 70%);
+
+  &:disabled {
+    background-color: alpha($accentColor, 50%);
+    cursor: auto;
+  }
+}
+
+.mailer {
+  width: 100%;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+}
+
+.mailer-button {
+  flex: 1;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
 </style>
