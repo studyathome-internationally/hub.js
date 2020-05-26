@@ -30,12 +30,13 @@ export default {
   },
   computed: {
     index() {
-      return this.$site.pages.find(({ regularPath }) => regularPath === this.path).frontmatter
-        .indexed;
+      return this.$site.pages.find(({ regularPath }) => regularPath === this.path)
+        .frontmatter.indexed;
     },
     courses() {
       return this.$site.pages.filter(
-        ({ regularPath, frontmatter }) => frontmatter.state && this.index.includes(regularPath)
+        ({ regularPath, frontmatter }) =>
+          frontmatter.state && frontmatter.enrollment && this.index.includes(regularPath)
       );
     },
   },
@@ -43,7 +44,10 @@ export default {
     selection(newValue, oldValue) {
       const { course, home } = this.$route.query;
       if (newValue !== course) {
-        this.$router.replace({ path: this.$route.path, query: { course: newValue, home } });
+        this.$router.replace({
+          path: this.$route.path,
+          query: { course: newValue, home },
+        });
       }
     },
   },

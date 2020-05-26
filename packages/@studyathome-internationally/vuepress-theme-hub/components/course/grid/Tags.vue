@@ -33,7 +33,7 @@ export default {
     padding 0.15rem 0.2rem
     border-radius 2px
     margin-right 3px
-    background-color lighten($accentColor,40%)
+    background-color $accentColor
     color white
     white-space nowrap
     &:last-child

@@ -7,14 +7,26 @@
 .dropdown-wrapper .dropdown-title
   pointer-events auto !important
 
+.hide-on-mobile
+  display none
+@media (max-width: $MQMobile)
+  .hide-on-mobile
+    display unset
+  .hide-on-desktop
+    display none
+
 :focus, a:focus
   outline 3px solid $accentColor !important
   outline-offset 0.1rem !important
 
 :not(.grid-item) > a
-  color lighten($accentColor,40%)
+  color lighten($accentColor,29.25%)
 .nav-links a, .dropdown-wrapper .dropdown-title, a.sidebar-link
   color $accentColor
+
+@media (max-width: $MQMobile)
+  .home .hero p.description
+    font-size 18pt
 
 .courses-overview
   .theme-default-content

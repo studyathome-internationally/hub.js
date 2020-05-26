@@ -8,16 +8,10 @@
       Participation is free of charge. Student of partner universities can send
       applications to participate in courses.
     </p>
-    <router-link
-      v-if="active"
-      class="action"
-      :to="{ path: '/courses/enroll/', query: { course } }"
-    >
+    <router-link v-if="active" class="action" :to="{ path: '/courses/enroll/', query: { course } }">
       <button>Enroll now!</button>
     </router-link>
-    <p v-else>
-      Enrolling to this course is currently not possible.
-    </p>
+    <p id="not-available" v-else>Enrolling to this course is not possible at this time.</p>
   </section>
 </template>
 
@@ -32,9 +26,15 @@ export default {
     },
     active() {
       return get(["$frontmatter", "enrollment"], this);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+#not-available {
+  padding: 1rem;
+  text-align: left;
+  background-color: $borderColor;
+}
+</style>
