@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div style="width: inherit; height: inherit;" class="player" :id="id"></div>
+  <div class="container">
+    <div class="player" :id="id"></div>
   </div>
 </template>
 
@@ -49,7 +49,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-div, iframe, .player
-  height 100% !important
-  width 100% !important
+.container
+  position relative
+  width 100%
+  height 0
+  padding-bottom 56.27198%
 </style>

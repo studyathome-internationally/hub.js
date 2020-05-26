@@ -139,6 +139,7 @@ module.exports = (themeConfig, ctx) => {
   const config = {
     extend: "@vuepress/theme-default",
     extendMarkdown: markdownConfiguration,
+    globalUIComponents: ["CookieConsent"],
     plugins,
   };
 

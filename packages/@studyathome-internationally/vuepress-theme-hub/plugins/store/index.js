@@ -9,13 +9,31 @@ export const store = new Vuex.Store({
       disclaimer: false,
       home: "",
     },
+    cookie: {
+      consent: false,
+    },
   },
   mutations: {
+    load(state) {
+      if (!localStorage) return;
+      state.cookie = Object.assign(
+        state.cookie,
+        JSON.parse(localStorage.getItem("hub-settings-cookie"))
+      );
+    },
+    save(state) {
+      if (!localStorage) return;
+      localStorage.setItem("hub-settings-cookie", JSON.stringify(state.cookie));
+    },
+
     updateEnrollmentDisclaimer(state, confirmation) {
       state.enrollment.disclaimer = confirmation;
     },
     updateHomeUniversity(state, home) {
       state.enrollment.home = home;
+    },
+    consentToCookies(state) {
+      state.cookie.consent = true;
     },
   },
 });

@@ -45,19 +45,17 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#container {
-  margin: 2rem 0;
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-top: 56.25%; // 9 / 16 * 100
-}
+#container
+  margin 2rem 0
+  position relative
+  width 100%
+  height 0
+  padding-top 56.25% // 9 / 16 * 100
 
-#player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+#player
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
 </style>

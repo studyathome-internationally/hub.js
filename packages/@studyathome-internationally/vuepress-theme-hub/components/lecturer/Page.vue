@@ -16,20 +16,16 @@ import PageNav from "@parent-theme/components/PageNav.vue";
 
 export default {
   components: { PageEdit, PageNav, Overview },
-  props: ["sidebarItems"]
+  props: ["sidebarItems"],
 };
 </script>
 
 <style lang="stylus">
 @require '../../styles/wrapper.styl';
-
-.page {
-  margin-top: $navbarHeight;
-  padding-bottom: 2rem;
-  display: block;
-}
-
-.page-edit {
-  margin-top: 2rem;
-}
+.page
+  margin-top $navbarHeight
+  padding-bottom 2rem
+  display block
+.page-edit
+  margin-top 2rem
 </style>

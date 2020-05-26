@@ -103,38 +103,29 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-a, button {
-  display: block;
-  width: 100%;
-}
+a, button
+  display block
+  width 100%
+a:hover
+  text-decoration none !important
+button
+  background-color $accentColor
+  color white
+  border none
+  border-radius 4px
+  box-shadow 1px 1px 3px 1px darken($borderColor, 70%)
+  &:disabled
+    background-color alpha($accentColor, 50%)
+    cursor auto
 
-a:hover {
-  text-decoration: none !important;
-}
+.mailer
+  width 100%
+  margin-block-start 1rem
+  margin-block-end 1rem
 
-button {
-  background-color: $accentColor;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 1px 1px 3px 1px darken($borderColor, 70%);
-
-  &:disabled {
-    background-color: alpha($accentColor, 50%);
-    cursor: auto;
-  }
-}
-
-.mailer {
-  width: 100%;
-  margin-block-start: 1rem;
-  margin-block-end: 1rem;
-}
-
-.mailer-button {
-  flex: 1;
-  font-size: 1.4rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
+.mailer-button
+  flex 1
+  font-size 1.4rem
+  padding 0.5rem 1rem
+  cursor pointer
 </style>
