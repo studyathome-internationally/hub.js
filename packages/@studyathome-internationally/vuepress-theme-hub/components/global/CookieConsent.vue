@@ -1,5 +1,5 @@
 <template>
-  <div id="cookie-consent" v-if="!cookie.consent">
+  <div id="cookie-consent" v-show="!cookie.consent">
     <p>
       <span>
         This website uses cookies to ensure you get the best experience on our website.
