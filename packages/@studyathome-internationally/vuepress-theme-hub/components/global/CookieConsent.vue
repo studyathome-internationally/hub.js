@@ -33,7 +33,7 @@ export default {
 <style lang="stylus" scoped>
 #cookie-consent
   position fixed
-  z-index 25
+  z-index 1
   width 100%
   min-height 90px
   bottom 0
