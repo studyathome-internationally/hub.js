@@ -5,12 +5,14 @@
       <ECTS />
       <Date />
       <Language />
-      <Enroll />
+      <Enroll v-if="active" />
     </div>
   </div>
 </template>
 
 <script>
+import { get } from "@theme/utils/object.js";
+
 import ECTS from "@theme/components/course/page/description/ECTS.vue";
 import Date from "@theme/components/course/page/description/Date.vue";
 import Language from "@theme/components/course/page/description/Language.vue";
@@ -20,11 +22,8 @@ export default {
   name: "Information",
   components: { ECTS, Date, Language, Enroll },
   computed: {
-    description() {
-      return this.$frontmatter.description;
-    },
-    course() {
-      return this.$title.split("|")[0].trim();
+    active() {
+      return get(["$frontmatter", "enrollment"], this);
     },
   },
 };

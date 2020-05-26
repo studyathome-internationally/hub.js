@@ -5,12 +5,19 @@
       Enrollment
     </h2>
     <p>
-      Participation is free of charge. Student of partner universities can send applications to
-      participate in courses.
+      Participation is free of charge. Student of partner universities can send
+      applications to participate in courses.
     </p>
-    <router-link class="action" :to="{ path: '/courses/enroll/', query: { course } }">
+    <router-link
+      v-if="active"
+      class="action"
+      :to="{ path: '/courses/enroll/', query: { course } }"
+    >
       <button>Enroll now!</button>
     </router-link>
+    <p v-else>
+      Enrolling to this course is currently not possible.
+    </p>
   </section>
 </template>
 
@@ -22,8 +29,11 @@ export default {
   computed: {
     course() {
       return get(["$page", "title"], this) || "";
-    }
-  }
+    },
+    active() {
+      return get(["$frontmatter", "enrollment"], this);
+    },
+  },
 };
 </script>
 

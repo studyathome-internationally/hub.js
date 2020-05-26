@@ -1,6 +1,5 @@
 $courseContentWidth = $courseContentWidth + $courseSidebarWidth
 
-
 h1, h2, h3, h4, h5, h6
   .content__default > &, .course-sidebar > section > &, .course-sidebar > section > .preview > .excerpt > &, .course-description > .information > .content__information > &
     margin-top (0.5rem - $navbarHeight)
@@ -12,10 +11,7 @@ h1, h2, h3, h4, h5, h6
         margin-top 2rem
 
 .page.course
-  // background-color alpha($accentColor,45%)
   background-color alpha($accentColor,100%)
-  // max-width $courseContentWidth
-  // margin auto
 
   .course-title
     color white
@@ -23,7 +19,7 @@ h1, h2, h3, h4, h5, h6
     max-width $courseContentWidth
     margin auto
 
-  .container
+  & > .container
     max-width $courseContentWidth
     margin auto
     padding 2rem
@@ -46,13 +42,14 @@ h1, h2, h3, h4, h5, h6
       
       .media.figure
         margin auto
-        img
-          max-height 500px
-          object-fit contain
+        .container
+          padding unset !important
+          img
+            max-height 500px
+            object-fit contain
 
       .information
-        padding 0 0.5rem
-        // padding-right 0.5rem
+        padding 0
         padding-left 1rem
 
         .hard-facts

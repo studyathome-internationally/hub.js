@@ -1,1 +1,2 @@
-export const get = (p, o) => p.reduce((xs, x) => (xs && xs[x] ? xs[x] : null), o);
+export const get = (p, o) =>
+  p.reduce((xs, x) => (xs && typeof xs[x] !== "undefined" ? xs[x] : null), o);
