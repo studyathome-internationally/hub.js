@@ -3,7 +3,7 @@
     <p>
       <span>
         This website uses cookies to ensure you get the best experience on our website.
-        <router-link to="/studyathome/about.html">Learn more</router-link>
+        <router-link to="/studyathome/privacy.html">Learn more</router-link>
         <button @click="onClick">Got it!</button>
       </span>
     </p>
