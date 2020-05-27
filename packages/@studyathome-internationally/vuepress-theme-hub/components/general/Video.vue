@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!-- <div style="width: inherit; height: inherit;" class="player" :id="id"></div> -->
     <div class="player" :id="id"></div>
   </div>
 </template>
@@ -48,10 +49,4 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
-.container
-  position relative
-  width 100%
-  height 0
-  padding-bottom 56.27198%
-</style>
+<style lang="stylus" scoped></style>
