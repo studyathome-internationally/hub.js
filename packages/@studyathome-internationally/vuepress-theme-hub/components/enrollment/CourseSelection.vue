@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "CourseSelection",
   props: {
@@ -23,12 +25,8 @@ export default {
       default: "-- Please choose a course --",
     },
   },
-  data() {
-    return {
-      selection: "",
-    };
-  },
   computed: {
+    ...mapState(["enrollment"]),
     index() {
       return this.$site.pages.find(({ regularPath }) => regularPath === this.path)
         .frontmatter.indexed;
@@ -39,16 +37,21 @@ export default {
           frontmatter.state && frontmatter.enrollment && this.index.includes(regularPath)
       );
     },
+    selection: {
+      get() {
+        return this.enrollment.course;
+      },
+      set(course) {
+        this.$store.commit("updateCourse", course);
+        this.$route.query.course = course;
+        this.updateLocation(course, this.$route.query.home);
+      },
+    },
   },
-  watch: {
-    selection(newValue, oldValue) {
-      const { course, home } = this.$route.query;
-      if (newValue !== course) {
-        this.$router.replace({
-          path: this.$route.path,
-          query: { course: newValue, home },
-        });
-      }
+  methods: {
+    updateLocation(course = "", home = "") {
+      const search = `?course=${course}&home=${home}`;
+      window && window.history.replaceState(null, "", this.$route.path + search);
     },
   },
   created() {

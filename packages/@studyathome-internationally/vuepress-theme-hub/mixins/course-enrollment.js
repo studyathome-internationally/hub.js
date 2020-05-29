@@ -1,8 +1,11 @@
+import { mapState } from "vuex";
+
 export default {
   computed: {
+    ...mapState(["enrollment"]),
     course() {
-      return this.$route.query.course
-        ? this.$site.pages.find(({ title }) => title === this.$route.query.course) || false
+      return this.enrollment.course
+        ? this.$site.pages.find(({ title }) => title === this.enrollment.course) || false
         : false;
     },
     host() {

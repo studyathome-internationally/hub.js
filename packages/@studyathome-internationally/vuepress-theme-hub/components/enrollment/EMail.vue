@@ -84,10 +84,8 @@ export default {
     },
     valid() {
       return (
-        this.$route.query.course &&
-        this.$route.query.course !== "" &&
-        this.$route.query.home &&
-        this.$route.query.home !== "" &&
+        this.enrollment.course !== "" &&
+        this.enrollment.home !== "" &&
         this.enrollment.disclaimer
       );
     },
