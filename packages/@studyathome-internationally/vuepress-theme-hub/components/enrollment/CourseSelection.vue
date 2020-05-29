@@ -52,7 +52,11 @@ export default {
     updateLocation(course = "", home = "") {
       const search = `?course=${course}&home=${home}`;
       if (typeof window !== "undefined") {
-        window.history.replaceState(null, "", this.$route.path + search);
+        window.history.replaceState(
+          null,
+          "",
+          this.$site.base.replace(/\/$/, "") + this.$route.path + search
+        );
       }
     },
   },
