@@ -59,7 +59,9 @@ export default {
   methods: {
     updateLocation(course = "", home = "") {
       const search = `?course=${course}&home=${home}`;
-      window && window.history.replaceState(null, "", this.$route.path + search);
+      if (typeof window !== "undefined") {
+        window.history.replaceState(null, "", this.$route.path + search);
+      }
     },
     loadHomeUniversities() {
       return this.$site.pages.filter(
