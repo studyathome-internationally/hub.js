@@ -11,23 +11,13 @@
       <slot></slot>
       <template v-if="Boolean(course)">
         <hr />
-        <div v-html="hostDisclaimer"></div>
+        <div v-html="disclaimer"></div>
       </template>
     </details>
-    <div class="confirmation">
-      <hr />
-      <div>
-        <input type="checkbox" id="disclaimer-confirmation" v-model="confirm" />
-        <label for="disclaimer-confirmation">
-          <Content slot-key="confirmation" />
-        </label>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import course from "@theme/mixins/course-enrollment.js";
 
 export default {
@@ -43,21 +33,27 @@ export default {
       default: false,
     },
   },
-  computed: {
-    ...mapState(["enrollment"]),
-    hostDisclaimer() {
-      return this.$site.pages.find(
-        ({ regularPath }) => regularPath === this.host + "disclaimer.html"
-      ).excerpt;
+  data() {
+    return {
+      disclaimer: "",
+    };
+  },
+  methods: {
+    loadDisclaimer(host) {
+      const page = this.$site.pages.find(
+        ({ regularPath }) => regularPath === host + "disclaimer.html"
+      );
+      return page ? page.excerpt : "";
     },
-    confirm: {
-      get() {
-        return this.enrollment.disclaimer;
-      },
-      set(value) {
-        this.$store.commit("updateEnrollmentDisclaimer", value);
-      },
+  },
+  watch: {
+    host(newValue, oldValue) {
+      this.disclaimer = this.loadDisclaimer(newValue);
+      this.$store.commit("updateEnrollmentDisclaimer", false);
     },
+  },
+  created() {
+    this.disclaimer = this.loadDisclaimer(this.host);
   },
 };
 </script>
@@ -75,20 +71,5 @@ export default {
   border-radius .25rem
   margin-block-start 0.5rem
   margin-block-end 0.5rem
-
-.confirmation
-  padding 0 1rem 0.5rem 1rem
-  hr
-    margin-block-start 0
-  & > div
-    display inline-flex
-    input
-      margin 0.5rem
-hr
-  border-top 1px solid $accentColor
 </style>
-<style lang="stylus">
-.content__confirmation p
-  margin-block-start 0
-  margin-block-end 0
-</style>
+<style lang="stylus"></style>

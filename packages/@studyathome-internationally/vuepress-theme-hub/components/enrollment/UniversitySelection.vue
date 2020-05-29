@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import course from "@theme/mixins/course-enrollment.js";
 
 export default {
@@ -27,36 +28,49 @@ export default {
   },
   data() {
     return {
-      selection: "",
+      universities: [],
     };
   },
   computed: {
-    universities() {
+    ...mapState(["enrollment"]),
+    courseSelection() {
+      return this.enrollment.course;
+    },
+    selection: {
+      get() {
+        return this.enrollment.home;
+      },
+      set(home) {
+        this.$store.commit("updateHomeUniversity", home);
+        this.$route.query.home = home;
+        this.updateLocation(this.$route.query.course, home);
+      },
+    },
+  },
+  watch: {
+    courseSelection(newValue, oldValue) {
+      const course = newValue.course;
+      this.universities = this.loadHomeUniversities();
+      if (!this.universities.map(({ title }) => title).includes(this.enrollment.home)) {
+        this.selection = "";
+      }
+    },
+  },
+  methods: {
+    updateLocation(course = "", home = "") {
+      const search = `?course=${course}&home=${home}`;
+      window && window.history.replaceState(null, "", this.$route.path + search);
+    },
+    loadHomeUniversities() {
       return this.$site.pages.filter(
         ({ regularPath }) =>
           /^\/studyathome\/partner\/.*?\/$/.exec(regularPath) && regularPath !== this.host
       );
     },
   },
-  watch: {
-    selection(newValue, oldValue) {
-      const { course, home } = this.$route.query;
-      if (newValue !== home) {
-        this.$router.replace({
-          path: this.$route.path,
-          query: { course, home: newValue },
-        });
-      }
-      this.$store.commit("updateHomeUniversity", newValue);
-    },
-    universities(newValue, oldValue) {
-      if (!newValue.map(({ title }) => title).includes(this.selection)) {
-        this.selection = "";
-      }
-    },
-  },
   created() {
     this.selection = this.$route.query.home || "";
+    this.universities = this.loadHomeUniversities();
   },
 };
 </script>

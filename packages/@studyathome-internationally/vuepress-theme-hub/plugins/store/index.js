@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     enrollment: {
       disclaimer: false,
       home: "",
+      course: "",
     },
     cookie: {
       consent: false,
@@ -31,6 +32,9 @@ export const store = new Vuex.Store({
     },
     updateHomeUniversity(state, home) {
       state.enrollment.home = home;
+    },
+    updateCourse(state, course) {
+      state.enrollment.course = course;
     },
     consentToCookies(state) {
       state.cookie.consent = true;

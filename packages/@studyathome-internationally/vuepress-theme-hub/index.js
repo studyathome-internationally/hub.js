@@ -124,6 +124,10 @@ module.exports = (themeConfig, ctx) => {
             path: "@theme/components/enrollment/Disclaimer.vue",
           },
           {
+            name: "Confirmation",
+            path: "@theme/components/enrollment/Confirmation.vue",
+          },
+          {
             name: "EMail",
             path: "@theme/components/enrollment/EMail.vue",
           },
