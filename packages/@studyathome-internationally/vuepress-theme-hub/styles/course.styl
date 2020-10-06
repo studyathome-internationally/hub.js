@@ -10,6 +10,10 @@ h1, h2, h3, h4, h5, h6
       + p, + pre, + .custom-block
         margin-top 2rem
 
+.cover-image-contain .media.figure
+  img
+    object-fit contain !important
+
 .page.course
   background-color alpha($accentColor,100%)
 
@@ -50,7 +54,7 @@ h1, h2, h3, h4, h5, h6
         margin auto
         img
           max-height 500px
-          object-fit contain
+          object-fit cover
 
       .information
         padding 0
