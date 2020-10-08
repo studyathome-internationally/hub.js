@@ -1,7 +1,9 @@
 <template>
   <div class="course-title">
     <h1 id="title">{{ title }}</h1>
-    <div>{{ name }}</div>
+    <div class="lecturers">
+      <span v-for="lecturer of lecturers" :key="lecturer">{{ lecturer }}</span>
+    </div>
   </div>
 </template>
 
@@ -14,14 +16,10 @@ export default {
     title() {
       return get(["$page", "title"], this) || "";
     },
-    lecturer() {
-      return get(["$frontmatter", "lecturers", 0], this) || "";
-    },
-    page() {
-      return this.$site.pages.find(({ regularPath }) => regularPath === this.lecturer);
-    },
-    name() {
-      return get(["page", "title"], this) || "";
+    lecturers() {
+      return get(["$frontmatter", "lecturers"], this)
+        .map((lecturerPath) => this.$site.pages.find(({ regularPath }) => regularPath === lecturerPath))
+        .map(({ title }) => title);
     },
   },
 };

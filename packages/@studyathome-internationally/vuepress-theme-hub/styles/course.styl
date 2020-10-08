@@ -23,6 +23,22 @@ h1, h2, h3, h4, h5, h6
     max-width $courseContentWidth
     margin auto
 
+    h1
+      margin-bottom 0.5rem
+      border-bottom 1px solid white
+
+    .lecturers
+      display flex
+      flex-flow row wrap
+    
+      span
+        font-size 1.4rem
+        line-height 1.6
+        flex 1 1 50%
+
+        &:nth-child(2n)
+          text-align right
+
   & > .container
     max-width $courseContentWidth
     margin auto
@@ -123,7 +139,14 @@ h1, h2, h3, h4, h5, h6
 
   &.mobile
     .course-title
-      padding 2rem 2rem
+      padding 2rem 2rem 0 2rem
+
+      // .lecturers
+      //   span
+      //     font-size 1.2rem
+      //     flex 1 1 100%
+      //     &:nth-child(2n)
+      //       text-align left
 
     .container
       padding unset
@@ -191,3 +214,10 @@ h1, h2, h3, h4, h5, h6
 //     .container
 //       .course-description
 //         flex-flow column nowrap
+
+@media (max-width: $MQNarrow)
+  .page.course > .course-title > .lecturers > span
+    font-size 1.2rem
+    flex 1 1 100%
+    &:nth-child(2n)
+      text-align left
