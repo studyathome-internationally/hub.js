@@ -98,7 +98,14 @@ module.exports = (themeConfig, ctx) => {
         after: "</div>",
       },
     ],
-
+    [
+      "container",
+      {
+        type: "note",
+        before: `<div class="custom-block note"><div class="icon"><font-awesome-icon icon="info-circle"></font-awesome-icon></div>`,
+        after: "</div>",
+      },
+    ],
     [
       "@vuepress/plugin-register-components",
       {

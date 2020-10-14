@@ -1,0 +1,17 @@
+.custom-block
+  &.note
+    background $borderColor
+    // background lighten($accentColor, 92%)
+    // border 1px lighten($accentColor,50%) solid 
+    box-shadow 1px 1px 2px 1px $accentColor
+    border-radius 0.5rem
+    display flex
+    flex-flow row nowrap
+    *:first-child
+      flex 1 1 4rem
+      margin auto
+      text-align center
+      font-size 2rem
+      color $accentColor
+    *:nth-child(2)
+      flex 1 1 90%
