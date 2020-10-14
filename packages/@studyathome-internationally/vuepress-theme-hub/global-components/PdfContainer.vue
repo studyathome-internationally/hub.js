@@ -11,7 +11,7 @@
           </a>
         </p>
       </div>
-      <a class="preview no-zoom" :href="$withBase(link)">
+      <a class="preview no-zoom" :href="$withBase(href)">
         <img :src="$withBase(thumb)" alt="PDF Document Preview" />
       </a>
     </div>
