@@ -5,14 +5,14 @@
       <div class="description">
         <slot></slot>
         <p class="download">
-          <a :href="this.link">
+          <a :href="$withBase(href)">
             Download
             <font-awesome-icon :icon="['far', 'file-pdf']"></font-awesome-icon>
           </a>
         </p>
       </div>
-      <a class="preview no-zoom" :href="this.link">
-        <img :src="this.thumb" alt="PDF Document Preview" />
+      <a class="preview no-zoom" :href="$withBase(link)">
+        <img :src="$withBase(thumb)" alt="PDF Document Preview" />
       </a>
     </div>
   </div>
@@ -30,14 +30,9 @@ export default {
       type: String,
       required: true,
     },
-    thumb: String,
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    link() {
-      return this.$withBase(this.href);
+    thumb: {
+      type: String,
+      required: true,
     },
   },
 };

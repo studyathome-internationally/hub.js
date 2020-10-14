@@ -49,7 +49,7 @@ export default {
         if (this.$vnode.key === "tel") icon = ["fas", "phone-alt"];
         else if (this.$vnode.key === "mail") icon = ["fas", "envelope"];
         else if (this.$vnode.key === "linkedin") icon = ["fab", "linkedin"];
-        else if (this.$vnode.key === "reasearchgate") icon[("fab", "researchgate")];
+        else if (this.$vnode.key === "reasearchgate") icon = ["fab", "researchgate"];
       } else {
         icon = this.contact.icon.split("-");
       }
