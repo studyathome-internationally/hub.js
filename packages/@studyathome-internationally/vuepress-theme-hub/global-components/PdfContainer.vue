@@ -58,7 +58,7 @@ export default {
     flex-flow row nowrap
     .description
       position relative
-      padding 0rem 1.2rem 3rem 1rem
+      padding 1rem 3rem 3rem 2rem
       font-size 1.4rem
       .download
         position absolute
