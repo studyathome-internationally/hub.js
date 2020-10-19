@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show">
     <div class="title">Contact</div>
     <ul>
       <Contact v-for="(contact, key) in contacts" :key="key" :contact="contacts[key]" />
@@ -15,10 +15,13 @@ export default {
   name: "Contacts",
   components: { Contact },
   computed: {
+    show() {
+      return get(["$frontmatter", "contact"], this) ? true : false;
+    },
     contacts() {
       return get(["$frontmatter", "contact"], this) || {};
-    }
-  }
+    },
+  },
 };
 </script>
 

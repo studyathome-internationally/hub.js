@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="experience.length > 0">
     <div class="title">Experience</div>
     <ul>
       <li v-for="e of experience" :key="e">{{ e }}</li>
