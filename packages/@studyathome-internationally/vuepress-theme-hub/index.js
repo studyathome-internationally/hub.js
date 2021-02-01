@@ -107,6 +107,15 @@ module.exports = (themeConfig, ctx) => {
       },
     ],
     [
+      "container",
+      {
+        type: "schedule",
+        before: (title) =>
+          `<div class="course-schedule"><div class="title"><font-awesome-icon icon="calendar-week"></font-awesome-icon>${title}</div>`,
+        after: "</div>",
+      },
+    ],
+    [
       "@vuepress/plugin-register-components",
       {
         components: [
