@@ -109,10 +109,35 @@ module.exports = (themeConfig, ctx) => {
     [
       "container",
       {
-        type: "schedule",
-        before: (title) =>
-          `<div class="course-schedule"><div class="title"><font-awesome-icon icon="calendar-week"></font-awesome-icon>${title}</div>`,
-        after: "</div>",
+        type: "testimonial",
+        before: (config) => {
+          let result = `<div class="testimonial">`;
+          const m = /^(.*?)\s(.*)$/.exec(config);
+          if (m) {
+            let [_, semester, participant] = m;
+            let icon = `<font-awesome-icon icon="${
+              semester.startsWith("W") ? "igloo" : "umbrella-beach"
+            }"></font-awesome-icon>`;
+            // icon = `
+            // <font-awesome-layers>
+            //   <font-awesome-icon icon="certificate"/>
+            //   <font-awesome-layers-text value="${semester}"/>
+            // </font-awesome-layers>`;
+            result += `
+              <div class="information">
+                <div class="semester">
+                  ${icon} 
+                  <span>${semester}</span>
+                </div>
+                <div class="participant">
+                  ${participant}
+                </div>
+              </div>`;
+          }
+          result += `<div class="summary">`;
+          return result;
+        },
+        after: "</div></div>",
       },
     ],
     [

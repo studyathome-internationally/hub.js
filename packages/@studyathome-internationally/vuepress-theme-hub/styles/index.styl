@@ -111,3 +111,20 @@ div.image-triplet, div.image-triplet p
 div.centered-image
   display flex
   justify-content center
+
+div.testimonial
+  display flex
+  flex-flow column nowrap
+  & > .information
+    display flex
+    flex-flow row nowrap
+    justify-content space-between
+    padding 0.6rem 1rem 0.6rem !important
+    background $accentColor
+    & > .participant
+      font-style italic
+    & > *
+      color white
+  & > .summary
+    background $borderColor
+    padding-left 1rem
