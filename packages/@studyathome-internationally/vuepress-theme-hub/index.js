@@ -118,11 +118,6 @@ module.exports = (themeConfig, ctx) => {
             let icon = `<font-awesome-icon icon="${
               semester.startsWith("W") ? "igloo" : "umbrella-beach"
             }"></font-awesome-icon>`;
-            // icon = `
-            // <font-awesome-layers>
-            //   <font-awesome-icon icon="certificate"/>
-            //   <font-awesome-layers-text value="${semester}"/>
-            // </font-awesome-layers>`;
             result += `
               <div class="information">
                 <div class="semester">
@@ -135,9 +130,12 @@ module.exports = (themeConfig, ctx) => {
               </div>`;
           }
           result += `<div class="summary">`;
+          result += `<text-previewer>`;
           return result;
         },
-        after: "</div></div>",
+        after: `</text-previewer>
+             </div>
+           </div>`,
       },
     ],
     [
