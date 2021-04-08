@@ -47,6 +47,7 @@
     "uri-js": "^4.4.1",
     "vuepress": "1.8.1",
     "vuepress-plugin-directory-classifier": "^0.1.0",
+    "vuepress-plugin-matomo": "^1.0.2",
     "vuex": "^3.6.2",
     "youtube-player": "^5.5.2"
   }

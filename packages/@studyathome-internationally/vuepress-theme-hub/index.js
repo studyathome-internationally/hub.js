@@ -50,6 +50,15 @@ module.exports = (themeConfig, ctx) => {
   };
 
   const plugins = [
+    [
+      "matomo",
+      {
+        siteId: 6,
+        trackerUrl: "https://analytics.wbt.wien/",
+        trackerJsFile: "matomo.js",
+        trackerPhpFile: "matomo.php",
+      },
+    ],
     ["directory-classifier", hubDirectoryClassifierPluginOptions],
     ["@vuepress/back-to-top", true],
     [
