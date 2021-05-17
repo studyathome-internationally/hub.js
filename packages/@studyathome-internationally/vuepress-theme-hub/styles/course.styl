@@ -137,6 +137,11 @@ h1, h2, h3, h4, h5, h6
       background-color $accentColor
       color white
 
+  & > .page-edit
+    max-width $courseContentWidth
+    & .edit-link a
+      color darken($borderColor,10%)
+
   &.mobile
     .course-title
       padding 2rem 2rem 0 2rem
