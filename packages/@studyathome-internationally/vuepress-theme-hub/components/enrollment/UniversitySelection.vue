@@ -2,12 +2,9 @@
   <div id="university-select" class="select">
     <select v-model="selection">
       <option value="">{{ placeholder }}</option>
-      <option
-        v-for="university of universities"
-        :key="university.title"
-        :value="university.title"
-        >{{ university.title }}</option
-      >
+      <option v-for="university of universities" :key="university.title" :value="university.title">{{
+        university.title
+      }}</option>
     </select>
     <font-awesome-icon class="icon" icon="angle-down"></font-awesome-icon>
   </div>
@@ -21,6 +18,10 @@ export default {
   name: "UniversitySelection",
   mixins: [course],
   props: {
+    path: {
+      type: String,
+      default: "/studyathome/partner/",
+    },
     placeholder: {
       type: String,
       default: "-- Please choose your home university --",
@@ -60,17 +61,16 @@ export default {
     updateLocation(course = "", home = "") {
       const search = `?course=${course}&home=${home}`;
       if (typeof window !== "undefined") {
-        window.history.replaceState(
-          null,
-          "",
-          this.$site.base.replace(/\/$/, "") + this.$route.path + search
-        );
+        window.history.replaceState(null, "", this.$site.base.replace(/\/$/, "") + this.$route.path + search);
       }
     },
     loadHomeUniversities() {
       return this.$site.pages.filter(
         ({ regularPath }) =>
-          /^\/studyathome\/partner\/.*?\/$/.exec(regularPath) && regularPath !== this.host
+          regularPath.startsWith(this.path) &&
+          regularPath.endsWith("/") &&
+          regularPath !== this.path &&
+          regularPath !== this.host
       );
     },
   },
