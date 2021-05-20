@@ -51,10 +51,9 @@ export default {
   },
   methods: {
     sanitize(text) {
-      return text.toLowerCase().replaceAll(" ", "-");
+      return text.toLowerCase().replace(/\s/g, "-");
     },
     updateSelection() {
-      console.log("DUMMY", "updateSelection", Array.from(this.$refs.universities.children));
       this.selection = Array.from(this.$refs.universities.children)
         .filter(({ checked, nodeName }) => "INPUT" === nodeName && checked)
         .map(({ value }) => value);
@@ -79,6 +78,7 @@ export default {
       })
     );
     this.selection = this.universityEntries.filter(({ checked }) => checked).map(({ path }) => path);
+    this.$emit("update", this.selection);
   },
 };
 </script>
@@ -137,4 +137,13 @@ form
         background-color darken($borderColor,25%)
         border-color darken($borderColor,25%)
         color lighten($borderColor,20%)
+
+@media (max-width: $MQMobile)
+  form
+    fieldset
+      flex-flow column nowrap
+      .label
+        margin-bottom 0.5rem
+      .options
+        padding-left unset
 </style>

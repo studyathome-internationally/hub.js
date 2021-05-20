@@ -53,7 +53,8 @@ export default {
   box-shadow 1px 1px 4px 1px darken($borderColor, 40%)
   position fixed
   min-width 14vw
-  left 43vw
+  left 50%
+  transform translate(-50%, -50%)
   padding 1rem
   font-size 1.2rem
   border-radius 0.4rem
