@@ -32,7 +32,7 @@ export default {
     async onShare() {
       const hashValues = await Promise.all(this.selection.map(async (entry) => await hash(entry, 7)));
       const hosts = "hosts=" + window.encodeURIComponent(hashValues.join(","));
-      const value = window.location.href + "?" + hosts;
+      const value = window.location.origin + window.location.pathname + "?" + hosts;
       await window.navigator.clipboard.writeText(value);
 
       // console.log("Copied to clipboard: ", value);
