@@ -3,6 +3,7 @@ import "@theme/plugins/icons";
 import { store } from "@theme/plugins/store";
 
 import CookieConsent from "@theme/components/global/CookieConsent.vue";
+import FilterConsumer from "@theme/components/global/FilterConsumer.vue";
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app
@@ -12,4 +13,5 @@ export default ({
 }) => {
   Vue.prototype.$store = store;
   Vue.component("CookieConsent", CookieConsent);
+  Vue.component("FilterConsumer", FilterConsumer);
 };

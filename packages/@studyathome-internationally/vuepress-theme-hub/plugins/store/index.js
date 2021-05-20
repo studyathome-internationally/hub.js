@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
       home: "",
       course: "",
     },
+    filter: [],
     cookie: {
       consent: false,
     },
@@ -17,14 +18,15 @@ export const store = new Vuex.Store({
   mutations: {
     load(state) {
       if (!localStorage) return;
-      state.cookie = Object.assign(
-        state.cookie,
-        JSON.parse(localStorage.getItem("hub-settings-cookie"))
-      );
+      state.cookie = Object.assign(state.cookie, JSON.parse(localStorage.getItem("hub-settings-cookie")));
     },
     save(state) {
       if (!localStorage) return;
       localStorage.setItem("hub-settings-cookie", JSON.stringify(state.cookie));
+    },
+
+    updateFilter(state, filter) {
+      state.filter = filter;
     },
 
     updateEnrollmentDisclaimer(state, confirmation) {
@@ -36,6 +38,7 @@ export const store = new Vuex.Store({
     updateCourse(state, course) {
       state.enrollment.course = course;
     },
+
     consentToCookies(state) {
       state.cookie.consent = true;
     },
