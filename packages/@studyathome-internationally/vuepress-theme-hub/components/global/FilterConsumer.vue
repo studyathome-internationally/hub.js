@@ -8,9 +8,9 @@ export default {
     ...mapMutations(["updateFilter"]),
   },
   created() {
-    const filter = this.$route.query.filter ? window.decodeURIComponent(this.$route.query.filter).split(",") : [];
-    this.$store.commit("updateFilter", filter);
-    if (filter.length > 0) this.$router.replace({ query: null });
+    const hosts = this.$route.query.hosts ? window.decodeURIComponent(this.$route.query.hosts).split(",") : [];
+    this.$store.commit("updateFilterHosts", hosts);
+    // if (filter.length > 0) this.$router.replace({ query: null });
   },
 };
 </script>

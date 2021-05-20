@@ -10,7 +10,9 @@ export const store = new Vuex.Store({
       home: "",
       course: "",
     },
-    filter: [],
+    filter: {
+      hosts: [],
+    },
     cookie: {
       consent: false,
     },
@@ -25,8 +27,8 @@ export const store = new Vuex.Store({
       localStorage.setItem("hub-settings-cookie", JSON.stringify(state.cookie));
     },
 
-    updateFilter(state, filter) {
-      state.filter = filter;
+    updateFilterHosts(state, hosts) {
+      state.filter.hosts = hosts;
     },
 
     updateEnrollmentDisclaimer(state, confirmation) {

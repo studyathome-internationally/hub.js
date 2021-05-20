@@ -3,7 +3,7 @@
     <fieldset @change="onChange" name="universities">
       <div class="label">
         <legend>
-          <ShareFilter :selection="selection">Host University</ShareFilter>
+          <ShareFilterHosts :selection="selection">Host University</ShareFilterHosts>
         </legend>
       </div>
       <div ref="universities" class="options">
@@ -28,11 +28,11 @@
 import { mapState } from "vuex";
 import { hash } from "@theme/utils/hash.js";
 
-import ShareFilter from "@theme/components/course/filter/ShareFilter.vue";
+import ShareFilterHosts from "@theme/components/course/filter/ShareFilterHosts.vue";
 
 export default {
   name: "University",
-  components: { ShareFilter },
+  components: { ShareFilterHosts },
   props: {
     universities: {
       type: Array,
@@ -72,7 +72,7 @@ export default {
         return {
           title: page.title,
           hash: hashValue,
-          checked: this.filter.length > 0 && university.available ? this.filter.includes(hashValue) : true,
+          checked: this.filter.hosts.length > 0 && university.available ? this.filter.hosts.includes(hashValue) : true,
           ...university,
         };
       })

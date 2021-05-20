@@ -16,7 +16,7 @@
 import { hash } from "@theme/utils/hash.js";
 
 export default {
-  name: "ShareFilter",
+  name: "ShareFilterHosts",
   props: {
     selection: {
       type: Array,
@@ -31,8 +31,8 @@ export default {
   methods: {
     async onShare() {
       const hashValues = await Promise.all(this.selection.map(async (entry) => await hash(entry, 7)));
-      const filter = "filter=" + window.encodeURIComponent(hashValues.join(","));
-      const value = window.location.href + "?" + filter;
+      const hosts = "hosts=" + window.encodeURIComponent(hashValues.join(","));
+      const value = window.location.href + "?" + hosts;
       await window.navigator.clipboard.writeText(value);
 
       // console.log("Copied to clipboard: ", value);
