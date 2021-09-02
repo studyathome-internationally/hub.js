@@ -1,6 +1,8 @@
 <template>
   <div class="course-filter">
-    <University @update="onUpdateUniversity" :universities="filterData.universities" />
+    <ClientOnly>
+      <University @update="onUpdateUniversity" :universities="filterData.universities" />
+    </ClientOnly>
   </div>
 </template>
 

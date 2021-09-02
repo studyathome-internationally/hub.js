@@ -65,25 +65,20 @@ export default {
   },
   async created() {
     this.uuid = this._uid.toString();
-    try {
-      // FIXME: server build throws error because of undefined `window`.
-      // testing if `window` exists seems to have no effect.
-      this.universityEntries = await Promise.all(
-        this.universities.map(async (university) => {
-          const page = this.$site.pages.find(({ regularPath }) => university.path === regularPath);
-          const hashValue = await hash(university.path, 7);
-          return {
-            title: page.title,
-            hash: hashValue,
-            checked:
-              this.filter.hosts.length > 0 && university.available ? this.filter.hosts.includes(hashValue) : true,
-            ...university,
-          };
-        })
-      );
-      this.selection = this.universityEntries.filter(({ checked }) => checked).map(({ path }) => path);
-      this.$emit("update", this.selection);
-    } catch (e) {}
+    this.universityEntries = await Promise.all(
+      this.universities.map(async (university) => {
+        const page = this.$site.pages.find(({ regularPath }) => university.path === regularPath);
+        const hashValue = await hash(university.path, 7);
+        return {
+          title: page.title,
+          hash: hashValue,
+          checked: this.filter.hosts.length > 0 && university.available ? this.filter.hosts.includes(hashValue) : true,
+          ...university,
+        };
+      })
+    );
+    this.selection = this.universityEntries.filter(({ checked }) => checked).map(({ path }) => path);
+    this.$emit("update", this.selection);
   },
 };
 </script>
