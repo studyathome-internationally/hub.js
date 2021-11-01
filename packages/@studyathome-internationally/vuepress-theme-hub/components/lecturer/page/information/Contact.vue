@@ -37,7 +37,7 @@ export default {
         if (this.$vnode.key === "tel") label = this.href.replace("tel:", "");
         else if (this.$vnode.key === "mail") label = this.href.replace("mailto:", "");
         else if (this.$vnode.key === "linkedin") label = "LinkedIn";
-        else if (this.$vnode.key === "reasearchgate") label = "ResearchGate";
+        else if (this.$vnode.key === "researchgate") label = "ResearchGate";
       } else {
         label = this.contact.label;
       }
@@ -49,7 +49,7 @@ export default {
         if (this.$vnode.key === "tel") icon = ["fas", "phone-alt"];
         else if (this.$vnode.key === "mail") icon = ["fas", "envelope"];
         else if (this.$vnode.key === "linkedin") icon = ["fab", "linkedin"];
-        else if (this.$vnode.key === "reasearchgate") icon = ["fab", "researchgate"];
+        else if (this.$vnode.key === "researchgate") icon = ["fab", "researchgate"];
       } else {
         icon = this.contact.icon.split("-");
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="course-description">
-    <Media :content="media" :zoom="false" />
+    <Media :content="media" :alt="alt" :zoom="false" />
     <Information />
   </div>
 </template>
@@ -19,6 +19,13 @@ export default {
       return (
         get(["$frontmatter", "media", "description", "src"], this) ||
         get(["$frontmatter", "media", "main", "src"], this) ||
+        ""
+      );
+    },
+    alt() {
+      return (
+        get(["$frontmatter", "media", "description", "alt"], this) ||
+        get(["$frontmatter", "media", "main", "alt"], this) ||
         ""
       );
     },

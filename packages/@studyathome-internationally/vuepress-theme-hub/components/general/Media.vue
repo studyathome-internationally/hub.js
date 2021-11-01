@@ -1,6 +1,6 @@
 <template>
   <div class="media" :class="{ figure: !isYoutube(content) }">
-    <Figure v-if="content && !isYoutube(content)" :src="content" :zoom="zoom" />
+    <Figure v-if="content && !isYoutube(content)" :src="content" :zoom="zoom" :alt="alt" />
     <Video v-else-if="isYoutube(content)" :code="isYoutube(content)" />
     <div v-else class="media-default"></div>
   </div>
@@ -18,6 +18,10 @@ export default {
   mixins: [youtube],
   props: {
     content: {
+      type: String,
+      default: null,
+    },
+    alt: {
       type: String,
       default: null,
     },
