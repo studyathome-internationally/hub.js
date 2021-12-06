@@ -91,12 +91,16 @@ details.hub
   display inline-block !important
   font-size 1.1rem !important
   color #fff !important
-  background-color #0f303e !important
+  background-color $accentColor !important
   padding .8rem 1.6rem !important
   border-radius 4px !important
   transition background-color .1s ease !important
   box-sizing border-box !important
-  border-bottom 1px solid #0d2b38 !important
+  border-bottom 1px solid darken($accentColor, 10%) !important
+
+.sw-update-popup > button.cancel
+  background-color darken($borderColor, 30%) !important
+  border-bottom 1px solid darken($borderColor, 40%) !important
 
 div.full-width-image img
   width 100%
