@@ -87,21 +87,28 @@ export default {
       }
     },
     encode(val) {
-      return window ? window.encodeURIComponent(val) : val;
+      if (typeof window !== "undefined") {
+        val = window.encodeURIComponent(val);
+      }
+      return val;
     },
     inject(str, type, val) {
-      if (val) str += "&" + type + "=" + this.encode(val);
+      if (val) {
+        str += "&" + type + "=" + this.encode(val);
+      }
       return str;
     },
   },
   mounted() {
-    this.onResize();
-    if (window && this.listener === null) {
-      this.listener = window.addEventListener("resize", this.onResize);
+    if (typeof window !== "undefined") {
+      this.onResize();
+      if (this.listener === null) {
+        this.listener = window.addEventListener("resize", this.onResize);
+      }
     }
   },
   beforeDestroy() {
-    if (this.listener) {
+    if (typeof window !== "undefined" && this.listener) {
       window.removeEventListener("resize", this.onResize);
     }
   },
