@@ -1,6 +1,6 @@
 {
   "name": "@studyathome-internationally/vuepress-plugin-pwa-autoload",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Auto reload popup for @vuepress/pwa",
   "author": "Alija Sabic <sabic@technikum-wien.at>",
   "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
