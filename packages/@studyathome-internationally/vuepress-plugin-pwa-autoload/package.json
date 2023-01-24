@@ -1,0 +1,27 @@
+{
+  "name": "@studyathome-internationally/vuepress-plugin-pwa-autoload",
+  "version": "0.0.0",
+  "description": "Auto reload popup for @vuepress/pwa",
+  "author": "Alija Sabic <sabic@technikum-wien.at>",
+  "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
+  "license": "GPL-3.0",
+  "main": "index.js",
+  "keywords": [
+    "vuepress",
+    "vuepress-plugin"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studyathome-internationally/hub.js.git",
+    "path": "packages/@studyathome-internationally/vuepress-plugin-pwa-autoload"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/studyathome-internationally/hub.js/issues"
+  }
+}
