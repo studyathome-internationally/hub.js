@@ -1,6 +1,6 @@
 <template>
   <form id="search-form" class="algolia-search-wrapper search-box" role="search">
-    <input id="algolia-search-input" class="search-query" :placeholder="placeholder" />
+    <div id="algolia-search-input" class="search-query" :placeholder="placeholder"></div>
   </form>
 </template>
 
@@ -27,9 +27,10 @@ export default {
   },
   methods: {
     initialize(userOptions, lang) {
+      const { algoliaOptions = {} } = userOptions;
       docsearch(
         Object.assign({}, userOptions, {
-          inputSelector: "#algolia-search-input",
+          container: "#algolia-search-input",
           // #697 Make docsearch work well at i18n mode.
           algoliaOptions: {
             ...algoliaOptions,
@@ -45,11 +46,36 @@ export default {
       );
     },
     update(options, lang) {
-      this.$el.innerHTML = '<input id="algolia-search-input" class="search-query">';
+      this.$el.innerHTML = '<div id="algolia-search-input" class="search-query"></div>';
       this.initialize(options, lang);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="stylus">
+#search-form
+  margin-right 1rem
+
+.DocSearch-Button-Keys, .DocSearch-Button-Container
+  display flex !important
+
+.DocSearch-Button-Placeholder
+  height 0.9rem
+
+.DocSearch-Input:focus
+  outline unset !important
+
+.DocSearch-Logo svg
+  .cls-1, .cls-2
+    fill var(--docsearch-logo-color)
+
+@media (max-width: $MQMobile)
+  .DocSearch-Button-Keys, .DocSearch-Button-Placeholder
+    display none !important
+
+:root
+  --docsearch-logo-color $accentColor
+  --docsearch-primary-color $accentColor
+  --docsearch-highlight-color $accentColor
+</style>
