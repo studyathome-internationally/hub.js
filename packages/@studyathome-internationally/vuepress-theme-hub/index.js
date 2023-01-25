@@ -60,6 +60,15 @@ module.exports = (themeConfig, ctx) => {
       },
     ],
     ["directory-classifier", hubDirectoryClassifierPluginOptions],
+    [
+      "@studyathome-internationally/vuepress-plugin-pwa-autoload",
+      {
+        appId: "MKD3X349RT",
+        apiKey: "f1fd393bbed56da9dd0988564b714776",
+        indexName: "hub",
+        disableUserPersonalization: true,
+      },
+    ],
     ["@studyathome-internationally/vuepress-plugin-pwa-autoload"],
     [
       "@vuepress/pwa",
