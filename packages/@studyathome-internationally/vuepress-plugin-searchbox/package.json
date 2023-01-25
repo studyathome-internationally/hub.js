@@ -1,0 +1,31 @@
+{
+  "name": "@studyathome-internationally/vuepress-plugin-searchbox",
+  "version": "0.0.0",
+  "description": "Custom algolia search box",
+  "author": "Alija Sabic <sabic@technikum-wien.at>",
+  "homepage": "https://github.com/studyathome-internationally/hub.js#readme",
+  "license": "GPL-3.0",
+  "main": "index.js",
+  "keywords": [
+    "vuepress",
+    "vuepress-plugin"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studyathome-internationally/hub.js.git",
+    "path": "packages/@studyathome-internationally/vuepress-plugin-searchbox"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/studyathome-internationally/hub.js/issues"
+  },
+  "dependencies": {
+    "@docsearch/css": "^3.3.2",
+    "@docsearch/js": "^3.3.2"
+  }
+}
