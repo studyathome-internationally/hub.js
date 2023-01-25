@@ -61,7 +61,7 @@ module.exports = (themeConfig, ctx) => {
     ],
     ["directory-classifier", hubDirectoryClassifierPluginOptions],
     [
-      "@studyathome-internationally/vuepress-plugin-pwa-autoload",
+      "@studyathome-internationally/vuepress-plugin-searchbox",
       {
         appId: "MKD3X349RT",
         apiKey: "f1fd393bbed56da9dd0988564b714776",
