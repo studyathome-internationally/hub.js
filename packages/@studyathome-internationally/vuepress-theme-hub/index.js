@@ -63,8 +63,8 @@ module.exports = (themeConfig, ctx) => {
     [
       "@studyathome-internationally/vuepress-plugin-searchbox",
       {
-        appId: "MKD3X349RT",
-        apiKey: "f1fd393bbed56da9dd0988564b714776",
+        appId: "V42SWCCDPQ",
+        apiKey: "eb51645e2c5b17e0faffa667db5d2a55",
         indexName: "hub",
         disableUserPersonalization: true,
       },
